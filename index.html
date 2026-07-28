@@ -387,11 +387,23 @@
       padding: 8px;
     }
 
-    .item-icon img {
+        /* Обновляем базовый стиль картинки */
+      .item-icon img {
       width: 100%;
       height: 100%;
       object-fit: contain;
       image-rendering: pixelated;
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Добавляем плавную анимацию */
+      position: relative; /* Нужно для корректной работы слоев */
+      z-index: 1;
+    }
+    
+    /* Добавляем эффект при наведении мыши (hover) */
+    .item-icon img:hover {
+      transform: scale(2.5); /* Увеличивает картинку в 2.5 раза */
+      z-index: 10; /* Выводит увеличенную картинку поверх соседних строк */
+      filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.3)); /* Легкая тень для красоты */
+      cursor: zoom-in; /* Меняет курсор на лупу */
     }
 
     strong {
