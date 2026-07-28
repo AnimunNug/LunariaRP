@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lunaria — Руководство по ресурспаку</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Comfortaa:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ПЕРЕМЕННЫЕ ДЛЯ СВЕТЛОЙ И ТЕМНОЙ ТЕМЫ */
+    :root {
+      --bg-gradient: linear-gradient(135deg, #e0f7fa 0%, #fffdf5 50%, #e0f2f1 100%);
+      --bg-creamy: rgba(255, 253, 245, 0.85);
+      --card-border: rgba(120, 210, 214, 0.4);
+      --primary-soft: #78d2d6;
+      --accent-color: #f5e0ac;
+      --text-main: #2c4a52;
+      --text-muted: #6b8e96;
+      --code-bg: #e0f2f1;
+      --code-text: #00796b;
+      --shadow-soft: 0 10px 30px rgba(120, 210, 214, 0.15);
+      --glow-light: 0 0 15px rgba(245, 224, 172, 0.6);
+      --particles: rgba(120, 210, 214, 0.15);
+      --icon-bg: #ffffff;
+      --table-hover: rgba(245, 224, 172, 0.2);
+      --th-bg: rgba(120, 210, 214, 0.15);
+    }
+
+    [data-theme="dark"] {
+      --bg-gradient: radial-gradient(circle at top, #14213d 0%, #070d1e 100%);
+      --bg-creamy: rgba(15, 28, 54, 0.75);
+      --card-border: rgba(91, 192, 190, 0.3);
+      --primary-soft: #5bc0be;
+      --accent-color: #90e0ef;
+      --text-main: #e0f2fe;
+      --text-muted: #94a3b8;
+      --code-bg: rgba(0, 0, 0, 0.4);
+      --code-text: #a5f3fc;
+      --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(91, 192, 190, 0.2);
+      --glow-light: 0 0 15px rgba(91, 192, 190, 0.5);
+      --particles: rgba(91, 192, 190, 0.1);
+      --icon-bg: rgba(0, 0, 0, 0.3);
+      --table-hover: rgba(91, 192, 190, 0.08);
+      --th-bg: rgba(91, 192, 190, 0.1);
+    }
+
+    /* ЭФФЕКТ ПЕРЕХОДА ТЕМ (View Transitions API) */
+    ::view-transition-old(root) {
+      animation: fade-out 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards, 
+                 scale-down 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+    ::view-transition-new(root) {
+      animation: fade-in 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards, 
+                 scale-up 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    @keyframes fade-out { to { opacity: 0; } }
+    @keyframes fade-in { from { opacity: 0; } }
+    @keyframes scale-down { to { transform: scale(0.95); } }
+    @keyframes scale-up { from { transform: scale(1.05); } }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Comfortaa', cursive, sans-serif;
+      background: var(--bg-gradient);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem 5rem 1rem;
+      position: relative;
+      overflow-x: hidden;
+      transition: background 0.5s ease, color 0.5s ease;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, var(--particles) 1.5px, transparent 1.5px);
+      background-size: 50px 50px;
+      animation: magicFloat 80s linear infinite;
+      z-index: -1;
+      pointer-events: none;
+      transition: background 0.5s ease;
+    }
+
+    @keyframes magicFloat {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      100% { transform: translate(50px, 50px) rotate(360deg); }
+    }
+
+    .container {
+      max-width: 950px;
+      width: 100%;
+      z-index: 1;
+    }
+
+    /* ШАПКА */
+    header {
+      background: var(--bg-creamy);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      border-radius: 30px;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 2rem;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .left-group, .right-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .server-badge {
+      background: linear-gradient(135deg, rgba(120, 210, 214, 0.2), rgba(245, 224, 172, 0.2));
+      border: 1px solid var(--primary-soft);
+      color: var(--text-main);
+      padding: 0.5rem 1.2rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    /* Соцсети с подсказками */
+    .social-links {
+      display: flex;
+      gap: 10px;
+    }
+
+    .social-btn {
+      position: relative;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: transparent;
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .social-btn:hover {
+      transform: translateY(-3px);
+      border-color: var(--primary-soft);
+      box-shadow: var(--glow-light);
+      color: var(--primary-soft);
+    }
+
+    .social-btn svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    /* Стильные всплывающие подсказки */
+    .social-btn::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: -40px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-5px);
+      background: var(--bg-creamy);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      padding: 5px 12px;
+      border-radius: 10px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      white-space: nowrap;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.25s ease;
+      pointer-events: none;
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(8px);
+      z-index: 10;
+    }
+
+    .social-btn:hover::after {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Кнопки управления */
+    .control-btn {
+      background: transparent;
+      border: 1px solid var(--primary-soft);
+      color: var(--text-main);
+      padding: 0.5rem 1.2rem;
+      border-radius: 20px;
+      cursor: pointer;
+      font-family: inherit;
+      font-weight: 700;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .control-btn.icon-only {
+      padding: 0.5rem;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+
+    .control-btn svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .control-btn:hover {
+      background: var(--primary-soft);
+      color: #fff;
+      box-shadow: var(--glow-light);
+    }
+
+    h1 {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 3rem;
+      background: linear-gradient(135deg, var(--text-main) 30%, var(--primary-soft) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+    }
+
+    .subtitle {
+      color: var(--primary-soft);
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .description {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      max-width: 700px;
+      margin: 0 auto 1.5rem auto;
+    }
+
+    /* Кнопка «Предложить идею» */
+    .action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--primary-soft), var(--card-border));
+      color: var(--text-main);
+      padding: 0.8rem 1.8rem;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+      border: 1px solid var(--primary-soft);
+      box-shadow: var(--shadow-soft);
+      transition: all 0.3s ease;
+    }
+
+    .action-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--glow-light);
+      background: var(--primary-soft);
+      color: #fff;
+    }
+
+    .action-btn svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* ПОИСК */
+    .controls {
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: center;
+    }
+
+    .search-input {
+      width: 100%;
+      max-width: 450px;
+      padding: 1rem 1.5rem;
+      border-radius: 25px;
+      background: var(--bg-creamy);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      font-family: inherit;
+      outline: none;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .search-input:focus {
+      border-color: var(--primary-soft);
+      box-shadow: var(--glow-light);
+    }
+
+    /* ТАБЛИЦА */
+    .table-wrapper {
+      background: var(--bg-creamy);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      border-radius: 25px;
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    th {
+      background: var(--th-bg);
+      color: var(--text-main);
+      padding: 1.5rem 1rem;
+      font-weight: 700;
+      font-size: 1rem;
+      border-bottom: 2px solid var(--card-border);
+    }
+
+    td {
+      padding: 1.2rem 1rem;
+      border-bottom: 1px solid var(--card-border);
+      vertical-align: middle;
+      transition: background 0.2s ease;
+    }
+
+    tr:hover td {
+      background: var(--table-hover);
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .item-icon {
+      width: 56px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--icon-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 15px;
+      padding: 8px;
+    }
+
+    .item-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      image-rendering: pixelated;
+    }
+
+    strong {
+      color: var(--text-main);
+    }
+
+    .rename-code {
+      background: var(--code-bg);
+      padding: 0.5rem 1rem;
+      border-radius: 12px;
+      border: 1px solid var(--card-border);
+      color: var(--code-text);
+      font-family: monospace;
+      font-size: 0.95rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .copy-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .copy-btn svg {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .copy-btn:hover {
+      color: var(--primary-soft);
+      transform: scale(1.1);
+    }
+
+    /* ФИКСИРОВАННАЯ КНОПКА ПОДДЕРЖКИ В УГЛУ */
+    .support-widget {
+      position: fixed;
+      bottom: 25px;
+      left: 25px;
+      z-index: 99;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--bg-creamy);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      padding: 0.8rem 1.4rem;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.85rem;
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow-soft);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .support-widget:hover {
+      transform: translateY(-4px) scale(1.02);
+      border-color: var(--primary-soft);
+      box-shadow: var(--glow-light);
+      color: var(--primary-soft);
+    }
+
+    .support-widget svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* УВЕДОМЛЕНИЕ */
+    .toast {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background: var(--primary-soft);
+      color: #fff;
+      padding: 1rem 2rem;
+      border-radius: 15px;
+      font-weight: 700;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s ease;
+      pointer-events: none;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      z-index: 100;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 700px) {
+      .top-bar { justify-content: center; flex-direction: column-reverse; }
+      h1 { font-size: 2.2rem; }
+      th, td { padding: 1rem 0.5rem; font-size: 0.85rem; }
+      .rename-code { font-size: 0.8rem; padding: 0.4rem 0.6rem; }
+      .item-icon { width: 45px; height: 45px; padding: 5px; }
+      .support-widget { bottom: 15px; left: 50%; transform: translateX(-50%); width: calc(100% - 40px); justify-content: center; }
+      .support-widget:hover { transform: translateX(-50%) translateY(-2px); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <div class="top-bar">
+        <div class="left-group">
+          <span class="server-badge">SPm Server</span>
+          
+          <div class="social-links">
+            <!-- Кнопки соцсетей с пояснениями при наведении -->
+            <a href="https://discord.gg" class="social-btn" target="_blank" id="discordLink" data-tooltip="Discord сервер проекта">
+              <svg viewBox="0 0 448 512"><path d="M94.3 256.1c0-33.6 27.1-60.6 60.6-60.6s60.6 27.1 60.6 60.6-27.1 60.6-60.6 60.6-60.6-27.1-60.6-60.6zm186.2 0c0-33.6 27.1-60.6 60.6-60.6s60.6 27.1 60.6 60.6-27.1 60.6-60.6 60.6-60.6-27.1-60.6-60.6zm167.5-169.8v341.4c-14.9-13.3-31.4-31-43.5-43.2L393.6 346l-16 14.9c-15.6 14.9-33.4 29.4-49.9 44.1H16.6V34.8h415.4v51.5z"/></svg>
+            </a>
+            <a href="https://vk.com" class="social-btn" target="_blank" id="vkLink" data-tooltip="Сообщество ВКонтакте">
+              <svg viewBox="0 0 512 512"><path d="M12.252.004a11.78 11.768 0 0 0-8.92 3.73a11 11 0 0 0-2.17 3.11a11.37 11.359 0 0 0-1.16 5.169c0 1.42.17 2.5.6 3.77c.24.759.77 1.899 1.17 2.529a12.3 12.298 0 0 0 8.85 5.639c.44.05 2.54.07 2.76.02c.2-.04.22.1-.26-1.7l-.36-1.37l-1.01-.06a8.5 8.489 0 0 1-5.18-1.8a5.3 5.3 0 0 1-1.3-1.26c0-.05.34-.28.74-.5a37.572 37.545 0 0 1 2.88-1.629c.03 0 .5.45 1.06.98l1 .97l2.07-.43l2.06-.43l1.47-1.47c.8-.8 1.48-1.5 1.48-1.52c0-.09-.42-1.63-.46-1.7c-.04-.06-.2-.03-1.02.18c-.53.13-1.2.3-1.45.4l-.48.15l-.53.53l-.53.53l-.93.1l-.93.07l-.52-.5a2.7 2.7 0 0 1-.96-1.7l-.13-.6l.43-.57c.68-.9.68-.9 1.46-1.1c.4-.1.65-.2.83-.33c.13-.099.65-.579 1.14-1.069l.9-.9l-.7-.7l-.7-.7l-1.95.54c-1.07.3-1.96.53-1.97.53c-.03 0-2.23 2.48-2.63 2.97l-.29.35l.28 1.03c.16.56.3 1.16.31 1.34l.03.3l-.34.23c-.37.23-2.22 1.3-2.84 1.63c-.36.2-.37.2-.44.1c-.08-.1-.23-.6-.32-1.03c-.18-.86-.17-2.75.02-3.73a8.84 8.84 0 0 1 7.9-6.93c.43-.03.77-.08.78-.1c.06-.17.5-2.999.47-3.039c-.01-.02-.1-.02-.2-.03Zm3.68.67c-.2 0-.3.1-.37.38c-.06.23-.46 2.42-.46 2.52c0 .04.1.11.22.16a8.51 8.499 0 0 1 2.99 2a8.38 8.379 0 0 1 2.16 3.449a6.9 6.9 0 0 1 .4 2.8c0 1.07 0 1.27-.1 1.73a9.4 9.4 0 0 1-1.76 3.769c-.32.4-.98 1.06-1.37 1.38c-.38.32-1.54 1.1-1.7 1.14c-.1.03-.1.06-.07.26c.03.18.64 2.56.7 2.78l.06.06a12.07 12.058 0 0 0 7.27-9.4c.13-.77.13-2.58 0-3.4a11.96 11.948 0 0 0-5.73-8.578c-.7-.42-2.05-1.06-2.25-1.06Z"/></svg>
+            </a>
+            <a href="https://youtube.com" class="social-btn" target="_blank" id="ytLink" data-tooltip="Наш YouTube канал">
+              <svg viewBox="0 0 576 512"><path d="M549.65 118.4c-6.45-24.12-25.4-43-49.45-49.45C455.6 56 288 56 288 56S120.4 56 75.8 68.95c-24.05 6.45-43 25.4-49.45 49.45C16 163.6 16 256 16 256s0 92.4 12.35 137.6c6.45 24.12 25.4 43 49.45 49.45C120.4 456 288 456 288 456s167.6 0 212.2-12.95c24.05-6.45 43-25.4 49.45-49.45C560 348.4 560 256 560 256s0-92.4-12.35-137.6zM218.82 365.6V146.4l140 110.96-140 108.28z"/></svg>
+            </a>
+          </div>
+        </div>
+        
+        <div class="right-group">
+          <!-- Кнопка смены темы с анимированной SVG иконкой -->
+          <button class="control-btn icon-only" id="themeToggle" onclick="toggleTheme()" title="Сменить тему">
+            <svg id="themeIcon" viewBox="0 0 24 24">
+              <!-- Луна по умолчанию -->
+              <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
+            </svg>
+          </button>
+          
+          <button class="control-btn" id="langToggle" onclick="toggleLanguage()">EN</button>
+        </div>
+      </div>
+      
+      <h1 id="title">LUNARIA</h1>
+      <p class="subtitle" id="subtitle">Светлое руководство по ресурспаку</p>
+      <p class="description" id="desc">
+        Добро пожаловать в библиотеку города Лунария. Воспользуйтесь наковальней и переименуйте предмет точно так, как указано в таблице, чтобы пробудить его истинную магическую форму.
+      </p>
+
+      <!-- Кнопка «Предложить идею» -->
+      <a href="https://forms.google.com" target="_blank" class="action-btn" id="suggestBtn">
+        <svg viewBox="0 0 24 24"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
+        <span>Предложить свою идею</span>
+      </a>
+    </header>
+
+    <div class="controls">
+      <input type="text" class="search-input" id="searchInput" placeholder="Поиск предмета или названия..." oninput="filterTable()">
+    </div>
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th id="thIcon">Иконка</th>
+            <th id="thOriginal">Исходный предмет</th>
+            <th id="thRename">Переименование</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody">
+          <!-- Генерируется JS -->
+        </tbody>
+      </table>
+    </div>
+
+    <footer>
+      <p id="footerText">✨ С любовью из Лунарии | SPm Server</p>
+    </footer>
+  </div>
+
+  <!-- Фиксированная кнопка в нижнем углу сайта -->
+  <a href="https://discord.gg" target="_blank" class="support-widget" id="supportWidget">
+    <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    <span id="supportText">Что-то не работает? Пиши!</span>
+  </a>
+
+  <div id="toast" class="toast">Скопировано!</div>
+
+  <script>
+    const i18n = {
+      ru: {
+        title: "Lunaria",
+        subtitle_light: "Светлое руководство по ресурспаку",
+        subtitle_dark: "Тёмное руководство по ресурспаку",
+        desc: "Добро пожаловать в библиотеку города Лунария. Воспользуйтесь наковальней и переименуйте предмет точно так, как указано в таблице, чтобы пробудить его истинную магическую форму.",
+        searchPlaceholder: "Поиск предмета или названия...",
+        thIcon: "Иконка",
+        thOriginal: "Исходный предмет",
+        thRename: "Название на наковальне",
+        footerText: "✨ С любовью из Лунарии | SPm Server",
+        copied: "Скопировано в буфер!",
+        suggestBtn: "Предложить свою идею",
+        supportText: "Что-то не работает? Пиши!",
+        discordTooltip: "Discord сервер проекта",
+        vkTooltip: "Сообщество ВКонтакте",
+        ytTooltip: "Наш YouTube канал"
+      },
+      en: {
+        title: "Lunaria",
+        subtitle_light: "Light Resource Pack Guide",
+        subtitle_dark: "Dark Resource Pack Guide",
+        desc: "Welcome to the library of Lunaria city. Use an anvil and rename the item exactly as shown in the table to awaken its true magical form.",
+        searchPlaceholder: "Search item or name...",
+        thIcon: "Icon",
+        thOriginal: "Original Item",
+        thRename: "Anvil Rename String",
+        footerText: "✨ From Lunaria with love | SPm Server",
+        copied: "Copied to clipboard!",
+        suggestBtn: "Suggest an Idea",
+        supportText: "Report an Issue",
+        discordTooltip: "Official Discord Server",
+        vkTooltip: "VKontakte Community",
+        ytTooltip: "YouTube Channel"
+      }
+    };
+
+    const items = [
+      {
+        image: "images/slime_sword.png",
+        original: { ru: "Любой Меч", en: "Any sword" },
+        rename: { ru: "Слизневый Меч", en: "Slime Sword" }
+      },
+      {
+        image: "images/monster.png",
+        original: { ru: "Золотая Морковь", en: "Golden Carrot" },
+        rename: { ru: "Монстр", en: "Monster" }
+      },
+      {
+        image: "images/white_monster.png",
+        original: { ru: "Золотая Морковь", en: "Golden Carrot" },
+        rename: { ru: "Белый Монстр", en: "White Monster" }
+      },
+      {
+        image: "images/slimeburger.png",
+        original: { ru: "Золотая Морковь", en: "Golden Carrot" },
+        rename: { ru: "Слизьбургер", en: "Slimeburger" }
+      },
+      {
+        image: "images/spunked_carrot.png",
+        original: { ru: "Золотая Морковь", en: "Golden Carrot" },
+        rename: { ru: "Малафьиная Морковь", en: "Spunked Carrot" }
+      },
+      {
+        image: "images/pug_of_undying.png",
+        original: { ru: "Тотем Бессмертия", en: "Totem of Undying" },
+        rename: { ru: "Мопс Бессмертия", en: "Pug of Undying" }
+      },
+      {
+        image: "images/great_pug.png",
+        original: { ru: "Вырезанная Тыква", en: "Carved Pumpkin" },
+        rename: { ru: "Великий Мопс", en: "Great Pug" }
+      },
+    ];
+
+    let currentLang = 'ru';
+    let currentTheme = 'light';
+
+    /* SVG Иконки для переключения темы */
+    const sunIconPath = `<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M18.36 5.64l-1.41 1.41"/>`;
+    const moonIconPath = `<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>`;
+
+    /* --- ЛОГИКА ТЕМЫ --- */
+    function toggleTheme() {
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      
+      if (!document.startViewTransition) {
+        applyTheme(newTheme);
+        return;
+      }
+
+      document.startViewTransition(() => {
+        applyTheme(newTheme);
+      });
+    }
+
+    function applyTheme(theme) {
+      currentTheme = theme;
+      document.documentElement.setAttribute('data-theme', theme);
+      
+      // Смена иконки Солнце / Луна
+      const iconSvg = document.getElementById('themeIcon');
+      iconSvg.innerHTML = theme === 'dark' ? sunIconPath : moonIconPath;
+
+      updateTexts();
+    }
+
+    /* --- ЛОГИКА ЯЗЫКА И ТАБЛИЦЫ --- */
+    function toggleLanguage() {
+      currentLang = currentLang === 'ru' ? 'en' : 'ru';
+      document.getElementById('langToggle').innerText = currentLang === 'ru' ? 'EN' : 'RU';
+      updateTexts();
+      renderTable();
+    }
+
+    function updateTexts() {
+      const langData = i18n[currentLang];
+      document.getElementById('title').innerText = langData.title;
+      document.getElementById('subtitle').innerText = currentTheme === 'light' ? langData.subtitle_light : langData.subtitle_dark;
+      document.getElementById('desc').innerText = langData.desc;
+      document.getElementById('searchInput').placeholder = langData.searchPlaceholder;
+      document.getElementById('thIcon').innerText = langData.thIcon;
+      document.getElementById('thOriginal').innerText = langData.thOriginal;
+      document.getElementById('thRename').innerText = langData.thRename;
+      document.getElementById('footerText').innerText = langData.footerText;
+      
+      // Новые элементы
+      document.querySelector('#suggestBtn span').innerText = langData.suggestBtn;
+      document.getElementById('supportText').innerText = langData.supportText;
+      
+      // Всплывающие подсказки соцсетей
+      document.getElementById('discordLink').setAttribute('data-tooltip', langData.discordTooltip);
+      document.getElementById('vkLink').setAttribute('data-tooltip', langData.vkTooltip);
+      document.getElementById('ytLink').setAttribute('data-tooltip', langData.ytTooltip);
+    }
+
+    function renderTable() {
+      const tbody = document.getElementById('tableBody');
+      const searchQuery = document.getElementById('searchInput').value.toLowerCase();
+      tbody.innerHTML = '';
+
+      items.forEach(item => {
+        const origText = item.original[currentLang];
+        const renameText = item.rename[currentLang];
+
+        if (origText.toLowerCase().includes(searchQuery) || renameText.toLowerCase().includes(searchQuery)) {
+          const tr = document.createElement('tr');
+          
+          const imgNotFoundSvg = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMSI+PHJlY3QgeD0iMyIgeT0iMyIgd2lkdGg9IjE4IiBoZWlnaHQ9IjE4IiByeD0iNSIvPjxjaXJjbGUgY3g9IjguNSIgY3k9IjguNSIgcj0iMS41Ii8+PHBvbHlsaW5lIHBvaW50cz0iMjEgMTUgMTYgMTAgNSAyMSIvPjwvc3ZnPg==";
+
+          tr.innerHTML = `
+            <td>
+              <div class="item-icon">
+                <img src="${item.image}" alt="${origText}" onerror="this.src='${imgNotFoundSvg}'">
+              </div>
+            </td>
+            <td><strong>${origText}</strong></td>
+            <td>
+              <span class="rename-code">
+                ${renameText}
+                <button class="copy-btn" onclick="copyToClipboard('${renameText}', this)" title="Скопировать">
+                  <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                </button>
+              </span>
+            </td>
+          `;
+          tbody.appendChild(tr);
+        }
+      });
+    }
+
+    function filterTable() {
+      renderTable();
+    }
+
+    function copyToClipboard(text, btn) {
+      navigator.clipboard.writeText(text).then(() => {
+        const toast = document.getElementById('toast');
+        toast.innerText = i18n[currentLang].copied;
+        toast.classList.add('show');
+        
+        // Временный эффект успешного копирования на кнопке
+        const origSvg = btn.innerHTML;
+        btn.innerHTML = `<svg viewBox="0 0 24 24" style="stroke: var(--code-text);"><polyline points="20 6 9 17 4 12"/></svg>`;
+        
+        setTimeout(() => { 
+          toast.classList.remove('show');
+          btn.innerHTML = origSvg;
+        }, 2000);
+      });
+    }
+
+    // Инициализация
+    updateTexts();
+    renderTable();
+  </script>
+</body>
+</html>
