@@ -169,6 +169,7 @@
     .control-btn {
       background: transparent; border: 1px solid var(--primary-soft); color: var(--text-main); padding: 0.5rem 1.2rem;
       border-radius: 20px; font-family: inherit; font-weight: 700; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 8px;
+      text-decoration: none;
     }
     .control-btn.icon-only { padding: 0.5rem; width: 40px; height: 40px; border-radius: 50%; }
     .control-btn svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; }
@@ -179,7 +180,7 @@
       background: linear-gradient(135deg, var(--text-main) 30%, var(--primary-soft) 100%); 
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
       margin-bottom: 0.5rem; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
-      user-select: none; /* Чтобы текст не выделялся при даблклике */
+      user-select: none;
     }
 
     .subtitle { color: var(--primary-soft); font-size: 1.2rem; font-weight: 600; margin-bottom: 1rem; }
@@ -287,7 +288,7 @@
     .copy-code-btn:hover { opacity: 0.9; }
     .code-block { background: var(--code-bg); color: var(--code-text); padding: 1rem; border-radius: 14px; border: 1px solid var(--card-border); font-family: monospace; font-size: 0.88rem; overflow-x: auto; white-space: pre; line-height: 1.5; }
 
-    /* --- НОВОЕ ОКНО СКАЧИВАНИЯ (СМЕШНОЕ) --- */
+    /* --- ОКНО СКАЧИВАНИЯ --- */
     .download-options { display: flex; flex-direction: column; gap: 1.8rem; align-items: center; }
     
     .goofy-modrinth-promo {
@@ -401,6 +402,11 @@
         </div>
         
         <div class="right-group">
+          <!-- Кнопка перехода на сайт города -->
+          <a href="https://animunnug.github.io/Lunaria/" target="_blank" class="control-btn" id="cityBtn" title="Сайт города Лунария">
+            <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <span id="cityBtnText">Город</span>
+          </a>
           <button class="control-btn icon-only" id="themeToggle" onclick="toggleTheme()" title="Сменить тему">
             <svg id="themeIcon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
           </button>
@@ -459,7 +465,7 @@
     </footer>
   </div>
 
-  <!-- ОБНОВЛЕННОЕ МОДАЛЬНОЕ ОКНО СКАЧИВАНИЯ -->
+  <!-- ОКНО СКАЧИВАНИЯ -->
   <div id="downloadModal" class="modal-overlay">
     <div class="modal-content text-center">
       <button class="close-modal" id="closeDownloadBtn" title="Закрыть">
@@ -475,7 +481,6 @@
           
           <a href="https://modrinth.com/resourcepack/ВАШ_ПАК" class="super-duper-btn" target="_blank">
             <div class="btn-icon">
-              <!-- Официальный-подобный вектор Modrinth (геометрическая 'M' в стиле логотипа) -->
               <svg viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12.016 1.484a1.868 1.868 0 0 0-1.22.428L2.093 9.074c-.585.47-.932 1.185-.932 1.937v9.423c0 1.25.94 2.302 2.185 2.459 1.192.15 2.274-.684 2.493-1.859V11.23l4.908 3.93c.717.575 1.733.575 2.45 0l4.909-3.93v9.804c.219 1.175 1.301 2.01 2.493 1.86 1.245-.157 2.185-1.21 2.185-2.46V11.011c0-.752-.347-1.467-.932-1.937l-8.703-7.162a1.866 1.866 0 0 0-1.134-.428z" />
               </svg>
@@ -512,7 +517,6 @@
       <div class="modal-body">
         <div class="reco-card">
           <div class="reco-card-title">
-            <!-- Официальная иконка Modrinth в рекомендациях -->
             <svg width="20" height="20" viewBox="0 0 24 24" fill="#1bd96a">
                 <path d="M12.016 1.484a1.868 1.868 0 0 0-1.22.428L2.093 9.074c-.585.47-.932 1.185-.932 1.937v9.423c0 1.25.94 2.302 2.185 2.459 1.192.15 2.274-.684 2.493-1.859V11.23l4.908 3.93c.717.575 1.733.575 2.45 0l4.909-3.93v9.804c.219 1.175 1.301 2.01 2.493 1.86 1.245-.157 2.185-1.21 2.185-2.46V11.011c0-.752-.347-1.467-.932-1.937l-8.703-7.162a1.866 1.866 0 0 0-1.134-.428z" />
             </svg>
@@ -621,6 +625,7 @@ img.modrinth.com</pre>
         pmcLinkText: "Planet Minecraft 🦕",
         discordTooltip: "Discord сервер",
         tgTooltip: "Telegram канал",
+        cityBtnText: "Город",
         footer: "✨ С любовью из Лунарии | SPm Server",
         creators: "Создатели пака: Animun4ik и Moonray",
         supportText: "Что-то не работает? Пиши!",
@@ -654,6 +659,7 @@ img.modrinth.com</pre>
         pmcLinkText: "Planet Minecraft 🦕",
         discordTooltip: "Discord Server",
         tgTooltip: "Telegram Channel",
+        cityBtnText: "City",
         footer: "✨ With love from Lunaria | SPm Server",
         creators: "Pack creators: Animun4ik & Moonray",
         supportText: "Something not working? Write us!",
@@ -706,7 +712,6 @@ img.modrinth.com</pre>
       document.getElementById('thOriginal').innerText = langData.thOriginal;
       document.getElementById('thRename').innerText = langData.thRename;
       
-      // Меню скачивания
       document.getElementById('downloadHeaderBtnText').innerText = langData.dlHeaderBtn;
       document.getElementById('dlModalTitle').innerText = langData.dlModalTitle;
       document.getElementById('goofyTitle').innerText = langData.goofyTitle;
@@ -718,6 +723,7 @@ img.modrinth.com</pre>
 
       document.getElementById('discordLink').setAttribute('data-tooltip', langData.discordTooltip);
       document.getElementById('tgLink').setAttribute('data-tooltip', langData.tgTooltip);
+      document.getElementById('cityBtnText').innerText = langData.cityBtnText;
       document.getElementById('footerText').innerText = langData.footer;
       document.getElementById('creatorsText').innerText = langData.creators;
       document.getElementById('supportText').innerText = langData.supportText;
@@ -835,7 +841,6 @@ img.modrinth.com</pre>
         const bubble = document.createElement('div');
         bubble.className = 'easter-bubble';
         
-        // Гарантируем, что главная фраза точно появится хотя бы раз в партии баблов
         if(i === 0) {
             bubble.innerText = "ало скинофф студиос?";
         } else {
