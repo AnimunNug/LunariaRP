@@ -58,7 +58,6 @@
       cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='%23f5e0ac' stroke='%232c4a52' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 4l7.07 16.97 2.51-7.39 7.39-2.51L4 4z'/%3E%3C/svg%3E") 4 4, pointer !important;
     }
 
-    /* Искры от мышки */
     .cursor-sparkle {
       position: absolute;
       width: 5px;
@@ -75,7 +74,6 @@
       100% { transform: scale(0) translateY(15px); opacity: 0; }
     }
 
-    /* ПАСХАЛКА БАБЛЫ */
     .easter-bubble {
       position: fixed;
       background: var(--primary-soft);
@@ -98,7 +96,6 @@
       100% { transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(1); opacity: 0; }
     }
 
-    /* ЭФФЕКТ ПЕРЕХОДА ТЕМ */
     ::view-transition-old(root) { animation: fade-out 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
     ::view-transition-new(root) { animation: fade-in 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
     @keyframes fade-out { to { opacity: 0; } }
@@ -198,7 +195,6 @@
     .action-btn.secondary:hover { background: var(--bg-creamy); color: var(--primary-soft); filter: none; box-shadow: var(--glow-light); }
     .action-btn svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
-    /* КАТЕГОРИИ И ПОИСК */
     .controls-wrapper { margin-bottom: 1.8rem; display: flex; flex-direction: column; gap: 1rem; }
     .search-and-select-bar { display: flex; gap: 12px; flex-wrap: wrap; width: 100%; align-items: center; }
     .search-input {
@@ -207,7 +203,6 @@
     }
     .search-input:focus { border-color: var(--primary-soft); box-shadow: var(--glow-light); }
 
-    /* ПЕРЕКЛЮЧАТЕЛЬ РЕЖИМА КАТЕГОРИЙ */
     .mode-switch-container {
       display: flex; background: var(--bg-creamy); border: 1px solid var(--card-border);
       border-radius: 25px; padding: 4px; gap: 4px; align-items: center; flex: 0 0 auto;
@@ -247,7 +242,6 @@
     .dropdown-opt.active { background: var(--th-bg); color: var(--primary-soft); font-weight: 700; }
     .dropdown-opt .cat-count { font-size: 0.75rem; background: var(--card-border); color: var(--text-main); padding: 2px 8px; border-radius: 10px; opacity: 0.8; }
 
-    /* ТАБЛИЦА */
     .table-wrapper { background: var(--bg-creamy); border: 1px solid var(--card-border); border-radius: 25px; overflow: visible; box-shadow: var(--shadow-soft); }
     table { width: 100%; border-collapse: collapse; text-align: left; }
     th { background: var(--th-bg); color: var(--text-main); padding: 1.3rem 1rem; font-weight: 700; font-size: 0.95rem; border-bottom: 2px solid var(--card-border); }
@@ -265,7 +259,6 @@
     .copy-btn svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; }
     .copy-btn:hover { color: var(--primary-soft); transform: scale(1.15); }
 
-    /* --- НОВЫЙ ДИЗАЙН ВАРИАНТОВ ПРЕДМЕТОВ --- */
     .orig-cell-content { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
     .expand-btn {
       background: var(--th-bg); border: 1px solid var(--card-border); color: var(--text-main);
@@ -287,6 +280,7 @@
       border-top: 1px dashed var(--card-border);
       margin-top: 4px;
     }
+    
     .variants-title {
       font-size: 0.85rem; 
       font-weight: 700; 
@@ -297,6 +291,7 @@
       align-items: center;
       gap: 8px;
     }
+    
     .variants-title::after {
       content: '';
       flex: 1;
@@ -305,57 +300,96 @@
       opacity: 0.6;
     }
 
+    /* --- НОВЫЙ ДИЗАЙН ВАРИАНТОВ ПРЕДМЕТОВ --- */
     .variants-grid {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 15px; /* Отступ для тултипов */
+      padding-top: 10px;
     }
 
-    .variant-card {
-      display: inline-flex; 
-      align-items: center; 
-      gap: 10px; 
+    .variant-item {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
       background: var(--bg-creamy);
-      border: 1px solid var(--card-border); 
-      border-radius: 16px; 
-      padding: 8px 14px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.03); 
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
       transition: all 0.25s ease;
     }
-    .variant-card:hover { 
-      transform: translateY(-2px); 
+
+    .variant-item:hover {
       border-color: var(--primary-soft);
       box-shadow: var(--shadow-soft);
-    }
-    
-    /* ИКОНКА МАТЕРИАЛА: БЕЗ РАМКИ, ПРИБЛИЖАЕТСЯ КАК ОБЫЧНАЯ ИКОНКА */
-    .variant-pixel-icon { 
-      width: 28px; 
-      height: 28px; 
-      min-width: 28px;
-      min-height: 28px;
-      object-fit: contain; 
-      image-rendering: pixelated; 
-      image-rendering: crisp-edges;
-      display: block;
-      border: none;
-      background: transparent;
-      padding: 0;
-      transition: transform 0.3s ease;
-      position: relative;
-      z-index: 1;
+      transform: translateY(-2px);
+      z-index: 10;
     }
 
-    .variant-pixel-icon:hover {
-      transform: scale(2.5);
-      z-index: 10;
-      filter: drop-shadow(0 5px 10px rgba(0,0,0,0.3));
+    .variant-pixel-icon {
+      width: 34px;
+      height: 34px;
+      object-fit: contain;
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+      transition: transform 0.3s ease;
     }
-    
-    .variant-card span { 
-      font-size: 0.88rem; 
-      font-weight: 600; 
-      color: var(--text-main); 
+
+    .variant-item:hover .variant-pixel-icon {
+      transform: scale(1.6);
+    }
+
+    .material-corner-icon {
+      position: absolute;
+      bottom: -6px;
+      right: -6px;
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
+      image-rendering: pixelated;
+      background: var(--bg-creamy);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 2px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .variant-tooltip {
+      position: absolute;
+      top: -35px;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background: var(--text-main);
+      color: var(--bg-creamy);
+      padding: 6px 12px;
+      border-radius: 10px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      white-space: nowrap;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      pointer-events: none;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .variant-tooltip::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 5px 5px 0;
+      border-style: solid;
+      border-color: var(--text-main) transparent transparent transparent;
+    }
+
+    .variant-item:hover .variant-tooltip {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
     }
 
     /* ОБЩИЙ СТИЛЬ МОДАЛЬНЫХ ОКОН */
@@ -373,7 +407,6 @@
     }
     .close-modal:hover { color: var(--primary-soft); transform: rotate(90deg); }
 
-    /* Окно Рекомендаций */
     .modal-header { display: flex; align-items: center; gap: 12px; margin-bottom: 1.8rem; }
     .modal-header-icon { width: 44px; height: 44px; border-radius: 14px; background: var(--th-bg); border: 1px solid var(--card-border); display: flex; align-items: center; justify-content: center; color: var(--primary-soft); }
     .modal-header-icon svg { width: 24px; height: 24px; stroke: currentColor; fill: none; stroke-width: 2; }
@@ -398,7 +431,6 @@
     .copy-code-btn:hover { opacity: 0.9; }
     .code-block { background: var(--code-bg); color: var(--code-text); padding: 1rem; border-radius: 14px; border: 1px solid var(--card-border); font-family: monospace; font-size: 0.88rem; overflow-x: auto; white-space: pre; line-height: 1.5; }
 
-    /* ОКНО СКАЧИВАНИЯ */
     .download-options { display: flex; flex-direction: column; gap: 1.8rem; align-items: center; }
     .goofy-modrinth-promo { width: 100%; background: var(--th-bg); border: 2px dashed var(--primary-soft); border-radius: 24px; padding: 2rem 1.5rem; text-align: center; position: relative; }
     .goofy-title { font-size: 1.3rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.8rem; }
@@ -432,7 +464,6 @@
     .support-widget:hover { transform: translateY(-4px) scale(1.02); border-color: var(--primary-soft); box-shadow: var(--glow-light); color: var(--primary-soft); }
     .support-widget svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
-    /* МАЛОЗАМЕТНАЯ КНОПКА УСЛОВИЙ В ФУТЕРЕ */
     .subtle-terms-btn {
       background: transparent;
       border: none;
@@ -564,7 +595,6 @@
     </footer>
   </div>
 
-  <!-- ОКНО СКАЧИВАНИЯ -->
   <div id="downloadModal" class="modal-overlay">
     <div class="modal-content text-center">
       <button class="close-modal" id="closeDownloadBtn" title="Закрыть">
@@ -593,7 +623,6 @@
     </div>
   </div>
 
-  <!-- МОДАЛЬНОЕ ОКНО РЕКОМЕНДАЦИЙ -->
   <div id="recoModal" class="modal-overlay">
     <div class="modal-content">
       <button class="close-modal" id="closeModalBtn" title="Закрыть">
@@ -650,7 +679,6 @@ img.modrinth.com</pre>
     </div>
   </div>
 
-  <!-- МОДАЛЬНОЕ ОКНО УСЛОВИЙ ПОЛЬЗОВАНИЯ -->
   <div id="termsModal" class="modal-overlay">
     <div class="modal-content">
       <button class="close-modal" id="closeTermsBtn" title="Закрыть">
@@ -742,9 +770,6 @@ img.modrinth.com</pre>
       }
     };
 
-    // =======================================================
-    // СПИСОК ПРЕДМЕТОВ
-    // =======================================================
     const items = [
       { 
         image: "images/slime_sword.png", 
@@ -753,12 +778,12 @@ img.modrinth.com</pre>
         original: { ru: "Любой Меч", en: "Any sword" }, 
         rename: { ru: "Слизневый Меч", en: "Slime Sword" },
         variants: [
-          { material: { ru: "Деревянный", en: "Wooden" }, image: "images/slime_sword_wood.png" },
-          { material: { ru: "Каменный", en: "Stone" }, image: "images/slime_sword_stone.png" },
-          { material: { ru: "Железный", en: "Iron" }, image: "images/slime_sword_iron.png" },
-          { material: { ru: "Золотой", en: "Golden" }, image: "images/slime_sword_gold.png" },
-          { material: { ru: "Алмазный", en: "Diamond" }, image: "images/slime_sword_diamond.png" },
-          { material: { ru: "Незеритовый", en: "Netherite" }, image: "images/slime_sword_netherite.png" }
+          { material: { ru: "Деревянный", en: "Wooden" }, mat_id: "wood", image: "images/slime_sword_wood.png" },
+          { material: { ru: "Каменный", en: "Stone" }, mat_id: "stone", image: "images/slime_sword_stone.png" },
+          { material: { ru: "Железный", en: "Iron" }, mat_id: "iron", image: "images/slime_sword_iron.png" },
+          { material: { ru: "Золотой", en: "Golden" }, mat_id: "gold", image: "images/slime_sword_gold.png" },
+          { material: { ru: "Алмазный", en: "Diamond" }, mat_id: "diamond", image: "images/slime_sword_diamond.png" },
+          { material: { ru: "Незеритовый", en: "Netherite" }, mat_id: "netherite", image: "images/slime_sword_netherite.png" }
         ]
       },
       { image: "images/moonedge.png", category: "weapons", theme: "other", original: { ru: "Любой Меч", en: "Any sword" }, rename: { ru: "Остролуние", en: "Moonedge" } },
@@ -1013,7 +1038,6 @@ img.modrinth.com</pre>
 
     function filterTable() { renderTable(); }
 
-    /* ФУНКЦИЯ ОТКРЫТИЯ/ЗАКРЫТИЯ ВАРИАНТОВ */
     function toggleVariants(index) {
       const varRow = document.getElementById(`variants-${index}`);
       const arrow = document.getElementById(`arrow-${index}`);
@@ -1077,7 +1101,6 @@ img.modrinth.com</pre>
           `;
           tbody.appendChild(tr);
 
-          // Строка с вариантами материалов (без рамок у иконок, с приближением при наведении)
           if (hasVariants) {
             const varTr = document.createElement('tr');
             varTr.className = 'variants-row';
@@ -1086,9 +1109,10 @@ img.modrinth.com</pre>
             let cardsHtml = '';
             item.variants.forEach(v => {
               cardsHtml += `
-                <div class="variant-card">
+                <div class="variant-item">
                   <img class="variant-pixel-icon" src="${v.image}" alt="${v.material[currentLang]}" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' viewBox=\\'0 0 24 24\\' fill=\\'%2378d2d6\\'><rect width=\\'24\\' height=\\'24\\'/></svg>'">
-                  <span>${v.material[currentLang]}</span>
+                  <img class="material-corner-icon" src="images/mat_${v.mat_id}.png" alt="Material" onerror="this.style.display='none'">
+                  <div class="variant-tooltip">${v.material[currentLang]}</div>
                 </div>
               `;
             });
