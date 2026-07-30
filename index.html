@@ -54,7 +54,7 @@
       cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2378d2d6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 4l7.07 16.97 2.51-7.39 7.39-2.51L4 4z'/%3E%3C/svg%3E") 4 4, auto;
     }
     
-    a, button, input, .social-btn, td, .select-cat-btn, h1 {
+    a, button, input, .social-btn, td, .select-cat-btn, h1, .mode-btn {
       cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='%23f5e0ac' stroke='%232c4a52' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 4l7.07 16.97 2.51-7.39 7.39-2.51L4 4z'/%3E%3C/svg%3E") 4 4, pointer !important;
     }
 
@@ -199,14 +199,30 @@
 
     /* КАТЕГОРИИ И ПОИСК */
     .controls-wrapper { margin-bottom: 1.8rem; display: flex; flex-direction: column; gap: 1rem; }
-    .search-and-select-bar { display: flex; gap: 12px; flex-wrap: wrap; width: 100%; }
+    .search-and-select-bar { display: flex; gap: 12px; flex-wrap: wrap; width: 100%; align-items: center; }
     .search-input {
-      flex: 1 1 280px; padding: 0.85rem 1.4rem; border-radius: 25px; background: var(--bg-creamy); border: 1px solid var(--card-border);
+      flex: 1 1 240px; padding: 0.85rem 1.4rem; border-radius: 25px; background: var(--bg-creamy); border: 1px solid var(--card-border);
       color: var(--text-main); font-family: inherit; font-size: 0.95rem; outline: none; transition: all 0.3s ease;
     }
     .search-input:focus { border-color: var(--primary-soft); box-shadow: var(--glow-light); }
 
-    .category-dropdown-container { position: relative; flex: 0 0 auto; min-width: 220px; }
+    /* ПЕРЕКЛЮЧАТЕЛЬ РЕЖИМА КАТЕГОРИЙ (ТИПЫ / ТЕМАТИКИ) */
+    .mode-switch-container {
+      display: flex; background: var(--bg-creamy); border: 1px solid var(--card-border);
+      border-radius: 25px; padding: 4px; gap: 4px; align-items: center; flex: 0 0 auto;
+      box-shadow: var(--shadow-soft);
+    }
+    .mode-btn {
+      background: transparent; border: none; color: var(--text-muted); padding: 0.55rem 1rem;
+      border-radius: 20px; font-family: inherit; font-size: 0.82rem; font-weight: 700;
+      transition: all 0.25s ease; white-space: nowrap;
+    }
+    .mode-btn.active {
+      background: var(--primary-soft); color: #ffffff; box-shadow: 0 2px 10px rgba(120, 210, 214, 0.4);
+    }
+    .mode-btn:hover:not(.active) { color: var(--text-main); background: var(--th-bg); }
+
+    .category-dropdown-container { position: relative; flex: 0 0 auto; min-width: 200px; }
     .category-dropdown-btn {
       width: 100%; height: 100%; min-height: 48px; padding: 0.85rem 1.2rem; border-radius: 25px; background: var(--bg-creamy);
       border: 1px solid var(--card-border); color: var(--text-main); font-family: inherit; font-size: 0.9rem; font-weight: 700;
@@ -372,6 +388,8 @@
       .item-icon { width: 44px; height: 44px; padding: 4px; }
       .support-widget { bottom: 15px; left: 50%; transform: translateX(-50%); width: calc(100% - 40px); justify-content: center; }
       .support-widget:hover { transform: translateX(-50%) translateY(-2px); }
+      .search-and-select-bar { flex-direction: column; align-items: stretch; }
+      .mode-switch-container { justify-content: center; }
       .category-dropdown-container { width: 100%; }
       .super-duper-btn { flex-direction: column; gap: 5px; padding: 1rem; }
       .btn-text-wrapper { text-align: center; }
@@ -434,6 +452,12 @@
       <div class="search-and-select-bar">
         <input type="text" class="search-input" id="searchInput" placeholder="Поиск предмета или названия..." oninput="filterTable()">
         
+        <!-- АККУРАТНЫЙ ПЕРЕКЛЮЧАТЕЛЬ РЕЖИМА -->
+        <div class="mode-switch-container">
+          <button class="mode-btn active" id="modeStandardBtn" onclick="switchCategoryMode('standard')">Типы</button>
+          <button class="mode-btn" id="modeThemeBtn" onclick="switchCategoryMode('theme')">Тематики</button>
+        </div>
+
         <div class="category-dropdown-container" id="catDropdownContainer">
           <button class="category-dropdown-btn" onclick="toggleCategoryDropdown()">
             <span id="selectedCatLabel">Все категории</span>
@@ -579,29 +603,48 @@ img.modrinth.com</pre>
       }
     });
 
-    const categoriesConfig = {
-      all: { ru: "Все категории", en: "All Categories" },
-      weapons: { ru: "Оружие", en: "Weapons" },
-      armor: { ru: "Броня", en: "Armor" },
-      tools: { ru: "Инструменты", en: "Tools" },
-      hats: { ru: "Шапки", en: "Hats" },
-      totems: { ru: "Тотемы", en: "Totems" },
-      food: { ru: "Еда", en: "Food" },
-      goodies: { ru: "Плюшки", en: "Goodies" }
+    // ==========================================
+    // ГИБКАЯ НАСТРОЙКА КАТЕГОРИЙ И ТЕМАТИК
+    // ==========================================
+    const categoryModes = {
+      standard: {
+        label: { ru: "Типы", en: "Types" },
+        categories: {
+          all: { ru: "Все категории", en: "All Categories" },
+          weapons: { ru: "Оружие", en: "Weapons" },
+          armor: { ru: "Броня", en: "Armor" },
+          tools: { ru: "Инструменты", en: "Tools" },
+          hats: { ru: "Шапки", en: "Hats" },
+          totems: { ru: "Тотемы", en: "Totems" },
+          food: { ru: "Еда", en: "Food" },
+          goodies: { ru: "Плюшки", en: "Goodies" }
+        }
+      },
+      theme: {
+        label: { ru: "Тематики", en: "Themes" },
+        categories: {
+          all: { ru: "Все тематики", en: "All Themes" },
+          slime: { ru: "Слизневое безумие", en: "Slime Madness" },
+          pugs: { ru: "Мопсы", en: "Pugs" },
+          energy: { ru: "Энергетики", en: "Energy Drinks" }
+        }
+      }
     };
 
+    // Предметы (с указанием 'category' и 'theme')
     const items = [
-      { image: "images/slime_sword.png", category: "weapons", original: { ru: "Любой Меч", en: "Any sword" }, rename: { ru: "Слизневый Меч", en: "Slime Sword" } },
-      { image: "images/moonedge.png", category: "weapons", original: { ru: "Любой Меч", en: "Any sword" }, rename: { ru: "Остролуние", en: "Moonedge" } },
-      { image: "images/monster.png", category: "food", original: { ru: "Золотая Морковь", en: "Golden Carrot" }, rename: { ru: "Монстр", en: "Monster" } },
-      { image: "images/white_monster.png", category: "food", original: { ru: "Золотая Морковь", en: "Golden Carrot" }, rename: { ru: "Белый Монстр", en: "White Monster" } },
-      { image: "images/slimeburger.png", category: "food", original: { ru: "Золотая Морковь", en: "Golden Carrot" }, rename: { ru: "Слизьбургер", en: "Slimeburger" } },
-      { image: "images/spunked_carrot.png", category: "food", original: { ru: "Золотая Морковь", en: "Golden Carrot" }, rename: { ru: "Малафьиная Морковь", en: "Spunked Carrot" } },
-      { image: "images/pug_of_undying.png", category: "totems", original: { ru: "Тотем Бессмертия", en: "Totem of Undying" }, rename: { ru: "Мопс Бессмертия", en: "Pug of Undying" } },
-      { image: "images/great_pug.png", category: "hats", original: { ru: "Вырезанная Тыква", en: "Carved Pumpkin" }, rename: { ru: "Великий Мопс", en: "Great Pug" } }
+      { image: "images/slime_sword.png", category: "weapons", theme: "slime", original: { ru: "Любой Меч", en: "Any sword" }, rename: { ru: "Слизневый Меч", en: "Slime Sword" } },
+      { image: "images/moonedge.png", category: "weapons", theme: "other", original: { ru: "Любой Меч", en: "Any sword" }, rename: { ru: "Остролуние", en: "Moonedge" } },
+      { image: "images/monster.png", category: "food", theme: "energy", original: { ru: "Золотая Морковь", en: "Golden Carrot" }, rename: { ru: "Монстр", en: "Monster" } },
+      { image: "images/white_monster.png", category: "food", theme: "energy", original: { ru: "Золотая Морковь", en: "Golden Carrot" }, rename: { ru: "Белый Монстр", en: "White Monster" } },
+      { image: "images/slimeburger.png", category: "food", theme: "slime", original: { ru: "Золотая Морковь", en: "Golden Carrot" }, rename: { ru: "Слизьбургер", en: "Slimeburger" } },
+      { image: "images/spunked_carrot.png", category: "food", theme: "other", original: { ru: "Золотая Морковь", en: "Golden Carrot" }, rename: { ru: "Малафьиная Морковь", en: "Spunked Carrot" } },
+      { image: "images/pug_of_undying.png", category: "totems", theme: "pugs", original: { ru: "Тотем Бессмертия", en: "Totem of Undying" }, rename: { ru: "Мопс Бессмертия", en: "Pug of Undying" } },
+      { image: "images/great_pug.png", category: "hats", theme: "pugs", original: { ru: "Вырезанная Тыква", en: "Carved Pumpkin" }, rename: { ru: "Великий Мопс", en: "Great Pug" } }
     ];
 
     let currentLang = 'ru';
+    let currentMode = 'standard'; // 'standard' или 'theme'
     let currentCategory = 'all';
     
     const i18n = {
@@ -610,6 +653,8 @@ img.modrinth.com</pre>
         subtitle: "Светлое руководство по ресурспаку",
         desc: "Добро пожаловать в библиотеку города Лунария. Воспользуйтесь наковальней и переименуйте предмет точно так, как указано в таблице, чтобы пробудить его истинную магическую форму.",
         search: "Поиск предмета или названия...",
+        modeStandard: "Типы",
+        modeTheme: "Тематики",
         thIcon: "Иконка",
         thOriginal: "Исходный предмет",
         thRename: "Переименование",
@@ -644,6 +689,8 @@ img.modrinth.com</pre>
         subtitle: "Luminous Resource Pack Guide",
         desc: "Welcome to the library of Lunaria. Use an anvil and rename the item exactly as shown in the table to awaken its true magical form.",
         search: "Search for item or name...",
+        modeStandard: "Types",
+        modeTheme: "Themes",
         thIcon: "Icon",
         thOriginal: "Original Item",
         thRename: "Rename to",
@@ -712,6 +759,9 @@ img.modrinth.com</pre>
       document.getElementById('thOriginal').innerText = langData.thOriginal;
       document.getElementById('thRename').innerText = langData.thRename;
       
+      document.getElementById('modeStandardBtn').innerText = categoryModes.standard.label[currentLang];
+      document.getElementById('modeThemeBtn').innerText = categoryModes.theme.label[currentLang];
+
       document.getElementById('downloadHeaderBtnText').innerText = langData.dlHeaderBtn;
       document.getElementById('dlModalTitle').innerText = langData.dlModalTitle;
       document.getElementById('goofyTitle').innerText = langData.goofyTitle;
@@ -739,6 +789,19 @@ img.modrinth.com</pre>
       document.getElementById('modalRFText').innerHTML = langData.modalRFText;
     }
 
+    /* ПЕРЕКЛЮЧЕНИЕ РЕЖИМА КАТЕГОРИЙ (ТИПЫ / ТЕМАТИКИ) */
+    function switchCategoryMode(mode) {
+      if (currentMode === mode) return;
+      currentMode = mode;
+      currentCategory = 'all';
+
+      document.getElementById('modeStandardBtn').classList.toggle('active', mode === 'standard');
+      document.getElementById('modeThemeBtn').classList.toggle('active', mode === 'theme');
+
+      renderCategoryUI();
+      renderTable();
+    }
+
     function toggleCategoryDropdown() {
       document.getElementById('catDropdownContainer').classList.toggle('open');
     }
@@ -760,12 +823,23 @@ img.modrinth.com</pre>
       const selectedLabel = document.getElementById('selectedCatLabel');
       
       dropdownMenu.innerHTML = '';
-      const activeCat = categoriesConfig[currentCategory] || categoriesConfig.all;
-      selectedLabel.innerHTML = `${activeCat[currentLang]}`; 
+      const modeConfig = categoryModes[currentMode];
+      const categoriesDict = modeConfig.categories;
 
-      Object.keys(categoriesConfig).forEach(catKey => {
-        const cat = categoriesConfig[catKey];
-        const count = catKey === 'all' ? items.length : items.filter(i => i.category === catKey).length;
+      const activeCatObj = categoriesDict[currentCategory] || categoriesDict.all;
+      selectedLabel.innerText = activeCatObj[currentLang];
+
+      Object.keys(categoriesDict).forEach(catKey => {
+        const cat = categoriesDict[catKey];
+        let count = 0;
+
+        if (catKey === 'all') {
+          count = items.length;
+        } else {
+          count = items.filter(i => {
+            return currentMode === 'standard' ? i.category === catKey : i.theme === catKey;
+          }).length;
+        }
 
         const opt = document.createElement('div');
         opt.className = `dropdown-opt ${catKey === currentCategory ? 'active' : ''}`;
@@ -787,7 +861,15 @@ img.modrinth.com</pre>
         const renameText = item.rename[currentLang];
         
         const matchesSearch = origText.toLowerCase().includes(searchQuery) || renameText.toLowerCase().includes(searchQuery);
-        const matchesCategory = currentCategory === 'all' || item.category === currentCategory;
+        
+        let matchesCategory = false;
+        if (currentCategory === 'all') {
+          matchesCategory = true;
+        } else if (currentMode === 'standard') {
+          matchesCategory = item.category === currentCategory;
+        } else if (currentMode === 'theme') {
+          matchesCategory = item.theme === currentCategory;
+        }
 
         if (matchesSearch && matchesCategory) {
           const tr = document.createElement('tr');
