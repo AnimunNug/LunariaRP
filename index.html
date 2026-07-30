@@ -54,7 +54,7 @@
       cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2378d2d6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 4l7.07 16.97 2.51-7.39 7.39-2.51L4 4z'/%3E%3C/svg%3E") 4 4, auto;
     }
     
-    a, button, input, .social-btn, td, .select-cat-btn, h1, .mode-btn, .expand-btn {
+    a, button, input, .social-btn, td, .select-cat-btn, h1, .mode-btn, .expand-btn, .variant-card {
       cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='%23f5e0ac' stroke='%232c4a52' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 4l7.07 16.97 2.51-7.39 7.39-2.51L4 4z'/%3E%3C/svg%3E") 4 4, pointer !important;
     }
 
@@ -264,7 +264,7 @@
     .copy-btn svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; }
     .copy-btn:hover { color: var(--primary-soft); transform: scale(1.15); }
 
-    /* --- НОВЫЙ ДИЗАЙН ВАРИАНТОВ ПРЕДМЕТОВ --- */
+    /* --- НОВЫЕ СТИЛИ ДЛЯ ВАРИАНТОВ МАТЕРИАЛОВ --- */
     .orig-cell-content { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
     .expand-btn {
       background: var(--th-bg); border: 1px solid var(--card-border); color: var(--text-main);
@@ -274,75 +274,90 @@
     .expand-btn:hover { border-color: var(--primary-soft); color: var(--primary-soft); transform: scale(1.1); }
     .expand-btn svg { transition: transform 0.3s ease; }
 
-    .variants-row { display: none; background: rgba(0, 0, 0, 0.015); }
-    [data-theme="dark"] .variants-row { background: rgba(0, 0, 0, 0.2); }
+    .variants-row { display: none; background: rgba(0, 0, 0, 0.02); }
+    [data-theme="dark"] .variants-row { background: rgba(0, 0, 0, 0.25); }
     .variants-row.open { display: table-row; }
     
     .variants-container {
-      padding: 1.2rem 1rem 1.4rem 1rem; 
-      display: flex; 
-      flex-direction: column;
-      gap: 12px;
-      border-top: 1px dashed var(--card-border);
-      margin-top: 4px;
+      padding: 0.8rem 0.5rem; display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
     }
     .variants-title {
-      font-size: 0.85rem; 
-      font-weight: 700; 
-      color: var(--primary-soft); 
-      text-transform: uppercase; 
-      letter-spacing: 0.8px;
+      width: 100%; font-size: 0.82rem; font-weight: 700; color: var(--primary-soft); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;
+    }
+
+    /* Компактная карточка варианта (Иконка материала + Текстура предмета) */
+    .variant-card {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bg-creamy);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 5px 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .variant-card:hover {
+      transform: translateY(-2px) scale(1.05);
+      border-color: var(--primary-soft);
+      box-shadow: var(--glow-light);
+    }
+
+    /* Иконка материала 5 на 5 пикселей */
+    .variant-mat-icon {
+      width: 14px;
+      height: 14px;
+      object-fit: contain;
+      image-rendering: pixelated;
+      flex-shrink: 0;
+    }
+
+    /* Иконка с текстурой предмета */
+    .variant-item-icon {
+      width: 36px;
+      height: 36px;
       display: flex;
       align-items: center;
-      gap: 8px;
+      justify-content: center;
+      background: var(--icon-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 3px;
     }
-    .variants-title::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--card-border);
-      opacity: 0.6;
-    }
-
-    .variants-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
+    .variant-item-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      image-rendering: pixelated;
     }
 
-    .variant-card {
-      display: inline-flex; 
-      align-items: center; 
-      gap: 10px; 
+    /* Всплывающая подсказка с описанием при наведении */
+    .variant-card::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%) translateY(4px);
       background: var(--bg-creamy);
-      border: 1px solid var(--card-border); 
-      border-radius: 16px; 
-      padding: 8px 14px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.03); 
-      transition: all 0.25s ease;
-    }
-    .variant-card:hover { 
-      transform: translateY(-2px); 
-      border-color: var(--primary-soft);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      white-space: nowrap;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.2s ease;
       box-shadow: var(--shadow-soft);
+      z-index: 20;
+      pointer-events: none;
     }
-    
-    /* СТРОГИЙ РАЗМЕР МИНИ-ИКОНКИ 5x5 ПИКСЕЛЕЙ С ПИКСЕЛЬНЫМ СГЛАЖИВАНИЕМ */
-    .variant-pixel-icon { 
-      width: 5px; 
-      height: 5px; 
-      min-width: 5px;
-      min-height: 5px;
-      object-fit: contain; 
-      image-rendering: pixelated; 
-      image-rendering: crisp-edges;
-      display: block;
-    }
-    
-    .variant-card span { 
-      font-size: 0.88rem; 
-      font-weight: 600; 
-      color: var(--text-main); 
+    .variant-card:hover::after {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
     }
 
     /* ОБЩИЙ СТИЛЬ МОДАЛЬНЫХ ОКОН */
@@ -654,7 +669,7 @@ img.modrinth.com</pre>
     };
 
     // =======================================================
-    // СПИСОК ПРЕДМЕТОВ (В СЛИЗНЕВЫЙ МЕЧ ДОБАВЛЕНЫ ВАРИАНТЫ)
+    // СПИСОК ПРЕДМЕТОВ (С ДОБАВЛЕННЫМИ ИКОНКАМИ МАТЕРИАЛОВ matIcon)
     // =======================================================
     const items = [
       { 
@@ -663,14 +678,14 @@ img.modrinth.com</pre>
         theme: "slime", 
         original: { ru: "Любой Меч", en: "Any sword" }, 
         rename: { ru: "Слизневый Меч", en: "Slime Sword" },
-        // --- ВАРИАНТЫ МАТЕРИАЛОВ С 5x5 ИКОНКАМИ ---
+        // --- ВАРИАНТЫ МАТЕРИАЛОВ С ИКОНКАМИ МАТЕРИАЛА ---
         variants: [
-          { material: { ru: "Деревянный", en: "Wooden" }, image: "images/slime_sword_wood.png" },
-          { material: { ru: "Каменный", en: "Stone" }, image: "images/slime_sword_stone.png" },
-          { material: { ru: "Железный", en: "Iron" }, image: "images/slime_sword_iron.png" },
-          { material: { ru: "Золотой", en: "Golden" }, image: "images/slime_sword_gold.png" },
-          { material: { ru: "Алмазный", en: "Diamond" }, image: "images/slime_sword_diamond.png" },
-          { material: { ru: "Незеритовый", en: "Netherite" }, image: "images/slime_sword_netherite.png" }
+          { material: { ru: "Деревянный", en: "Wooden" }, matIcon: "images/materials/wood.png", image: "images/slime_sword_wood.png" },
+          { material: { ru: "Каменный", en: "Stone" }, matIcon: "images/materials/stone.png", image: "images/slime_sword_stone.png" },
+          { material: { ru: "Железный", en: "Iron" }, matIcon: "images/materials/iron.png", image: "images/slime_sword_iron.png" },
+          { material: { ru: "Золотой", en: "Golden" }, matIcon: "images/materials/gold.png", image: "images/slime_sword_gold.png" },
+          { material: { ru: "Алмазный", en: "Diamond" }, matIcon: "images/materials/diamond.png", image: "images/slime_sword_diamond.png" },
+          { material: { ru: "Незеритовый", en: "Netherite" }, matIcon: "images/materials/netherite.png", image: "images/slime_sword_netherite.png" }
         ]
       },
       { image: "images/moonedge.png", category: "weapons", theme: "other", original: { ru: "Любой Меч", en: "Any sword" }, rename: { ru: "Остролуние", en: "Moonedge" } },
@@ -722,7 +737,7 @@ img.modrinth.com</pre>
         copyCodeText: "Скопировать",
         modalModrinthText: "Рекомендуется использовать лаунчер <a href='https://modrinth.com' target='_blank' style='color:var(--primary-soft); font-weight:700;'>Modrinth</a> для автоматического обновления ресурспака без ручного скачивания файлов.",
         modalRFText: "Если сервисы Modrinth не загружаются, рекомендуется использовать <a href='https://github.com/flowseal/zapret-discord-youtube' target='_blank' style='color:var(--primary-soft); font-weight:700;'>zapret-discord-youtube</a>.",
-        variantsTitle: "Доступные варианты материалов"
+        variantsTitle: "Варианты по материалам:"
       },
       en: {
         title: "Lunaria",
@@ -759,7 +774,7 @@ img.modrinth.com</pre>
         copyCodeText: "Copy",
         modalModrinthText: "It is recommended to use the <a href='https://modrinth.com' target='_blank' style='color:var(--primary-soft); font-weight:700;'>Modrinth</a> app for auto-updating the pack without downloading files manually.",
         modalRFText: "If Modrinth services fail to load, it is recommended to install <a href='https://github.com/flowseal/zapret-discord-youtube' target='_blank' style='color:var(--primary-soft); font-weight:700;'>zapret-discord-youtube</a>.",
-        variantsTitle: "Available Material Variants"
+        variantsTitle: "Material Variants:"
       }
     };
 
@@ -935,7 +950,7 @@ img.modrinth.com</pre>
               <div class="orig-cell-content">
                 <strong>${origText}</strong>
                 ${hasVariants ? `
-                  <button class="expand-btn" onclick="toggleVariants(${index})" title="Варианты материалов">
+                  <button class="expand-btn" onclick="toggleVariants(${index})" title="Варианты">
                     <svg id="arrow-${index}" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
                   </button>
                 ` : ''}
@@ -952,7 +967,7 @@ img.modrinth.com</pre>
           `;
           tbody.appendChild(tr);
 
-          // Строка с красивым выпадающим списком материалов и 5x5 иконками
+          // Обновленная строка для вариантов материалов
           if (hasVariants) {
             const varTr = document.createElement('tr');
             varTr.className = 'variants-row';
@@ -960,10 +975,14 @@ img.modrinth.com</pre>
 
             let cardsHtml = '';
             item.variants.forEach(v => {
+              const matIconSrc = v.matIcon || 'data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' viewBox=\\'0 0 5 5\\'><rect width=\\'5\\' height=\\'5\\' fill=\\'%2378d2d6\\'/></svg>';
+              
               cardsHtml += `
-                <div class="variant-card">
-                  <img class="variant-pixel-icon" src="${v.image}" alt="${v.material[currentLang]}" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' viewBox=\\'0 0 5 5\\' fill=\\'%2378d2d6\\'><rect width=\\'5\\' height=\\'5\\'/></svg>'">
-                  <span>${v.material[currentLang]}</span>
+                <div class="variant-card" data-tooltip="${v.material[currentLang]}">
+                  <img class="variant-mat-icon" src="${matIconSrc}" alt="${v.material[currentLang]}" onerror="this.style.opacity='0.3'">
+                  <div class="variant-item-icon">
+                    <img src="${v.image}" alt="${v.material[currentLang]}" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' viewBox=\\'0 0 24 24\\' fill=\\'none\\' stroke=\\'%236b8e96\\'><rect x=\\'3\\' y=\\'3\\' width=\\'18\\' height=\\'18\\' rx=\\'2\\' ry=\\'2\\'/></svg>'">
+                  </div>
                 </div>
               `;
             });
@@ -972,9 +991,7 @@ img.modrinth.com</pre>
               <td colspan="3">
                 <div class="variants-container">
                   <div class="variants-title">${i18n[currentLang].variantsTitle}</div>
-                  <div class="variants-grid">
-                    ${cardsHtml}
-                  </div>
+                  ${cardsHtml}
                 </div>
               </td>
             `;
