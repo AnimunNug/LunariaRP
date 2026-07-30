@@ -264,7 +264,7 @@
     .copy-btn svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; }
     .copy-btn:hover { color: var(--primary-soft); transform: scale(1.15); }
 
-    /* --- СТИЛИ ДЛЯ ВАРИАНТОВ ПРЕДМЕТОВ (РАСКРЫВАЮЩИЙСЯ СПИСОК) --- */
+    /* --- НОВЫЙ ДИЗАЙН ВАРИАНТОВ ПРЕДМЕТОВ --- */
     .orig-cell-content { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
     .expand-btn {
       background: var(--th-bg); border: 1px solid var(--card-border); color: var(--text-main);
@@ -274,24 +274,76 @@
     .expand-btn:hover { border-color: var(--primary-soft); color: var(--primary-soft); transform: scale(1.1); }
     .expand-btn svg { transition: transform 0.3s ease; }
 
-    .variants-row { display: none; background: rgba(0, 0, 0, 0.02); }
-    [data-theme="dark"] .variants-row { background: rgba(0, 0, 0, 0.25); }
+    .variants-row { display: none; background: rgba(0, 0, 0, 0.015); }
+    [data-theme="dark"] .variants-row { background: rgba(0, 0, 0, 0.2); }
     .variants-row.open { display: table-row; }
     
     .variants-container {
-      padding: 0.8rem 0.5rem; display: flex; gap: 12px; flex-wrap: wrap; align-items: center;
+      padding: 1.2rem 1rem 1.4rem 1rem; 
+      display: flex; 
+      flex-direction: column;
+      gap: 12px;
+      border-top: 1px dashed var(--card-border);
+      margin-top: 4px;
     }
     .variants-title {
-      width: 100%; font-size: 0.82rem; font-weight: 700; color: var(--primary-soft); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px;
+      font-size: 0.85rem; 
+      font-weight: 700; 
+      color: var(--primary-soft); 
+      text-transform: uppercase; 
+      letter-spacing: 0.8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
+    .variants-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--card-border);
+      opacity: 0.6;
+    }
+
+    .variants-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
     .variant-card {
-      display: flex; align-items: center; gap: 10px; background: var(--bg-creamy);
-      border: 1px solid var(--card-border); border-radius: 14px; padding: 6px 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05); transition: transform 0.2s ease;
+      display: inline-flex; 
+      align-items: center; 
+      gap: 10px; 
+      background: var(--bg-creamy);
+      border: 1px solid var(--card-border); 
+      border-radius: 16px; 
+      padding: 8px 14px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03); 
+      transition: all 0.25s ease;
     }
-    .variant-card:hover { transform: translateY(-2px); border-color: var(--primary-soft); }
-    .variant-card .item-icon { width: 36px; height: 36px; border-radius: 10px; padding: 3px; }
-    .variant-card span { font-size: 0.85rem; font-weight: 600; color: var(--text-main); }
+    .variant-card:hover { 
+      transform: translateY(-2px); 
+      border-color: var(--primary-soft);
+      box-shadow: var(--shadow-soft);
+    }
+    
+    /* СТРОГИЙ РАЗМЕР МИНИ-ИКОНКИ 5x5 ПИКСЕЛЕЙ С ПИКСЕЛЬНЫМ СГЛАЖИВАНИЕМ */
+    .variant-pixel-icon { 
+      width: 5px; 
+      height: 5px; 
+      min-width: 5px;
+      min-height: 5px;
+      object-fit: contain; 
+      image-rendering: pixelated; 
+      image-rendering: crisp-edges;
+      display: block;
+    }
+    
+    .variant-card span { 
+      font-size: 0.88rem; 
+      font-weight: 600; 
+      color: var(--text-main); 
+    }
 
     /* ОБЩИЙ СТИЛЬ МОДАЛЬНЫХ ОКОН */
     .modal-overlay {
@@ -611,7 +663,7 @@ img.modrinth.com</pre>
         theme: "slime", 
         original: { ru: "Любой Меч", en: "Any sword" }, 
         rename: { ru: "Слизневый Меч", en: "Slime Sword" },
-        // --- ПРИМЕР ВАРИАНТОВ МАТЕРИАЛОВ ---
+        // --- ВАРИАНТЫ МАТЕРИАЛОВ С 5x5 ИКОНКАМИ ---
         variants: [
           { material: { ru: "Деревянный", en: "Wooden" }, image: "images/slime_sword_wood.png" },
           { material: { ru: "Каменный", en: "Stone" }, image: "images/slime_sword_stone.png" },
@@ -670,7 +722,7 @@ img.modrinth.com</pre>
         copyCodeText: "Скопировать",
         modalModrinthText: "Рекомендуется использовать лаунчер <a href='https://modrinth.com' target='_blank' style='color:var(--primary-soft); font-weight:700;'>Modrinth</a> для автоматического обновления ресурспака без ручного скачивания файлов.",
         modalRFText: "Если сервисы Modrinth не загружаются, рекомендуется использовать <a href='https://github.com/flowseal/zapret-discord-youtube' target='_blank' style='color:var(--primary-soft); font-weight:700;'>zapret-discord-youtube</a>.",
-        variantsTitle: "Варианты по материалам:"
+        variantsTitle: "Доступные варианты материалов"
       },
       en: {
         title: "Lunaria",
@@ -707,7 +759,7 @@ img.modrinth.com</pre>
         copyCodeText: "Copy",
         modalModrinthText: "It is recommended to use the <a href='https://modrinth.com' target='_blank' style='color:var(--primary-soft); font-weight:700;'>Modrinth</a> app for auto-updating the pack without downloading files manually.",
         modalRFText: "If Modrinth services fail to load, it is recommended to install <a href='https://github.com/flowseal/zapret-discord-youtube' target='_blank' style='color:var(--primary-soft); font-weight:700;'>zapret-discord-youtube</a>.",
-        variantsTitle: "Material Variants:"
+        variantsTitle: "Available Material Variants"
       }
     };
 
@@ -883,7 +935,7 @@ img.modrinth.com</pre>
               <div class="orig-cell-content">
                 <strong>${origText}</strong>
                 ${hasVariants ? `
-                  <button class="expand-btn" onclick="toggleVariants(${index})" title="Варианты">
+                  <button class="expand-btn" onclick="toggleVariants(${index})" title="Варианты материалов">
                     <svg id="arrow-${index}" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
                   </button>
                 ` : ''}
@@ -900,7 +952,7 @@ img.modrinth.com</pre>
           `;
           tbody.appendChild(tr);
 
-          // Дополнительная строка для вариантов
+          // Строка с красивым выпадающим списком материалов и 5x5 иконками
           if (hasVariants) {
             const varTr = document.createElement('tr');
             varTr.className = 'variants-row';
@@ -910,9 +962,7 @@ img.modrinth.com</pre>
             item.variants.forEach(v => {
               cardsHtml += `
                 <div class="variant-card">
-                  <div class="item-icon">
-                    <img src="${v.image}" alt="${v.material[currentLang]}" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' viewBox=\\'0 0 24 24\\' fill=\\'none\\' stroke=\\'%236b8e96\\'><rect x=\\'3\\' y=\\'3\\' width=\\'18\\' height=\\'18\\' rx=\\'2\\' ry=\\'2\\'/></svg>'">
-                  </div>
+                  <img class="variant-pixel-icon" src="${v.image}" alt="${v.material[currentLang]}" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' viewBox=\\'0 0 5 5\\' fill=\\'%2378d2d6\\'><rect width=\\'5\\' height=\\'5\\'/></svg>'">
                   <span>${v.material[currentLang]}</span>
                 </div>
               `;
@@ -922,7 +972,9 @@ img.modrinth.com</pre>
               <td colspan="3">
                 <div class="variants-container">
                   <div class="variants-title">${i18n[currentLang].variantsTitle}</div>
-                  ${cardsHtml}
+                  <div class="variants-grid">
+                    ${cardsHtml}
+                  </div>
                 </div>
               </td>
             `;
