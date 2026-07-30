@@ -64,7 +64,8 @@
     @keyframes fade-out { to { opacity: 0; } }
     @keyframes fade-in { from { opacity: 0; } }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    /* Отключаем синее выделение при тапе на мобильных */
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
     body { font-family: 'Comfortaa', cursive, sans-serif; background: var(--bg-gradient); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 2rem 1rem 5rem 1rem; position: relative; overflow-x: hidden; transition: background 0.5s ease, color 0.5s ease; }
     body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, var(--particles) 1.5px, transparent 1.5px); background-size: 50px 50px; animation: magicFloat 60s linear infinite; z-index: -1; pointer-events: none; }
@@ -225,7 +226,7 @@
     .pmc-link { color: var(--text-main); font-size: 0.95rem; font-weight: 700; text-decoration: underline; text-underline-offset: 4px; transition: color 0.3s; }
     .pmc-link:hover { color: var(--primary-soft); }
 
-    .support-widget { position: fixed; bottom: 25px; left: 25px; z-index: 99; display: flex; align-items: center; gap: 10px; background: var(--bg-creamy); border: 1px solid var(--card-border); color: var(--text-main); padding: 0.8rem 1.4rem; border-radius: 30px; text-decoration: none; font-weight: 700; font-size: 0.85rem; box-shadow: var(--shadow-soft); transition: all 0.3s ease; }
+    .support-widget { position: fixed; bottom: 25px; left: 25px; z-index: 99; display: flex; align-items: center; justify-content: center; gap: 10px; background: var(--bg-creamy); border: 1px solid var(--card-border); color: var(--text-main); padding: 0 1.4rem; height: 54px; border-radius: 30px; text-decoration: none; font-weight: 700; font-size: 0.85rem; box-shadow: var(--shadow-soft); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
     .support-widget:hover { transform: translateY(-4px) scale(1.02); border-color: var(--primary-soft); box-shadow: var(--glow-light); color: var(--primary-soft); }
     .support-widget svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
@@ -272,10 +273,27 @@
       /* Расположение кнопок внутри бокового меню */
       .top-bar { flex-direction: column; padding: 1.5rem; margin: 0; gap: 1.5rem; align-items: stretch; }
       .left-group, .right-group { flex-direction: column; align-items: stretch; gap: 1rem; width: 100%; }
-      .download-badge { width: 100%; justify-content: center; padding: 1rem; border-radius: 15px; font-size: 1rem; }
-      .social-links { justify-content: space-evenly; width: 100%; }
-      .social-btn { width: 48px; height: 48px; border-radius: 14px; }
-      .control-btn { justify-content: center; padding: 1rem; border-radius: 15px; font-size: 1rem; width: 100%; }
+      .download-badge { width: 100%; justify-content: center; padding: 0; height: 54px; border-radius: 15px; font-size: 1rem; }
+      
+      /* Одинаковые прямоугольные кнопки соц.сетей с текстом */
+      .social-links { flex-direction: column; width: 100%; gap: 1rem; }
+      .social-btn { width: 100%; height: 54px; border-radius: 15px; justify-content: center; gap: 10px; padding: 0; }
+      .social-btn::after { 
+        content: attr(data-tooltip); 
+        position: static; 
+        transform: none; 
+        opacity: 1; 
+        visibility: visible; 
+        background: transparent; 
+        box-shadow: none; 
+        border: none; 
+        color: var(--text-main); 
+        padding: 0; 
+        font-size: 1rem; 
+      }
+      .social-btn:hover::after { transform: none; }
+      
+      .control-btn { justify-content: center; padding: 0; height: 54px; border-radius: 15px; font-size: 1rem; width: 100%; }
       #themeToggle { display: none; } /* Прячем дубликат переключателя темы в меню */
 
       .header-actions { flex-direction: column; gap: 10px; align-items: stretch; }
@@ -283,7 +301,8 @@
 
       /* Контролы (Поиск и Фильтры) */
       .search-and-select-bar { flex-direction: column; background: transparent; padding: 0; gap: 12px; }
-      .search-input { width: 100%; padding: 1rem 1.4rem; border-radius: 16px; }
+      /* Фикс некрасиво растягивающегося инпута */
+      .search-input { width: 100%; padding: 0 1.4rem; height: 54px; border-radius: 16px; flex: none; }
       .mode-switch-container { width: 100%; border-radius: 16px; padding: 6px; }
       .mode-btn { width: 50%; padding: 0.8rem; border-radius: 12px; }
       .category-dropdown-container { width: 100%; }
@@ -308,9 +327,22 @@
       .variants-container { padding: 1.2rem; background: var(--th-bg); border-radius: 16px; border: 1px solid var(--card-border); margin: 0; }
       .variants-grid { justify-content: center; }
 
-      /* Другие адаптации */
-      .support-widget { bottom: 15px; left: 50%; transform: translateX(-50%); width: calc(100% - 30px); justify-content: center; border-radius: 16px; padding: 1rem; }
+      /* Кнопка поддержки, сворачивающаяся в кружок */
+      .support-widget { 
+        bottom: 15px; left: 50%; transform: translateX(-50%); width: calc(100% - 30px); 
+        justify-content: center; border-radius: 16px; height: 54px; padding: 0; 
+      }
       .support-widget:hover { transform: translateX(-50%) translateY(-2px); }
+      
+      .support-widget.scrolled {
+        width: 54px;
+        border-radius: 50%;
+        left: calc(100% - 15px);
+        transform: translateX(-100%);
+      }
+      .support-widget.scrolled #supportText { display: none; }
+      .support-widget.scrolled:hover { transform: translateX(-100%) translateY(-2px); }
+      
       .super-duper-btn { flex-direction: column; gap: 5px; padding: 1rem; text-align: center; }
       .btn-text-wrapper { align-items: center; }
     }
@@ -343,7 +375,7 @@
           </button>
         </div>
         
-        <!-- НАВИГАЦИЯ (На ПК это верхняя панель, на телефоне — начинка бокового меню) -->
+        <!-- НАВИГАЦИЯ -->
         <div class="top-bar">
           <div class="left-group">
             <button class="download-badge" id="openDownloadBtn">
@@ -590,6 +622,20 @@ img.modrinth.com</pre>
       menu.classList.toggle('open');
       overlay.classList.toggle('show');
     }
+    
+    // Сворачивание кнопки поддержки при скролле
+    window.addEventListener('scroll', () => {
+      const supportWidget = document.getElementById('supportWidget');
+      if (window.innerWidth <= 700) {
+        if (window.scrollY > 80) {
+          supportWidget.classList.add('scrolled');
+        } else {
+          supportWidget.classList.remove('scrolled');
+        }
+      } else {
+        supportWidget.classList.remove('scrolled');
+      }
+    });
 
     const categoryModes = {
       standard: {
@@ -783,7 +829,7 @@ img.modrinth.com</pre>
       document.getElementById('mobileMenuTitle').innerText = langData.mobileMenuTitle;
       
       document.getElementById('subtitle').innerText = langData.subtitle;
-      document.getElementById('desc').innerHTML = langData.desc; // Using innerHTML to preserve potential formatting if any
+      document.getElementById('desc').innerHTML = langData.desc; 
       document.getElementById('searchInput').placeholder = langData.search;
       document.getElementById('thIcon').innerText = langData.thIcon;
       document.getElementById('thOriginal').innerText = langData.thOriginal;
