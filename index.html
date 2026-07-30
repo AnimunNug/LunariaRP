@@ -54,7 +54,7 @@
       cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2378d2d6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 4l7.07 16.97 2.51-7.39 7.39-2.51L4 4z'/%3E%3C/svg%3E") 4 4, auto;
     }
     
-    a, button, input, .social-btn, td, .select-cat-btn, h1, .mode-btn, .expand-btn, .variant-card {
+    a, button, input, .social-btn, td, .select-cat-btn, h1, .mode-btn, .expand-btn, .subtle-terms-btn {
       cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='%23f5e0ac' stroke='%232c4a52' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 4l7.07 16.97 2.51-7.39 7.39-2.51L4 4z'/%3E%3C/svg%3E") 4 4, pointer !important;
     }
 
@@ -188,13 +188,14 @@
 
     .header-actions { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
     .action-btn {
-      display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(135deg, var(--primary-soft), var(--card-border));
-      color: var(--text-main); padding: 0.8rem 1.8rem; border-radius: 25px; text-decoration: none; font-weight: 700; font-size: 0.95rem;
-      border: 1px solid var(--primary-soft); box-shadow: var(--shadow-soft); transition: all 0.3s ease;
+      display: inline-flex; align-items: center; gap: 10px; 
+      background: linear-gradient(135deg, var(--primary-soft), #5eb3b8);
+      color: #ffffff; padding: 0.8rem 1.8rem; border-radius: 25px; text-decoration: none; font-weight: 700; font-size: 0.95rem;
+      border: none; box-shadow: 0 4px 15px rgba(120, 210, 214, 0.4); transition: all 0.3s ease;
     }
-    .action-btn:hover { transform: translateY(-3px); box-shadow: var(--glow-light); background: var(--primary-soft); color: #fff; }
-    .action-btn.secondary { background: transparent; border: 1px solid var(--primary-soft); }
-    .action-btn.secondary:hover { background: var(--bg-creamy); color: var(--primary-soft); }
+    .action-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(120, 210, 214, 0.6); filter: brightness(1.1); color: #ffffff; }
+    .action-btn.secondary { background: transparent; border: 1px solid var(--primary-soft); color: var(--text-main); box-shadow: var(--shadow-soft); }
+    .action-btn.secondary:hover { background: var(--bg-creamy); color: var(--primary-soft); filter: none; box-shadow: var(--glow-light); }
     .action-btn svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
     /* КАТЕГОРИИ И ПОИСК */
@@ -264,7 +265,7 @@
     .copy-btn svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; }
     .copy-btn:hover { color: var(--primary-soft); transform: scale(1.15); }
 
-    /* --- НОВЫЙ ДИЗАЙН ВАРИАНТОВ ПРЕДМЕТОВ (МАТЕРИАЛЫ) --- */
+    /* --- НОВЫЙ ДИЗАЙН ВАРИАНТОВ ПРЕДМЕТОВ --- */
     .orig-cell-content { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
     .expand-btn {
       background: var(--th-bg); border: 1px solid var(--card-border); color: var(--text-main);
@@ -274,72 +275,87 @@
     .expand-btn:hover { border-color: var(--primary-soft); color: var(--primary-soft); transform: scale(1.1); }
     .expand-btn svg { transition: transform 0.3s ease; }
 
-    .variants-row { display: none; background: rgba(0, 0, 0, 0.02); }
-    [data-theme="dark"] .variants-row { background: rgba(0, 0, 0, 0.25); }
+    .variants-row { display: none; background: rgba(0, 0, 0, 0.015); }
+    [data-theme="dark"] .variants-row { background: rgba(0, 0, 0, 0.2); }
     .variants-row.open { display: table-row; }
     
     .variants-container {
-      padding: 1rem 0.5rem 1.5rem 0.5rem; display: flex; flex-direction: column; gap: 12px;
+      padding: 1.2rem 1rem 1.4rem 1rem; 
+      display: flex; 
+      flex-direction: column;
+      gap: 12px;
+      border-top: 1px dashed var(--card-border);
+      margin-top: 4px;
     }
     .variants-title {
-      font-size: 0.82rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+      font-size: 0.85rem; 
+      font-weight: 700; 
+      color: var(--primary-soft); 
+      text-transform: uppercase; 
+      letter-spacing: 0.8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .variants-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--card-border);
+      opacity: 0.6;
+    }
+
+    .variants-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .variant-card {
+      display: inline-flex; 
+      align-items: center; 
+      gap: 10px; 
+      background: var(--bg-creamy);
+      border: 1px solid var(--card-border); 
+      border-radius: 16px; 
+      padding: 8px 14px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03); 
+      transition: all 0.25s ease;
+    }
+    .variant-card:hover { 
+      transform: translateY(-2px); 
+      border-color: var(--primary-soft);
+      box-shadow: var(--shadow-soft);
     }
     
-    .variants-grid {
-      display: flex; gap: 14px; flex-wrap: wrap; align-items: center;
-    }
-
-    /* Карточка варианта (Квадрат без текста) */
-    .variant-card {
+    /* ИКОНКА МАТЕРИАЛА: БЕЗ РАМКИ, ПРИБЛИЖАЕТСЯ КАК ОБЫЧНАЯ ИКОНКА */
+    .variant-pixel-icon { 
+      width: 28px; 
+      height: 28px; 
+      min-width: 28px;
+      min-height: 28px;
+      object-fit: contain; 
+      image-rendering: pixelated; 
+      image-rendering: crisp-edges;
+      display: block;
+      border: none;
+      background: transparent;
+      padding: 0;
+      transition: transform 0.3s ease;
       position: relative;
-      display: flex; align-items: center; justify-content: center;
-      width: 58px; height: 58px; 
-      background: var(--icon-bg); border: 1px solid var(--card-border); 
-      border-radius: 14px; padding: 8px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.02); 
-      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .variant-card:hover {
-      transform: translateY(-4px) scale(1.05); 
-      border-color: var(--primary-soft); 
-      box-shadow: var(--shadow-soft); 
-      z-index: 5;
+      z-index: 1;
     }
 
-    /* Текстура самого предмета внутри варианта */
-    .variant-item-tex {
-      width: 100%; height: 100%; 
-      object-fit: contain; image-rendering: pixelated;
+    .variant-pixel-icon:hover {
+      transform: scale(2.5);
+      z-index: 10;
+      filter: drop-shadow(0 5px 10px rgba(0,0,0,0.3));
     }
-
-    /* Маленькая 5x5 иконка материала поверх карточки */
-    .material-indicator {
-      position: absolute; bottom: -6px; right: -6px;
-      width: 22px; height: 22px; /* Визуально увеличен размер контейнера для лучшей читаемости */
-      background: var(--bg-creamy); border: 1px solid var(--card-border);
-      border-radius: 6px; padding: 3px; 
-      object-fit: contain; image-rendering: pixelated;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15); 
-      transition: transform 0.2s ease, border-color 0.2s ease;
-    }
-    .variant-card:hover .material-indicator {
-      transform: scale(1.15) rotate(5deg); 
-      border-color: var(--primary-soft);
-    }
-
-    /* Всплывающий тултип с описанием (только при наведении) */
-    .variant-card::after {
-      content: attr(data-tooltip);
-      position: absolute; bottom: calc(100% + 10px); left: 50%;
-      transform: translateX(-50%) translateY(10px);
-      background: var(--bg-creamy); border: 1px solid var(--primary-soft);
-      color: var(--text-main); padding: 6px 12px; border-radius: 8px;
-      font-size: 0.8rem; font-weight: 700; white-space: nowrap;
-      opacity: 0; visibility: hidden; transition: all 0.25s ease;
-      box-shadow: var(--shadow-soft); pointer-events: none;
-    }
-    .variant-card:hover::after {
-      opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0);
+    
+    .variant-card span { 
+      font-size: 0.88rem; 
+      font-weight: 600; 
+      color: var(--text-main); 
     }
 
     /* ОБЩИЙ СТИЛЬ МОДАЛЬНЫХ ОКОН */
@@ -416,12 +432,31 @@
     .support-widget:hover { transform: translateY(-4px) scale(1.02); border-color: var(--primary-soft); box-shadow: var(--glow-light); color: var(--primary-soft); }
     .support-widget svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
+    /* МАЛОЗАМЕТНАЯ КНОПКА УСЛОВИЙ В ФУТЕРЕ */
+    .subtle-terms-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      font-family: inherit;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      opacity: 0.7;
+      transition: opacity 0.2s ease, color 0.2s ease;
+      cursor: pointer;
+      margin-top: 4px;
+    }
+    .subtle-terms-btn:hover {
+      opacity: 1;
+      color: var(--primary-soft);
+    }
+
     .toast {
       position: fixed; bottom: 25px; right: 25px; background: var(--primary-soft); color: #fff; padding: 0.9rem 1.8rem; border-radius: 16px; font-weight: 700; opacity: 0; transform: translateY(20px); transition: all 0.3s ease; pointer-events: none; box-shadow: 0 5px 20px rgba(0,0,0,0.25); z-index: 1000;
     }
     .toast.show { opacity: 1; transform: translateY(0); }
 
-    footer { text-align: center; margin-top: 3.5rem; color: var(--text-muted); font-size: 0.9rem; display: flex; flex-direction: column; gap: 6px; }
+    footer { text-align: center; margin-top: 3.5rem; color: var(--text-muted); font-size: 0.9rem; display: flex; flex-direction: column; gap: 6px; align-items: center; }
     .creators-tag { font-weight: 700; color: var(--primary-soft); }
 
     @media (max-width: 700px) {
@@ -438,8 +473,6 @@
       .category-dropdown-container { width: 100%; }
       .super-duper-btn { flex-direction: column; gap: 5px; padding: 1rem; }
       .btn-text-wrapper { text-align: center; }
-      .variant-card { width: 48px; height: 48px; }
-      .material-indicator { width: 18px; height: 18px; }
     }
   </style>
 </head>
@@ -527,6 +560,7 @@
     <footer>
       <p id="footerText">✨ С любовью из Лунарии | SPm Server</p>
       <p class="creators-tag" id="creatorsText">Создатели пака: Animun4ik и Moonray</p>
+      <button class="subtle-terms-btn" id="openTermsBtn">Условия использования пака</button>
     </footer>
   </div>
 
@@ -543,7 +577,7 @@
           <p class="goofy-desc" id="goofyDesc">Слушай, тут такое дело... Там есть авто-обновления, кайфовый интерфейс, а ещё — если ты скачаешь оттуда, нам перепадёт пара копеек на энергетики!</p>
           <a href="https://modrinth.com/resourcepack/ВАШ_ПАК" class="super-duper-btn" target="_blank">
             <div class="btn-icon">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.016 1.484a1.868 1.868 0 0 0-1.22.428L2.093 9.074c-.585.47-.932 1.185-.932 1.937v9.423c0 1.25.94 2.302 2.185 2.459 1.192.15 2.274-.684 2.493-1.859V11.23l4.908 3.93c.717.575 1.733.575 2.45 0l4.909-3.93v9.804c.219 1.175 1.301 2.01 2.493 1.86 1.245-.157 2.185-1.21 2.185-2.46V11.011c0-.752-.347-1.467-.932-1.937l-8.703-7.162a1.866 1.866 0 0 0-1.134-.428z"/></svg>
+              <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><title>Modrinth</title><path d="M12.252.004a11.78 11.768 0 0 0-8.92 3.73 11 10.999 0 0 0-2.17 3.11 11.37 11.359 0 0 0-1.16 5.169c0 1.42.17 2.5.6 3.77.24.759.77 1.899 1.17 2.529a12.3 12.298 0 0 0 8.85 5.639c.44.05 2.54.07 2.76.02.2-.04.22.1-.26-1.7l-.36-1.37-1.01-.06a8.5 8.489 0 0 1-5.18-1.8 5.34 5.34 0 0 1-1.3-1.26c0-.05.34-.28.74-.5a37.572 37.545 0 0 1 2.88-1.629c.03 0 .5.45 1.06.98l1 .97 2.07-.43 2.06-.43 1.47-1.47c.8-.8 1.48-1.5 1.48-1.52 0-.09-.42-1.63-.46-1.7-.04-.06-.2-.03-1.02.18-.53.13-1.2.3-1.45.4l-.48.15-.53.53-.53.53-.93.1-.93.07-.52-.5a2.7 2.7 0 0 1-.96-1.7l-.13-.6.43-.57c.68-.9.68-.9 1.46-1.1.4-.1.65-.2.83-.33.13-.099.65-.579 1.14-1.069l.9-.9-.7-.7-.7-.7-1.95.54c-1.07.3-1.96.53-1.97.53-.03 0-2.23 2.48-2.63 2.97l-.29.35.28 1.03c.16.56.3 1.16.31 1.34l.03.3-.34.23c-.37.23-2.22 1.3-2.84 1.63-.36.2-.37.2-.44.1-.08-.1-.23-.6-.32-1.03-.18-.86-.17-2.75.02-3.73a8.84 8.839 0 0 1 7.9-6.93c.43-.03.77-.08.78-.1.06-.17.5-2.999.47-3.039-.01-.02-.1-.02-.2-.03Zm3.68.67c-.2 0-.3.1-.37.38-.06.23-.46 2.42-.46 2.52 0 .04.1.11.22.16a8.51 8.499 0 0 1 2.99 2 8.38 8.379 0 0 1 2.16 3.449 6.9 6.9 0 0 1 .4 2.8c0 1.07 0 1.27-.1 1.73a9.37 9.369 0 0 1-1.76 3.769c-.32.4-.98 1.06-1.37 1.38-.38.32-1.54 1.1-1.7 1.14-.1.03-.1.06-.07.26.03.18.64 2.56.7 2.78l.06.06a12.07 12.058 0 0 0 7.27-9.4c.13-.77.13-2.58 0-3.4a11.96 11.948 0 0 0-5.73-8.578c-.7-.42-2.05-1.06-2.25-1.06Z"/></svg>
             </div>
             <div class="btn-text-wrapper">
               <span class="btn-main" id="btnMain">Скачать с Modrinth</span>
@@ -572,15 +606,26 @@
       <div class="modal-body">
         <div class="reco-card">
           <div class="reco-card-title">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="#1bd96a"><path d="M12.016 1.484a1.868 1.868 0 0 0-1.22.428L2.093 9.074c-.585.47-.932 1.185-.932 1.937v9.423c0 1.25.94 2.302 2.185 2.459 1.192.15 2.274-.684 2.493-1.859V11.23l4.908 3.93c.717.575 1.733.575 2.45 0l4.909-3.93v9.804c.219 1.175 1.301 2.01 2.493 1.86 1.245-.157 2.185-1.21 2.185-2.46V11.011c0-.752-.347-1.467-.932-1.937l-8.703-7.162a1.866 1.866 0 0 0-1.134-.428z"/></svg>
+            <span style="width:20px; height:20px; display:inline-flex; align-items:center; color:#1bd96a;">
+              <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><title>Modrinth</title><path d="M12.252.004a11.78 11.768 0 0 0-8.92 3.73 11 10.999 0 0 0-2.17 3.11 11.37 11.359 0 0 0-1.16 5.169c0 1.42.17 2.5.6 3.77.24.759.77 1.899 1.17 2.529a12.3 12.298 0 0 0 8.85 5.639c.44.05 2.54.07 2.76.02.2-.04.22.1-.26-1.7l-.36-1.37-1.01-.06a8.5 8.489 0 0 1-5.18-1.8 5.34 5.34 0 0 1-1.3-1.26c0-.05.34-.28.74-.5a37.572 37.545 0 0 1 2.88-1.629c.03 0 .5.45 1.06.98l1 .97 2.07-.43 2.06-.43 1.47-1.47c.8-.8 1.48-1.5 1.48-1.52 0-.09-.42-1.63-.46-1.7-.04-.06-.2-.03-1.02.18-.53.13-1.2.3-1.45.4l-.48.15-.53.53-.53.53-.93.1-.93.07-.52-.5a2.7 2.7 0 0 1-.96-1.7l-.13-.6.43-.57c.68-.9.68-.9 1.46-1.1.4-.1.65-.2.83-.33.13-.099.65-.579 1.14-1.069l.9-.9-.7-.7-.7-.7-1.95.54c-1.07.3-1.96.53-1.97.53-.03 0-2.23 2.48-2.63 2.97l-.29.35.28 1.03c.16.56.3 1.16.31 1.34l.03.3-.34.23c-.37.23-2.22 1.3-2.84 1.63-.36.2-.37.2-.44.1-.08-.1-.23-.6-.32-1.03-.18-.86-.17-2.75.02-3.73a8.84 8.839 0 0 1 7.9-6.93c.43-.03.77-.08.78-.1.06-.17.5-2.999.47-3.039-.01-.02-.1-.02-.2-.03Zm3.68.67c-.2 0-.3.1-.37.38-.06.23-.46 2.42-.46 2.52 0 .04.1.11.22.16a8.51 8.499 0 0 1 2.99 2 8.38 8.379 0 0 1 2.16 3.449 6.9 6.9 0 0 1 .4 2.8c0 1.07 0 1.27-.1 1.73a9.37 9.369 0 0 1-1.76 3.769c-.32.4-.98 1.06-1.37 1.38-.38.32-1.54 1.1-1.7 1.14-.1.03-.1.06-.07.26.03.18.64 2.56.7 2.78l.06.06a12.07 12.058 0 0 0 7.27-9.4c.13-.77.13-2.58 0-3.4a11.96 11.948 0 0 0-5.73-8.578c-.7-.42-2.05-1.06-2.25-1.06Z"/></svg>
+            </span>
             <span id="recoStep1Title">1. Установка через Modrinth App</span>
           </div>
           <p id="modalModrinthText">Рекомендуется использовать лаунчер <a href="https://modrinth.com" target="_blank" style="color:var(--primary-soft); font-weight:700;">Modrinth</a> для автоматического обновления ресурспака без ручного скачивания файлов.</p>
         </div>
+
+        <div class="reco-card">
+          <div class="reco-card-title">
+            <span style="font-size: 1.1rem;">🏷️</span>
+            <span id="recoStepRPrenamesTitle">2. Мод RPrenames (Для удобства)</span>
+          </div>
+          <p id="modalRPrenamesText">Настоятельно рекомендуем поставить мод <a href="https://modrinth.com/mod/rprenames" target="_blank" style="color:var(--primary-soft); font-weight:700;">RPrenames</a> на ваш Майнкрафт. Он добавляет интерактивный список всех вариантов переименований прямо в меню наковальни, чтобы вам было удобнее жить!</p>
+        </div>
+
         <div class="reco-card">
           <div class="reco-card-title">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
-            <span id="recoStep2Title">2. Настройка доступности Modrinth (для РФ)</span>
+            <span id="recoStep2Title">3. Настройка доступности Modrinth (для РФ)</span>
           </div>
           <p id="modalRFText">Если сервисы Modrinth не загружаются, рекомендуется использовать <a href="https://github.com/flowseal/zapret-discord-youtube" target="_blank" style="color:var(--primary-soft); font-weight:700;">zapret-discord-youtube</a>.</p>
           <div class="fs-tree">
@@ -600,6 +645,51 @@ cdn.modrinth.com
 api.modrinth.com
 fonts.modrinth.com
 img.modrinth.com</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- МОДАЛЬНОЕ ОКНО УСЛОВИЙ ПОЛЬЗОВАНИЯ -->
+  <div id="termsModal" class="modal-overlay">
+    <div class="modal-content">
+      <button class="close-modal" id="closeTermsBtn" title="Закрыть">
+        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" fill="none" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+      <div class="modal-header">
+        <div class="modal-header-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </div>
+        <h2 class="modal-title" id="termsModalTitle">Условия использования</h2>
+      </div>
+      <div class="modal-body">
+        <div class="reco-card">
+          <div class="reco-card-title">
+            <span>🎨</span>
+            <span id="termsRule1Title">1. Использование и авторство</span>
+          </div>
+          <p id="termsRule1Desc">Вы можете свободно использовать материалы из этого пака в своих сборках, видео и сторонних проектах, но <strong>не выдавайте их за свою собственную работу</strong>.</p>
+        </div>
+        <div class="reco-card">
+          <div class="reco-card-title">
+            <span>🚫</span>
+            <span id="termsRule2Title">2. Полный запрет монетизации</span>
+          </div>
+          <p id="termsRule2Desc">Категорически <strong>запрещено монетизировать</strong> любые ресурсы пака (продавать текстуры, ставить платный доступ, перепродавать в сборках и т.д.).</p>
+        </div>
+        <div class="reco-card">
+          <div class="reco-card-title">
+            <span>✂️</span>
+            <span id="termsRule3Title">3. Модификация под себя</span>
+          </div>
+          <p id="termsRule3Desc">Материалы пака можно свободно изменять, редактировать и перерисовывать под свои личные нужды и вкусы.</p>
+        </div>
+        <div class="reco-card">
+          <div class="reco-card-title">
+            <span>🤝</span>
+            <span id="termsRule4Title">4. Указание авторов</span>
+          </div>
+          <p id="termsRule4Desc">Если вы создаете публичный контент (видео, стримы, посты), используя наши материалы, обязательно <strong>укажите нас как авторов</strong> — потому что вы же не мудак. 😉</p>
         </div>
       </div>
     </div>
@@ -653,7 +743,7 @@ img.modrinth.com</pre>
     };
 
     // =======================================================
-    // СПИСОК ПРЕДМЕТОВ (Добавлен параметр matIcon для 5x5 иконок)
+    // СПИСОК ПРЕДМЕТОВ
     // =======================================================
     const items = [
       { 
@@ -663,12 +753,12 @@ img.modrinth.com</pre>
         original: { ru: "Любой Меч", en: "Any sword" }, 
         rename: { ru: "Слизневый Меч", en: "Slime Sword" },
         variants: [
-          { material: { ru: "Деревянный", en: "Wooden" }, image: "images/slime_sword_wood.png", matIcon: "images/mat_wood.png" },
-          { material: { ru: "Каменный", en: "Stone" }, image: "images/slime_sword_stone.png", matIcon: "images/mat_stone.png" },
-          { material: { ru: "Железный", en: "Iron" }, image: "images/slime_sword_iron.png", matIcon: "images/mat_iron.png" },
-          { material: { ru: "Золотой", en: "Golden" }, image: "images/slime_sword_gold.png", matIcon: "images/mat_gold.png" },
-          { material: { ru: "Алмазный", en: "Diamond" }, image: "images/slime_sword_diamond.png", matIcon: "images/mat_diamond.png" },
-          { material: { ru: "Незеритовый", en: "Netherite" }, image: "images/slime_sword_netherite.png", matIcon: "images/mat_netherite.png" }
+          { material: { ru: "Деревянный", en: "Wooden" }, image: "images/slime_sword_wood.png" },
+          { material: { ru: "Каменный", en: "Stone" }, image: "images/slime_sword_stone.png" },
+          { material: { ru: "Железный", en: "Iron" }, image: "images/slime_sword_iron.png" },
+          { material: { ru: "Золотой", en: "Golden" }, image: "images/slime_sword_gold.png" },
+          { material: { ru: "Алмазный", en: "Diamond" }, image: "images/slime_sword_diamond.png" },
+          { material: { ru: "Незеритовый", en: "Netherite" }, image: "images/slime_sword_netherite.png" }
         ]
       },
       { image: "images/moonedge.png", category: "weapons", theme: "other", original: { ru: "Любой Меч", en: "Any sword" }, rename: { ru: "Остролуние", en: "Moonedge" } },
@@ -715,12 +805,24 @@ img.modrinth.com</pre>
         recoBtnText: "Рекомендации к установке",
         modalTitle: "Рекомендации к установке",
         recoStep1Title: "1. Установка через Modrinth App",
-        recoStep2Title: "2. Настройка доступности Modrinth (для РФ)",
+        recoStepRPrenamesTitle: "2. Мод RPrenames (Для удобства)",
+        recoStep2Title: "3. Настройка доступности Modrinth (для РФ)",
         codeHeaderLabel: "Строчки для добавления в list-general.txt:",
         copyCodeText: "Скопировать",
         modalModrinthText: "Рекомендуется использовать лаунчер <a href='https://modrinth.com' target='_blank' style='color:var(--primary-soft); font-weight:700;'>Modrinth</a> для автоматического обновления ресурспака без ручного скачивания файлов.",
+        modalRPrenamesText: "Настоятельно рекомендуем поставить мод <a href='https://modrinth.com/mod/rprenames' target='_blank' style='color:var(--primary-soft); font-weight:700;'>RPrenames</a> на ваш Майнкрафт. Он добавляет интерактивный список всех вариантов переименований прямо в меню наковальни, чтобы вам было удобнее жить!",
         modalRFText: "Если сервисы Modrinth не загружаются, рекомендуется использовать <a href='https://github.com/flowseal/zapret-discord-youtube' target='_blank' style='color:var(--primary-soft); font-weight:700;'>zapret-discord-youtube</a>.",
-        variantsTitle: "Варианты по материалам:"
+        variantsTitle: "Доступные варианты материалов",
+        subtleTermsBtn: "Условия использования пака",
+        termsModalTitle: "Условия использования",
+        termsRule1Title: "1. Использование и авторство",
+        termsRule1Desc: "Вы можете свободно использовать материалы из этого пака в своих сборках, видео и сторонних проектах, но <strong>не выдавайте их за свою собственную работу</strong>.",
+        termsRule2Title: "2. Полный запрет монетизации",
+        termsRule2Desc: "Категорически <strong>запрещено монетизировать</strong> любые ресурсы пака (продавать текстуры, ставить платный доступ, перепродавать в сборках и т.д.).",
+        termsRule3Title: "3. Модификация под себя",
+        termsRule3Desc: "Материалы пака можно свободно изменять, редактировать и перерисовывать под свои личные нужды и вкусы.",
+        termsRule4Title: "4. Указание авторов",
+        termsRule4Desc: "Если вы создаете публичный контент (видео, стримы, посты), используя наши материалы, обязательно <strong>укажите нас как авторов</strong> — потому что вы же не мудак. 😉"
       },
       en: {
         title: "Lunaria",
@@ -752,12 +854,24 @@ img.modrinth.com</pre>
         recoBtnText: "Installation Guide",
         modalTitle: "Installation Recommendations",
         recoStep1Title: "1. Installation via Modrinth App",
-        recoStep2Title: "2. Modrinth accessibility setup (for RU)",
+        recoStepRPrenamesTitle: "2. RPrenames Mod (Quality of Life)",
+        recoStep2Title: "3. Modrinth accessibility setup (for RU)",
         codeHeaderLabel: "Lines to add to list-general.txt:",
         copyCodeText: "Copy",
         modalModrinthText: "It is recommended to use the <a href='https://modrinth.com' target='_blank' style='color:var(--primary-soft); font-weight:700;'>Modrinth</a> app for auto-updating the pack without downloading files manually.",
+        modalRPrenamesText: "We highly recommend installing the <a href='https://modrinth.com/mod/rprenames' target='_blank' style='color:var(--primary-soft); font-weight:700;'>RPrenames</a> mod for Minecraft. It adds a built-in list of all item rename options directly inside the anvil GUI!",
         modalRFText: "If Modrinth services fail to load, it is recommended to install <a href='https://github.com/flowseal/zapret-discord-youtube' target='_blank' style='color:var(--primary-soft); font-weight:700;'>zapret-discord-youtube</a>.",
-        variantsTitle: "Material Variants:"
+        variantsTitle: "Available Material Variants",
+        subtleTermsBtn: "Terms of Use",
+        termsModalTitle: "Terms of Use",
+        termsRule1Title: "1. Usage & Credit",
+        termsRule1Desc: "You can freely use materials from this pack in your modpacks, videos, and third-party projects, but <strong>do not claim them as your own work</strong>.",
+        termsRule2Title: "2. Strictly Non-Commercial",
+        termsRule2Desc: "It is strictly <strong>forbidden to monetize</strong> any pack resources (selling textures, paywalling, reselling in packs, etc.).",
+        termsRule3Title: "3. Freedom to Modify",
+        termsRule3Desc: "Feel free to modify, edit, and tweak pack assets to fit your personal preferences.",
+        termsRule4Title: "4. Attribute the Authors",
+        termsRule4Desc: "If you create public content (videos, streams, posts) using our materials, make sure to <strong>credit us</strong> — because you're not an asshole. 😉"
       }
     };
 
@@ -820,11 +934,24 @@ img.modrinth.com</pre>
       
       document.getElementById('modalTitle').innerText = langData.modalTitle;
       document.getElementById('recoStep1Title').innerText = langData.recoStep1Title;
+      document.getElementById('recoStepRPrenamesTitle').innerText = langData.recoStepRPrenamesTitle;
+      document.getElementById('modalRPrenamesText').innerHTML = langData.modalRPrenamesText;
       document.getElementById('recoStep2Title').innerText = langData.recoStep2Title;
       document.getElementById('codeHeaderLabel').innerText = langData.codeHeaderLabel;
       document.getElementById('copyCodeText').innerText = langData.copyCodeText;
       document.getElementById('modalModrinthText').innerHTML = langData.modalModrinthText;
       document.getElementById('modalRFText').innerHTML = langData.modalRFText;
+
+      document.getElementById('openTermsBtn').innerText = langData.subtleTermsBtn;
+      document.getElementById('termsModalTitle').innerText = langData.termsModalTitle;
+      document.getElementById('termsRule1Title').innerText = langData.termsRule1Title;
+      document.getElementById('termsRule1Desc').innerHTML = langData.termsRule1Desc;
+      document.getElementById('termsRule2Title').innerText = langData.termsRule2Title;
+      document.getElementById('termsRule2Desc').innerHTML = langData.termsRule2Desc;
+      document.getElementById('termsRule3Title').innerText = langData.termsRule3Title;
+      document.getElementById('termsRule3Desc').innerHTML = langData.termsRule3Desc;
+      document.getElementById('termsRule4Title').innerText = langData.termsRule4Title;
+      document.getElementById('termsRule4Desc').innerHTML = langData.termsRule4Desc;
     }
 
     function switchCategoryMode(mode) {
@@ -933,7 +1060,7 @@ img.modrinth.com</pre>
               <div class="orig-cell-content">
                 <strong>${origText}</strong>
                 ${hasVariants ? `
-                  <button class="expand-btn" onclick="toggleVariants(${index})" title="Варианты">
+                  <button class="expand-btn" onclick="toggleVariants(${index})" title="Варианты материалов">
                     <svg id="arrow-${index}" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
                   </button>
                 ` : ''}
@@ -950,7 +1077,7 @@ img.modrinth.com</pre>
           `;
           tbody.appendChild(tr);
 
-          // Дополнительная строка для вариантов
+          // Строка с вариантами материалов (без рамок у иконок, с приближением при наведении)
           if (hasVariants) {
             const varTr = document.createElement('tr');
             varTr.className = 'variants-row';
@@ -959,9 +1086,9 @@ img.modrinth.com</pre>
             let cardsHtml = '';
             item.variants.forEach(v => {
               cardsHtml += `
-                <div class="variant-card" data-tooltip="${v.material[currentLang]}">
-                  <img class="variant-item-tex" src="${v.image}" alt="${v.material[currentLang]}" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' viewBox=\\'0 0 24 24\\' fill=\\'none\\' stroke=\\'%236b8e96\\'><rect x=\\'3\\' y=\\'3\\' width=\\'18\\' height=\\'18\\' rx=\\'2\\' ry=\\'2\\'/></svg>'">
-                  <img class="material-indicator" src="${v.matIcon || 'images/default_mat.png'}" alt="Material" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' viewBox=\\'0 0 24 24\\' fill=\\'none\\' stroke=\\'%236b8e96\\'><circle cx=\\'12\\' cy=\\'12\\' r=\\'8\\'/></svg>'">
+                <div class="variant-card">
+                  <img class="variant-pixel-icon" src="${v.image}" alt="${v.material[currentLang]}" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' viewBox=\\'0 0 24 24\\' fill=\\'%2378d2d6\\'><rect width=\\'24\\' height=\\'24\\'/></svg>'">
+                  <span>${v.material[currentLang]}</span>
                 </div>
               `;
             });
@@ -988,13 +1115,16 @@ img.modrinth.com</pre>
 
     function setupModal(openBtnId, modalId, closeBtnId) {
       const modal = document.getElementById(modalId);
-      document.getElementById(openBtnId).addEventListener('click', () => modal.classList.add('show'));
-      document.getElementById(closeBtnId).addEventListener('click', () => modal.classList.remove('show'));
-      modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('show'); });
+      const openBtn = document.getElementById(openBtnId);
+      const closeBtn = document.getElementById(closeBtnId);
+      if (openBtn && modal) openBtn.addEventListener('click', () => modal.classList.add('show'));
+      if (closeBtn && modal) closeBtn.addEventListener('click', () => modal.classList.remove('show'));
+      if (modal) modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('show'); });
     }
 
     setupModal('openRecoBtn', 'recoModal', 'closeModalBtn');
     setupModal('openDownloadBtn', 'downloadModal', 'closeDownloadBtn');
+    setupModal('openTermsBtn', 'termsModal', 'closeTermsBtn');
 
     const bubbleTexts = ["ало скинофф студиос?", "ты пофиксил?!", "порталия", "Фиксите баги!", "Мяу 🐱", "Больше моделек!"];
 
