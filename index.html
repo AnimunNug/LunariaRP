@@ -54,7 +54,7 @@
       cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2378d2d6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 4l7.07 16.97 2.51-7.39 7.39-2.51L4 4z'/%3E%3C/svg%3E") 4 4, auto;
     }
     
-    a, button, input, .social-btn, td, .select-cat-btn, h1, .mode-btn {
+    a, button, input, .social-btn, td, .select-cat-btn, h1, .mode-btn, .expand-btn {
       cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='%23f5e0ac' stroke='%232c4a52' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 4l7.07 16.97 2.51-7.39 7.39-2.51L4 4z'/%3E%3C/svg%3E") 4 4, pointer !important;
     }
 
@@ -206,7 +206,7 @@
     }
     .search-input:focus { border-color: var(--primary-soft); box-shadow: var(--glow-light); }
 
-    /* ПЕРЕКЛЮЧАТЕЛЬ РЕЖИМА КАТЕГОРИЙ (ТИПЫ / ТЕМАТИКИ) */
+    /* ПЕРЕКЛЮЧАТЕЛЬ РЕЖИМА КАТЕГОРИЙ */
     .mode-switch-container {
       display: flex; background: var(--bg-creamy); border: 1px solid var(--card-border);
       border-radius: 25px; padding: 4px; gap: 4px; align-items: center; flex: 0 0 auto;
@@ -264,6 +264,35 @@
     .copy-btn svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; }
     .copy-btn:hover { color: var(--primary-soft); transform: scale(1.15); }
 
+    /* --- СТИЛИ ДЛЯ ВАРИАНТОВ ПРЕДМЕТОВ (РАСКРЫВАЮЩИЙСЯ СПИСОК) --- */
+    .orig-cell-content { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .expand-btn {
+      background: var(--th-bg); border: 1px solid var(--card-border); color: var(--text-main);
+      border-radius: 50%; width: 28px; height: 28px; display: inline-flex; align-items: center;
+      justify-content: center; transition: all 0.25s ease; padding: 0;
+    }
+    .expand-btn:hover { border-color: var(--primary-soft); color: var(--primary-soft); transform: scale(1.1); }
+    .expand-btn svg { transition: transform 0.3s ease; }
+
+    .variants-row { display: none; background: rgba(0, 0, 0, 0.02); }
+    [data-theme="dark"] .variants-row { background: rgba(0, 0, 0, 0.25); }
+    .variants-row.open { display: table-row; }
+    
+    .variants-container {
+      padding: 0.8rem 0.5rem; display: flex; gap: 12px; flex-wrap: wrap; align-items: center;
+    }
+    .variants-title {
+      width: 100%; font-size: 0.82rem; font-weight: 700; color: var(--primary-soft); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .variant-card {
+      display: flex; align-items: center; gap: 10px; background: var(--bg-creamy);
+      border: 1px solid var(--card-border); border-radius: 14px; padding: 6px 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05); transition: transform 0.2s ease;
+    }
+    .variant-card:hover { transform: translateY(-2px); border-color: var(--primary-soft); }
+    .variant-card .item-icon { width: 36px; height: 36px; border-radius: 10px; padding: 3px; }
+    .variant-card span { font-size: 0.85rem; font-weight: 600; color: var(--text-main); }
+
     /* ОБЩИЙ СТИЛЬ МОДАЛЬНЫХ ОКОН */
     .modal-overlay {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); display: flex; align-items: center; justify-content: center; z-index: 1000; opacity: 0; visibility: hidden; transition: all 0.3s ease; padding: 1rem;
@@ -304,67 +333,34 @@
     .copy-code-btn:hover { opacity: 0.9; }
     .code-block { background: var(--code-bg); color: var(--code-text); padding: 1rem; border-radius: 14px; border: 1px solid var(--card-border); font-family: monospace; font-size: 0.88rem; overflow-x: auto; white-space: pre; line-height: 1.5; }
 
-    /* --- ОКНО СКАЧИВАНИЯ --- */
+    /* ОКНО СКАЧИВАНИЯ */
     .download-options { display: flex; flex-direction: column; gap: 1.8rem; align-items: center; }
-    
-    .goofy-modrinth-promo {
-      width: 100%;
-      background: var(--th-bg);
-      border: 2px dashed var(--primary-soft);
-      border-radius: 24px;
-      padding: 2rem 1.5rem;
-      text-align: center;
-      position: relative;
-    }
-
-    .goofy-title {
-      font-size: 1.3rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.8rem;
-    }
-    
-    .goofy-desc {
-      font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 1.5rem;
-    }
+    .goofy-modrinth-promo { width: 100%; background: var(--th-bg); border: 2px dashed var(--primary-soft); border-radius: 24px; padding: 2rem 1.5rem; text-align: center; position: relative; }
+    .goofy-title { font-size: 1.3rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.8rem; }
+    .goofy-desc { font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 1.5rem; }
 
     .super-duper-btn {
       display: inline-flex; align-items: center; justify-content: center; gap: 15px;
-      background: linear-gradient(45deg, #1bd96a, #0ebd51, #1bd96a);
-      background-size: 200% auto;
-      color: #ffffff; padding: 1.2rem 2rem; border-radius: 20px;
-      text-decoration: none; font-family: inherit;
-      box-shadow: 0 10px 25px rgba(27, 217, 106, 0.4);
-      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-      animation: btnShine 3s infinite linear;
-      border: none;
+      background: linear-gradient(45deg, #1bd96a, #0ebd51, #1bd96a); background-size: 200% auto;
+      color: #ffffff; padding: 1.2rem 2rem; border-radius: 20px; text-decoration: none; font-family: inherit;
+      box-shadow: 0 10px 25px rgba(27, 217, 106, 0.4); transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      animation: btnShine 3s infinite linear; border: none;
     }
+    .super-duper-btn:hover { transform: scale(1.05) translateY(-5px) rotate(-1.5deg); box-shadow: 0 15px 35px rgba(27, 217, 106, 0.6); color: #fff; }
 
-    .super-duper-btn:hover {
-      transform: scale(1.05) translateY(-5px) rotate(-1.5deg);
-      box-shadow: 0 15px 35px rgba(27, 217, 106, 0.6);
-      color: #fff;
-    }
-
-    @keyframes btnShine {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+    @keyframes btnShine { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
     .btn-icon { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; }
     .btn-icon svg { width: 100%; height: 100%; fill: currentColor; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); }
-    
     .btn-text-wrapper { display: flex; flex-direction: column; text-align: left; }
     .btn-main { font-size: 1.3rem; font-weight: 800; letter-spacing: 0.5px; text-shadow: 0 1px 3px rgba(0,0,0,0.2); }
     .btn-sub { font-size: 0.8rem; font-weight: 600; opacity: 0.95; }
 
-    .sad-pmc-promo {
-      display: flex; flex-direction: column; gap: 6px; align-items: center;
-      background: var(--bg-gradient); padding: 1rem; border-radius: 16px; border: 1px solid var(--card-border);
-    }
+    .sad-pmc-promo { display: flex; flex-direction: column; gap: 6px; align-items: center; background: var(--bg-gradient); padding: 1rem; border-radius: 16px; border: 1px solid var(--card-border); }
     .pmc-text { font-size: 0.85rem; color: var(--text-muted); font-weight: 600; }
     .pmc-link { color: var(--text-main); font-size: 0.95rem; font-weight: 700; text-decoration: underline; text-underline-offset: 4px; transition: color 0.3s; }
     .pmc-link:hover { color: var(--primary-soft); }
 
-    /* ВИДЖЕТ ПОДДЕРЖКИ */
     .support-widget {
       position: fixed; bottom: 25px; left: 25px; z-index: 99; display: flex; align-items: center; gap: 10px; background: var(--bg-creamy); border: 1px solid var(--card-border); color: var(--text-main); padding: 0.8rem 1.4rem; border-radius: 30px; text-decoration: none; font-weight: 700; font-size: 0.85rem; box-shadow: var(--shadow-soft); transition: all 0.3s ease;
     }
@@ -409,9 +405,7 @@
           
           <div class="social-links">
             <a href="https://discord.gg/ВАШ_СЕРВЕР" class="social-btn" target="_blank" id="discordLink" data-tooltip="Discord сервер">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189z"/>
-              </svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189z"/></svg>
             </a>
             <a href="https://t.me/ВАШ_КАНАЛ" class="social-btn" target="_blank" id="tgLink" data-tooltip="Telegram канал">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
@@ -420,7 +414,6 @@
         </div>
         
         <div class="right-group">
-          <!-- Кнопка перехода на сайт города -->
           <a href="https://animunnug.github.io/Lunaria/" target="_blank" class="control-btn" id="cityBtn" title="Сайт города Лунария">
             <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
             <span id="cityBtnText">Город</span>
@@ -452,7 +445,6 @@
       <div class="search-and-select-bar">
         <input type="text" class="search-input" id="searchInput" placeholder="Поиск предмета или названия..." oninput="filterTable()">
         
-        <!-- АККУРАТНЫЙ ПЕРЕКЛЮЧАТЕЛЬ РЕЖИМА -->
         <div class="mode-switch-container">
           <button class="mode-btn active" id="modeStandardBtn" onclick="switchCategoryMode('standard')">Типы</button>
           <button class="mode-btn" id="modeThemeBtn" onclick="switchCategoryMode('theme')">Тематики</button>
@@ -463,8 +455,7 @@
             <span id="selectedCatLabel">Все категории</span>
             <svg class="arrow" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
           </button>
-          <div class="category-dropdown-menu" id="catDropdownMenu">
-          </div>
+          <div class="category-dropdown-menu" id="catDropdownMenu"></div>
         </div>
       </div>
     </div>
@@ -478,8 +469,7 @@
             <th id="thRename">Переименование</th>
           </tr>
         </thead>
-        <tbody id="tableBody">
-        </tbody>
+        <tbody id="tableBody"></tbody>
       </table>
     </div>
 
@@ -495,19 +485,14 @@
       <button class="close-modal" id="closeDownloadBtn" title="Закрыть">
         <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" fill="none" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
       </button>
-      
       <h2 class="modal-title mb-4" id="dlModalTitle">Скачивание (Очень важное)</h2>
-
       <div class="download-options">
         <div class="goofy-modrinth-promo">
           <h3 class="goofy-title" id="goofyTitle">Качай с Modrinth, будь крутым! 😎</h3>
           <p class="goofy-desc" id="goofyDesc">Слушай, тут такое дело... Там есть авто-обновления, кайфовый интерфейс, а ещё — если ты скачаешь оттуда, нам перепадёт пара копеек на энергетики!</p>
-          
           <a href="https://modrinth.com/resourcepack/ВАШ_ПАК" class="super-duper-btn" target="_blank">
             <div class="btn-icon">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12.016 1.484a1.868 1.868 0 0 0-1.22.428L2.093 9.074c-.585.47-.932 1.185-.932 1.937v9.423c0 1.25.94 2.302 2.185 2.459 1.192.15 2.274-.684 2.493-1.859V11.23l4.908 3.93c.717.575 1.733.575 2.45 0l4.909-3.93v9.804c.219 1.175 1.301 2.01 2.493 1.86 1.245-.157 2.185-1.21 2.185-2.46V11.011c0-.752-.347-1.467-.932-1.937l-8.703-7.162a1.866 1.866 0 0 0-1.134-.428z" />
-              </svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.016 1.484a1.868 1.868 0 0 0-1.22.428L2.093 9.074c-.585.47-.932 1.185-.932 1.937v9.423c0 1.25.94 2.302 2.185 2.459 1.192.15 2.274-.684 2.493-1.859V11.23l4.908 3.93c.717.575 1.733.575 2.45 0l4.909-3.93v9.804c.219 1.175 1.301 2.01 2.493 1.86 1.245-.157 2.185-1.21 2.185-2.46V11.011c0-.752-.347-1.467-.932-1.937l-8.703-7.162a1.866 1.866 0 0 0-1.134-.428z"/></svg>
             </div>
             <div class="btn-text-wrapper">
               <span class="btn-main" id="btnMain">Скачать с Modrinth</span>
@@ -515,7 +500,6 @@
             </div>
           </a>
         </div>
-
         <div class="sad-pmc-promo">
           <span class="pmc-text" id="pmcText">Или если ты фанат динозавров:</span>
           <a href="https://planetminecraft.com" class="pmc-link" id="pmcLinkText" target="_blank">Planet Minecraft 🦕</a>
@@ -530,37 +514,28 @@
       <button class="close-modal" id="closeModalBtn" title="Закрыть">
         <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" fill="none" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
       </button>
-      
       <div class="modal-header">
-        <div class="modal-header-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        </div>
+        <div class="modal-header-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
         <h2 class="modal-title" id="modalTitle">Рекомендации к установке</h2>
       </div>
-
       <div class="modal-body">
         <div class="reco-card">
           <div class="reco-card-title">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="#1bd96a">
-                <path d="M12.016 1.484a1.868 1.868 0 0 0-1.22.428L2.093 9.074c-.585.47-.932 1.185-.932 1.937v9.423c0 1.25.94 2.302 2.185 2.459 1.192.15 2.274-.684 2.493-1.859V11.23l4.908 3.93c.717.575 1.733.575 2.45 0l4.909-3.93v9.804c.219 1.175 1.301 2.01 2.493 1.86 1.245-.157 2.185-1.21 2.185-2.46V11.011c0-.752-.347-1.467-.932-1.937l-8.703-7.162a1.866 1.866 0 0 0-1.134-.428z" />
-            </svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#1bd96a"><path d="M12.016 1.484a1.868 1.868 0 0 0-1.22.428L2.093 9.074c-.585.47-.932 1.185-.932 1.937v9.423c0 1.25.94 2.302 2.185 2.459 1.192.15 2.274-.684 2.493-1.859V11.23l4.908 3.93c.717.575 1.733.575 2.45 0l4.909-3.93v9.804c.219 1.175 1.301 2.01 2.493 1.86 1.245-.157 2.185-1.21 2.185-2.46V11.011c0-.752-.347-1.467-.932-1.937l-8.703-7.162a1.866 1.866 0 0 0-1.134-.428z"/></svg>
             <span id="recoStep1Title">1. Установка через Modrinth App</span>
           </div>
           <p id="modalModrinthText">Рекомендуется использовать лаунчер <a href="https://modrinth.com" target="_blank" style="color:var(--primary-soft); font-weight:700;">Modrinth</a> для автоматического обновления ресурспака без ручного скачивания файлов.</p>
         </div>
-
         <div class="reco-card">
           <div class="reco-card-title">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
             <span id="recoStep2Title">2. Настройка доступности Modrinth (для РФ)</span>
           </div>
           <p id="modalRFText">Если сервисы Modrinth не загружаются, рекомендуется использовать <a href="https://github.com/flowseal/zapret-discord-youtube" target="_blank" style="color:var(--primary-soft); font-weight:700;">zapret-discord-youtube</a>.</p>
-
           <div class="fs-tree">
             <div class="fs-item"><svg class="folder-icon" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg><span>zapret-discord-youtube /</span></div>
             <div class="fs-item file"><svg class="file-icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg><span>list-general.txt</span></div>
           </div>
-
           <div class="code-box-header">
             <span id="codeHeaderLabel">Строчки для добавления в list-general.txt:</span>
             <button class="copy-code-btn" onclick="copyZapretCode()">
@@ -568,7 +543,6 @@
               <span id="copyCodeText">Скопировать</span>
             </button>
           </div>
-          
           <pre class="code-block" id="zapretCode">modrinth.com
 *.modrinth.com
 cdn.modrinth.com
@@ -588,7 +562,6 @@ img.modrinth.com</pre>
   <div class="toast" id="toast">Имя скопировано!</div>
 
   <script>
-    // Искры от мышки
     let lastSparkleTime = 0;
     document.addEventListener('mousemove', function(e) {
       const now = Date.now();
@@ -603,9 +576,6 @@ img.modrinth.com</pre>
       }
     });
 
-    // ==========================================
-    // ГИБКАЯ НАСТРОЙКА КАТЕГОРИЙ И ТЕМАТИК
-    // ==========================================
     const categoryModes = {
       standard: {
         label: { ru: "Типы", en: "Types" },
@@ -631,9 +601,26 @@ img.modrinth.com</pre>
       }
     };
 
-    // Предметы (с указанием 'category' и 'theme')
+    // =======================================================
+    // СПИСОК ПРЕДМЕТОВ (В СЛИЗНЕВЫЙ МЕЧ ДОБАВЛЕНЫ ВАРИАНТЫ)
+    // =======================================================
     const items = [
-      { image: "images/slime_sword.png", category: "weapons", theme: "slime", original: { ru: "Любой Меч", en: "Any sword" }, rename: { ru: "Слизневый Меч", en: "Slime Sword" } },
+      { 
+        image: "images/slime_sword.png", 
+        category: "weapons", 
+        theme: "slime", 
+        original: { ru: "Любой Меч", en: "Any sword" }, 
+        rename: { ru: "Слизневый Меч", en: "Slime Sword" },
+        // --- ПРИМЕР ВАРИАНТОВ МАТЕРИАЛОВ ---
+        variants: [
+          { material: { ru: "Деревянный", en: "Wooden" }, image: "images/slime_sword_wood.png" },
+          { material: { ru: "Каменный", en: "Stone" }, image: "images/slime_sword_stone.png" },
+          { material: { ru: "Железный", en: "Iron" }, image: "images/slime_sword_iron.png" },
+          { material: { ru: "Золотой", en: "Golden" }, image: "images/slime_sword_gold.png" },
+          { material: { ru: "Алмазный", en: "Diamond" }, image: "images/slime_sword_diamond.png" },
+          { material: { ru: "Незеритовый", en: "Netherite" }, image: "images/slime_sword_netherite.png" }
+        ]
+      },
       { image: "images/moonedge.png", category: "weapons", theme: "other", original: { ru: "Любой Меч", en: "Any sword" }, rename: { ru: "Остролуние", en: "Moonedge" } },
       { image: "images/monster.png", category: "food", theme: "energy", original: { ru: "Золотая Морковь", en: "Golden Carrot" }, rename: { ru: "Монстр", en: "Monster" } },
       { image: "images/white_monster.png", category: "food", theme: "energy", original: { ru: "Золотая Морковь", en: "Golden Carrot" }, rename: { ru: "Белый Монстр", en: "White Monster" } },
@@ -644,7 +631,7 @@ img.modrinth.com</pre>
     ];
 
     let currentLang = 'ru';
-    let currentMode = 'standard'; // 'standard' или 'theme'
+    let currentMode = 'standard';
     let currentCategory = 'all';
     
     const i18n = {
@@ -682,7 +669,8 @@ img.modrinth.com</pre>
         codeHeaderLabel: "Строчки для добавления в list-general.txt:",
         copyCodeText: "Скопировать",
         modalModrinthText: "Рекомендуется использовать лаунчер <a href='https://modrinth.com' target='_blank' style='color:var(--primary-soft); font-weight:700;'>Modrinth</a> для автоматического обновления ресурспака без ручного скачивания файлов.",
-        modalRFText: "Если сервисы Modrinth не загружаются, рекомендуется использовать <a href='https://github.com/flowseal/zapret-discord-youtube' target='_blank' style='color:var(--primary-soft); font-weight:700;'>zapret-discord-youtube</a>."
+        modalRFText: "Если сервисы Modrinth не загружаются, рекомендуется использовать <a href='https://github.com/flowseal/zapret-discord-youtube' target='_blank' style='color:var(--primary-soft); font-weight:700;'>zapret-discord-youtube</a>.",
+        variantsTitle: "Варианты по материалам:"
       },
       en: {
         title: "Lunaria",
@@ -718,7 +706,8 @@ img.modrinth.com</pre>
         codeHeaderLabel: "Lines to add to list-general.txt:",
         copyCodeText: "Copy",
         modalModrinthText: "It is recommended to use the <a href='https://modrinth.com' target='_blank' style='color:var(--primary-soft); font-weight:700;'>Modrinth</a> app for auto-updating the pack without downloading files manually.",
-        modalRFText: "If Modrinth services fail to load, it is recommended to install <a href='https://github.com/flowseal/zapret-discord-youtube' target='_blank' style='color:var(--primary-soft); font-weight:700;'>zapret-discord-youtube</a>."
+        modalRFText: "If Modrinth services fail to load, it is recommended to install <a href='https://github.com/flowseal/zapret-discord-youtube' target='_blank' style='color:var(--primary-soft); font-weight:700;'>zapret-discord-youtube</a>.",
+        variantsTitle: "Material Variants:"
       }
     };
 
@@ -750,7 +739,6 @@ img.modrinth.com</pre>
 
     function updateTexts() {
       const langData = i18n[currentLang];
-      
       document.getElementById('title').innerText = langData.title;
       document.getElementById('subtitle').innerText = langData.subtitle;
       document.getElementById('desc').innerText = langData.desc;
@@ -789,7 +777,6 @@ img.modrinth.com</pre>
       document.getElementById('modalRFText').innerHTML = langData.modalRFText;
     }
 
-    /* ПЕРЕКЛЮЧЕНИЕ РЕЖИМА КАТЕГОРИЙ (ТИПЫ / ТЕМАТИКИ) */
     function switchCategoryMode(mode) {
       if (currentMode === mode) return;
       currentMode = mode;
@@ -836,9 +823,7 @@ img.modrinth.com</pre>
         if (catKey === 'all') {
           count = items.length;
         } else {
-          count = items.filter(i => {
-            return currentMode === 'standard' ? i.category === catKey : i.theme === catKey;
-          }).length;
+          count = items.filter(i => currentMode === 'standard' ? i.category === catKey : i.theme === catKey).length;
         }
 
         const opt = document.createElement('div');
@@ -851,12 +836,25 @@ img.modrinth.com</pre>
 
     function filterTable() { renderTable(); }
 
+    /* ФУНКЦИЯ ОТКРЫТИЯ/ЗАКРЫТИЯ ВАРИАНТОВ */
+    function toggleVariants(index) {
+      const varRow = document.getElementById(`variants-${index}`);
+      const arrow = document.getElementById(`arrow-${index}`);
+      if (varRow) {
+        const isOpen = varRow.classList.contains('open');
+        varRow.classList.toggle('open');
+        if (arrow) {
+          arrow.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
+        }
+      }
+    }
+
     function renderTable() {
       const searchQuery = document.getElementById('searchInput').value.toLowerCase();
       const tbody = document.getElementById('tableBody');
       tbody.innerHTML = '';
 
-      items.forEach(item => {
+      items.forEach((item, index) => {
         const origText = item.original[currentLang];
         const renameText = item.rename[currentLang];
         
@@ -872,14 +870,25 @@ img.modrinth.com</pre>
         }
 
         if (matchesSearch && matchesCategory) {
+          const hasVariants = item.variants && item.variants.length > 0;
           const tr = document.createElement('tr');
+          
           tr.innerHTML = `
             <td>
               <div class="item-icon">
                 <img src="${item.image}" alt="${origText}" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' viewBox=\\'0 0 24 24\\' fill=\\'none\\' stroke=\\'%236b8e96\\'><rect x=\\'3\\' y=\\'3\\' width=\\'18\\' height=\\'18\\' rx=\\'2\\' ry=\\'2\\'/><circle cx=\\'8.5\\' cy=\\'8.5\\' r=\\'1.5\\'/><polyline points=\\'21 15 16 10 5 21\\'/></svg>'">
               </div>
             </td>
-            <td><strong>${origText}</strong></td>
+            <td>
+              <div class="orig-cell-content">
+                <strong>${origText}</strong>
+                ${hasVariants ? `
+                  <button class="expand-btn" onclick="toggleVariants(${index})" title="Варианты">
+                    <svg id="arrow-${index}" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+                  </button>
+                ` : ''}
+              </div>
+            </td>
             <td>
               <div class="rename-code">
                 ${renameText}
@@ -890,6 +899,35 @@ img.modrinth.com</pre>
             </td>
           `;
           tbody.appendChild(tr);
+
+          // Дополнительная строка для вариантов
+          if (hasVariants) {
+            const varTr = document.createElement('tr');
+            varTr.className = 'variants-row';
+            varTr.id = `variants-${index}`;
+
+            let cardsHtml = '';
+            item.variants.forEach(v => {
+              cardsHtml += `
+                <div class="variant-card">
+                  <div class="item-icon">
+                    <img src="${v.image}" alt="${v.material[currentLang]}" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' viewBox=\\'0 0 24 24\\' fill=\\'none\\' stroke=\\'%236b8e96\\'><rect x=\\'3\\' y=\\'3\\' width=\\'18\\' height=\\'18\\' rx=\\'2\\' ry=\\'2\\'/></svg>'">
+                  </div>
+                  <span>${v.material[currentLang]}</span>
+                </div>
+              `;
+            });
+
+            varTr.innerHTML = `
+              <td colspan="3">
+                <div class="variants-container">
+                  <div class="variants-title">${i18n[currentLang].variantsTitle}</div>
+                  ${cardsHtml}
+                </div>
+              </td>
+            `;
+            tbody.appendChild(varTr);
+          }
         }
       });
     }
@@ -908,38 +946,19 @@ img.modrinth.com</pre>
     setupModal('openRecoBtn', 'recoModal', 'closeModalBtn');
     setupModal('openDownloadBtn', 'downloadModal', 'closeDownloadBtn');
 
-    // ПАСХАЛКА ДЛЯ ТАЙТЛА
-    const bubbleTexts = [
-      "ало скинофф студиос?",
-      "ты пофиксил?!",
-      "порталия",
-      "Фиксите баги!",
-      "Мяу 🐱",
-      "Больше моделек!"
-    ];
+    const bubbleTexts = ["ало скинофф студиос?", "ты пофиксил?!", "порталия", "Фиксите баги!", "Мяу 🐱", "Больше моделек!"];
 
     document.getElementById('title').addEventListener('dblclick', function(e) {
       for (let i = 0; i < 5; i++) {
         const bubble = document.createElement('div');
         bubble.className = 'easter-bubble';
-        
-        if(i === 0) {
-            bubble.innerText = "ало скинофф студиос?";
-        } else {
-            bubble.innerText = bubbleTexts[Math.floor(Math.random() * bubbleTexts.length)];
-        }
-        
+        bubble.innerText = (i === 0) ? "ало скинофф студиос?" : bubbleTexts[Math.floor(Math.random() * bubbleTexts.length)];
         bubble.style.left = e.clientX + 'px';
         bubble.style.top = e.clientY + 'px';
-        
         const angle = (Math.random() * Math.PI * 2);
         const distance = 80 + Math.random() * 140;
-        const tx = Math.cos(angle) * distance + 'px';
-        const ty = Math.sin(angle) * distance + 'px';
-        
-        bubble.style.setProperty('--tx', tx);
-        bubble.style.setProperty('--ty', ty);
-        
+        bubble.style.setProperty('--tx', Math.cos(angle) * distance + 'px');
+        bubble.style.setProperty('--ty', Math.sin(angle) * distance + 'px');
         document.body.appendChild(bubble);
         setTimeout(() => bubble.remove(), 1200);
       }
