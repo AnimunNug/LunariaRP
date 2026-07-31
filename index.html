@@ -424,10 +424,118 @@
     </footer>
   </div>
 
-  <!-- Модальные окна (остаются теми же) -->
-  <div id="downloadModal" class="modal-overlay">...</div>
-  <div id="recoModal" class="modal-overlay">...</div>
-  <div id="termsModal" class="modal-overlay">...</div>
+  <!-- Окно скачивания -->
+  <div id="downloadModal" class="modal-overlay" onclick="if (event.target === this) closeModal('downloadModal')">
+    <div class="modal-content text-center">
+      <button class="close-modal" onclick="closeModal('downloadModal')" aria-label="Закрыть">
+        <svg viewBox="0 0 24 24" width="20" height="20"><path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+      </button>
+
+      <div class="modal-header" style="justify-content:center; text-align:center;">
+        <div class="modal-header-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        </div>
+        <h2 class="modal-title" id="dlModalTitle">Скачивание</h2>
+      </div>
+
+      <div class="download-options">
+        <div class="goofy-modrinth-promo">
+          <h3 class="goofy-title" id="goofyTitle">Качай с Modrinth, будь крутым! 😎</h3>
+          <p class="goofy-desc" id="goofyDesc">Автоматические обновления и удобная установка ресурспака.</p>
+
+          <a class="super-duper-btn" href="https://modrinth.com" target="_blank" rel="noopener noreferrer">
+            <span class="btn-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2Zm4.5 11h-3.5v3.5h-2V13H7.5v-2H11V7.5h2V11h3.5Z"/></svg>
+            </span>
+            <span class="btn-text-wrapper">
+              <span class="btn-main" id="btnMain">Скачать с Modrinth</span>
+              <span class="btn-sub" id="btnSub">Удобная установка и обновления</span>
+            </span>
+          </a>
+        </div>
+
+        <div class="sad-pmc-promo">
+          <span class="pmc-text" id="pmcText">Альтернативная ссылка:</span>
+          <a class="pmc-link" id="pmcLinkText" href="https://www.planetminecraft.com" target="_blank" rel="noopener noreferrer">Planet Minecraft</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Окно рекомендаций -->
+  <div id="recoModal" class="modal-overlay" onclick="if (event.target === this) closeModal('recoModal')">
+    <div class="modal-content">
+      <button class="close-modal" onclick="closeModal('recoModal')" aria-label="Закрыть">
+        <svg viewBox="0 0 24 24" width="20" height="20"><path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+      </button>
+
+      <div class="modal-header">
+        <div class="modal-header-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h2 class="modal-title" id="modalTitle">Рекомендации к установке</h2>
+      </div>
+
+      <div class="reco-card">
+        <h3 class="reco-card-title" id="recoStep1Title">1. Установка через Modrinth App</h3>
+        <p id="modalModrinthText">Рекомендуется использовать приложение Modrinth для автоматического обновления ресурспака.</p>
+      </div>
+
+      <div class="reco-card">
+        <h3 class="reco-card-title" id="recoStepRPrenamesTitle">2. Мод RPrenames</h3>
+        <p id="modalRPrenamesText">Мод показывает доступные переименования прямо в интерфейсе наковальни.</p>
+      </div>
+
+      <div class="reco-card">
+        <h3 class="reco-card-title" id="recoStep2Title">3. Настройка доступности Modrinth</h3>
+        <p id="modalRFText">Если сервисы Modrinth не открываются, используйте подходящий способ восстановления доступа.</p>
+
+        <div class="code-box-header">
+          <span id="codeHeaderLabel">Строчки для добавления в list-general.txt:</span>
+          <button class="copy-code-btn" onclick="copyZapretCode()">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <span id="copyCodeText">Скопировать</span>
+          </button>
+        </div>
+        <pre class="code-block" id="zapretCode">modrinth.com
+api.modrinth.com
+cdn.modrinth.com</pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- Окно условий использования -->
+  <div id="termsModal" class="modal-overlay" onclick="if (event.target === this) closeModal('termsModal')">
+    <div class="modal-content">
+      <button class="close-modal" onclick="closeModal('termsModal')" aria-label="Закрыть">
+        <svg viewBox="0 0 24 24" width="20" height="20"><path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+      </button>
+
+      <div class="modal-header">
+        <div class="modal-header-icon">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg>
+        </div>
+        <h2 class="modal-title" id="termsModalTitle">Условия использования</h2>
+      </div>
+
+      <div class="reco-card">
+        <h3 class="reco-card-title" id="termsRule1Title">1. Использование и авторство</h3>
+        <p id="termsRule1Desc">Вы можете использовать материалы пака, не выдавая их за свою работу.</p>
+      </div>
+      <div class="reco-card">
+        <h3 class="reco-card-title" id="termsRule2Title">2. Полный запрет монетизации</h3>
+        <p id="termsRule2Desc">Запрещено продавать или монетизировать ресурсы пака.</p>
+      </div>
+      <div class="reco-card">
+        <h3 class="reco-card-title" id="termsRule3Title">3. Модификация под себя</h3>
+        <p id="termsRule3Desc">Материалы можно изменять для личных нужд.</p>
+      </div>
+      <div class="reco-card">
+        <h3 class="reco-card-title" id="termsRule4Title">4. Указание авторов</h3>
+        <p id="termsRule4Desc">В публичном контенте необходимо указать авторов пака.</p>
+      </div>
+    </div>
+  </div>
 
   <a href="https://discord.gg/ВАШ_СЕРВЕР" target="_blank" class="support-widget" id="supportWidget">
     <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
@@ -437,9 +545,17 @@
   <div class="toast" id="toast">Имя скопировано!</div>
 
   <!-- ПОДКЛЮЧАЕМ ВАШУ БАЗУ ДАННЫХ -->
-  <script src="items.js"></script>
+  <script src="./items.js"></script>
 
   <script>
+    // items.js должен загрузиться раньше этого скрипта.
+    // Явный экспорт через window исключает проблемы с областью видимости.
+    const items = Array.isArray(window.LUNARIA_ITEMS) ? window.LUNARIA_ITEMS : [];
+
+    if (items.length === 0) {
+      console.error('Lunaria: items.js не загрузился или не содержит массив LUNARIA_ITEMS. Проверьте путь, регистр имени файла и публикацию GitHub Pages.');
+    }
+
     let lastSparkleTime = 0;
     document.addEventListener('mousemove', function(e) {
       const now = Date.now();
@@ -748,6 +864,18 @@
       const tbody = document.getElementById('tableBody');
       const searchQuery = document.getElementById('searchInput').value.toLowerCase().trim();
       tbody.innerHTML = '';
+
+      if (items.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="3">
+              <strong>Не удалось загрузить items.js.</strong><br>
+              Проверьте, что файлы <code>index.html</code> и <code>items.js</code> лежат в одной папке и имя файла написано строчными буквами.
+            </td>
+          </tr>
+        `;
+        return;
+      }
 
       const filteredItems = items.filter(item => {
         const matchesCategory = currentCategory === 'all' || 
