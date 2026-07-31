@@ -58,8 +58,8 @@ window.LUNARIA_ITEMS = [
     rename: { ru: "Сильвериновый Слиток", en: "Silverine Ingot" }
   },
   {
-    image: "images/moonbattler.png",
-    hoverImage: "images/moonbattler_icon.png",
+    image: "images/moonbattler_icon.png",
+    hoverImage: "images/moonbattler.png",
     category: "weapons",
     theme: "lunaria",
     original: { ru: "Любое Копье", en: "Any spear" },
