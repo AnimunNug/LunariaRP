@@ -27,8 +27,8 @@ window.LUNARIA_ITEMS = [
   // (Например: Образ Величия и Луноборец)
   // ==========================================
   { 
-    image: "images/moonbattler.png", 
-    hoverImage: "images/moonbattler_alt.png", // Вставьте сюда путь к картинке при приближении
+    image: "images/moonbattler_icon.png", 
+    hoverImage: "images/moonbattler.png", // Вставьте сюда путь к картинке при приближении
     category: "weapons", 
     theme: "lunaria", 
     original: { ru: "Любое Копье", en: "Any spear" }, 
@@ -36,7 +36,7 @@ window.LUNARIA_ITEMS = [
   },
   { 
     image: "images/image_of_majesty_icon.png", 
-    hoverImage: "images/image_of_majesty_alt.png", // Вставьте сюда путь к картинке при приближении
+    hoverImage: "images/image_of_majesty.png", // Вставьте сюда путь к картинке при приближении
     category: "hats", 
     theme: "lunaria", 
     original: { ru: "Вырезанная Тыква", en: "Carved Pumpkin" }, 
@@ -70,5 +70,5 @@ window.LUNARIA_ITEMS = [
   { image: "images/spunked_carrot.png", category: "food", theme: "other", original: { ru: "Золотая Морковь", en: "Golden Carrot" }, rename: { ru: "Малафьиная Морковь", en: "Spunked Carrot" } },
   { image: "images/pug_of_undying.png", category: "totems", theme: "pugs", original: { ru: "Тотем Бессмертия", en: "Totem of Undying" }, rename: { ru: "Мопс Бессмертия", en: "Pug of Undying" } },
   { image: "images/great_pug.png", category: "hats", theme: "pugs", original: { ru: "Вырезанная Тыква", en: "Carved Pumpkin" }, rename: { ru: "Великий Мопс", en: "Great Pug" } },
-  { image: "images/tetanus_revenge.png", category: "weapons", theme: "other", original: { ru: "Любой Меч", en: "Any sword" }, rename: { ru: "Столбняковое Возмездие", en: "Tetanus Revenge" } }
+  { image: "images/tetanus_revenge_icon.png", hoverImage: "images/tetanus_revenge.png", category: "weapons", theme: "other", original: { ru: "Любой Меч", en: "Any sword" }, rename: { ru: "Столбняковое Возмездие", en: "Tetanus Revenge" } }
 ];
