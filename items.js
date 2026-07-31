@@ -8,21 +8,7 @@ window.LUNARIA_ITEMS = [
   { image: "images/silverine_ingot.png", category: "goodies", theme: "lunaria", original: { ru: "Железный Слиток", en: "Iron Ingot" }, rename: { ru: "Сильвериновый Слиток", en: "Silverine Ingot" } },
   { image: "images/moonbattler.png", hoverImage: "images/moonbattler_icon.png", // Вставьте сюда путь к картинке при приближенииcategory: "weapons", theme: "lunaria", original: { ru: "Любое Копье", en: "Any spear" }, rename: { ru: "Луноборец", en: "Moonbattler" } },
   { image: "images/image_of_majesty_icon.png", hoverImage: "images/image_of_majesty.png", category: "hats", theme: "lunaria", original: { ru: "Вырезанная Тыква", en: "Carved Pumpkin" }, rename: { ru: "Образ Величия", en: "Image of Majesty" } },
-  { 
-    image: "images/slime_sword.png", 
-    category: "weapons", 
-    theme: "slime", 
-    original: { ru: "Любой Меч", en: "Any sword" }, 
-    rename: { ru: "Слизневый Меч", en: "Slime Sword" },
-    variants: [
-      { material: { ru: "Деревянный", en: "Wooden" }, image: "images/slime_sword_wood.png", matIcon: "images/mat_wood.png" },
-      { material: { ru: "Каменный", en: "Stone" }, image: "images/slime_sword_stone.png", matIcon: "images/mat_stone.png" },
-      { material: { ru: "Железный", en: "Iron" }, image: "images/slime_sword_iron.png", matIcon: "images/mat_iron.png" },
-      { material: { ru: "Золотой", en: "Golden" }, image: "images/slime_sword_gold.png", matIcon: "images/mat_gold.png" },
-      { material: { ru: "Алмазный", en: "Diamond" }, image: "images/slime_sword_diamond.png", matIcon: "images/mat_diamond.png" },
-      { material: { ru: "Незеритовый", en: "Netherite" }, image: "images/slime_sword_netherite.png", matIcon: "images/mat_netherite.png" }
-    ]
-  },
+  { image: "images/slime_sword.png", category: "weapons", theme: "slime", original: { ru: "Любой Меч", en: "Any sword" }, rename: { ru: "Слизневый Меч", en: "Slime Sword" },variants: [{ material: { ru: "Деревянный", en: "Wooden" }, image: "images/slime_sword_wood.png", matIcon: "images/mat_wood.png" },{ material: { ru: "Каменный", en: "Stone" }, image: "images/slime_sword_stone.png", matIcon: "images/mat_stone.png" },{ material: { ru: "Железный", en: "Iron" }, image: "images/slime_sword_iron.png", matIcon: "images/mat_iron.png" },{ material: { ru: "Золотой", en: "Golden" }, image: "images/slime_sword_gold.png", matIcon: "images/mat_gold.png" },{ material: { ru: "Алмазный", en: "Diamond" }, image: "images/slime_sword_diamond.png", matIcon: "images/mat_diamond.png" },{ material: { ru: "Незеритовый", en: "Netherite" }, image: "images/slime_sword_netherite.png", matIcon: "images/mat_netherite.png" }]},
   { image: "images/monster.png", category: "food", theme: "energy", original: { ru: "Золотая Морковь", en: "Golden Carrot" }, rename: { ru: "Монстр", en: "Monster" } },
   { image: "images/white_monster.png", category: "food", theme: "energy", original: { ru: "Золотая Морковь", en: "Golden Carrot" }, rename: { ru: "Белый Монстр", en: "White Monster" } },
   { image: "images/slimeburger.png", category: "food", theme: "slime", original: { ru: "Золотая Морковь", en: "Golden Carrot" }, rename: { ru: "Слизьбургер", en: "Slimeburger" } },
