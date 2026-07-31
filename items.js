@@ -27,8 +27,8 @@ window.LUNARIA_ITEMS = [
   // (Например: Образ Величия и Луноборец)
   // ==========================================
   { 
-    image: "images/moonbattler_icon.png", 
-    hoverImage: "images/moonbattler.png", // Вставьте сюда путь к картинке при приближении
+    image: "images/moonbattler.png", 
+    hoverImage: "images/moonbattler_icon.png", // Вставьте сюда путь к картинке при приближении
     category: "weapons", 
     theme: "lunaria", 
     original: { ru: "Любое Копье", en: "Any spear" }, 
