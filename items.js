@@ -14,7 +14,8 @@
     category: "weapons", // Доступные категории: weapons, armor, tools, hats, totems, food, goodies
     theme: "lunaria",    // Доступные тематики: lunaria, slime, pugs, energy, other
     original: { ru: "Исходный предмет", en: "Original Item" },
-    rename: { ru: "Новое Имя Ру", en: "New Name En" }
+    rename: { ru: "Новое Имя Ру", en: "New Name En" },
+    requiresRPT: true    // ДОБАВЬТЕ ЭТУ СТРОКУ ЕСЛИ ДЛЯ ПРЕДМЕТА НУЖЕН МОД RPT
   },
 
   --- ВАРИАНТ Б: С альтернативной иконкой при наведении ---
@@ -71,7 +72,8 @@ window.LUNARIA_ITEMS = [
     category: "hats",
     theme: "lunaria",
     original: { ru: "Вырезанная Тыква", en: "Carved Pumpkin" },
-    rename: { ru: "Образ Величия", en: "Image of Majesty" }
+    rename: { ru: "Образ Величия", en: "Image of Majesty" },
+    requiresRPT: true // <--- Добавлен индикатор мода RPT
   },
   {
     image: "images/slime_sword.png",
@@ -128,14 +130,7 @@ window.LUNARIA_ITEMS = [
     category: "hats",
     theme: "pugs",
     original: { ru: "Вырезанная Тыква", en: "Carved Pumpkin" },
-    rename: { ru: "Великий Мопс", en: "Great Pug" }
-  },
-  {
-    image: "images/tetanus_revenge_icon.png",
-    hoverImage: "images/tetanus_revenge.png",
-    category: "weapons",
-    theme: "other",
-    original: { ru: "Любой Меч", en: "Any sword" },
-    rename: { ru: "Столбняковое Возмездие", en: "Tetanus Revenge" }
+    rename: { ru: "Великий Мопс", en: "Great Pug" },
+    requiresRPT: true // <--- Добавлен индикатор мода RPT
   }
 ];
