@@ -3,6 +3,19 @@
 // А обычное
 // Б с альтернативным изображением. для этого используется параметр hoverImage: "alt_icon"
 // B предметы с выпадающим списком материалов. создается через массив variants: [{ material: { ru: "Деревянный", en: "Wooden" }, image: "images/slime_sword_wood.png", matIcon: "images/mat_wood.png" }, { material: { ru: "Каменный", en: "Stone" }, image: "images/slime_sword_stone.png", matIcon: "images/mat_stone.png" }]
+
+//ПРИМЕРЫ ДЛЯ КОПИРОВАНИЯ
+//ДЛЯ ИСПОЛЬЗОВАНИЯ ТРЕБУЕТСЯ РАСКОММЕНТИРОВАТЬ ВАРИАНТ
+//-------------------------------------------------------
+// ВАРИАНТ А
+//  { image: "images/moonedge.png", category: "weapons", theme: "lunaria", original: { ru: "Любой Меч", en: "Any sword" }, rename: { ru: "Остролуние", en: "Moonedge" } },
+//-------------------------------------------------------
+// ВАРИАНТ Б
+//  { image: "images/moonbattler.png", hoverImage: "images/moonbattler_icon.png", // Вставьте сюда путь к картинке при приближенииcategory: "weapons", theme: "lunaria", original: { ru: "Любое Копье", en: "Any spear" }, rename: { ru: "Луноборец", en: "Moonbattler" } },
+//-------------------------------------------------------
+// ВАРИАНТ В
+//  { image: "images/slime_sword.png", category: "weapons", theme: "slime", original: { ru: "Любой Меч", en: "Any sword" }, rename: { ru: "Слизневый Меч", en: "Slime Sword" },variants: [{ material: { ru: "Деревянный", en: "Wooden" }, image: "images/slime_sword_wood.png", matIcon: "images/mat_wood.png" },{ material: { ru: "Каменный", en: "Stone" }, image: "images/slime_sword_stone.png", matIcon: "images/mat_stone.png" },{ material: { ru: "Железный", en: "Iron" }, image: "images/slime_sword_iron.png", matIcon: "images/mat_iron.png" },{ material: { ru: "Золотой", en: "Golden" }, image: "images/slime_sword_gold.png", matIcon: "images/mat_gold.png" },{ material: { ru: "Алмазный", en: "Diamond" }, image: "images/slime_sword_diamond.png", matIcon: "images/mat_diamond.png" },{ material: { ru: "Незеритовый", en: "Netherite" }, image: "images/slime_sword_netherite.png", matIcon: "images/mat_netherite.png" }]},
+//-------------------------------------------------------
 window.LUNARIA_ITEMS = [
   { image: "images/moonedge.png", category: "weapons", theme: "lunaria", original: { ru: "Любой Меч", en: "Any sword" }, rename: { ru: "Остролуние", en: "Moonedge" } },
   { image: "images/silverine_ingot.png", category: "goodies", theme: "lunaria", original: { ru: "Железный Слиток", en: "Iron Ingot" }, rename: { ru: "Сильвериновый Слиток", en: "Silverine Ingot" } },
