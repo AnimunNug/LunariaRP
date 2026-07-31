@@ -152,6 +152,29 @@
     .copy-btn:hover { color: var(--primary-soft); transform: scale(1.15); }
 
     .orig-cell-content { display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; }
+    
+    /* Стили для RPT значка */
+    .rpt-badge {
+        display: inline-flex; align-items: center; justify-content: center;
+        background: var(--th-bg); color: var(--primary-soft);
+        border: 1px solid var(--card-border);
+        width: 24px; height: 24px; border-radius: 50%;
+        cursor: pointer; transition: all 0.25s ease; position: relative;
+    }
+    .rpt-badge:hover {
+        background: var(--primary-soft); color: #fff;
+        transform: scale(1.1); box-shadow: var(--glow-light); border-color: var(--primary-soft);
+    }
+    .rpt-badge svg { width: 14px; height: 14px; }
+    .rpt-tooltip {
+        position: absolute; bottom: 130%; left: 50%; transform: translateX(-50%) translateY(8px);
+        background: var(--dropdown-bg); color: var(--text-main); font-size: 0.75rem; font-weight: 700;
+        padding: 6px 10px; border-radius: 10px; border: 1px solid var(--primary-soft);
+        opacity: 0; visibility: hidden; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        white-space: nowrap; box-shadow: 0 5px 15px rgba(0,0,0,0.15); z-index: 20; pointer-events: none;
+    }
+    .rpt-badge:hover .rpt-tooltip { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+
     .expand-btn { background: var(--th-bg); border: 1px solid var(--card-border); color: var(--text-main); border-radius: 50%; width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center; transition: all 0.25s ease; padding: 0; margin-left: 5px; }
     .expand-btn:hover { border-color: var(--primary-soft); color: var(--primary-soft); transform: scale(1.1); }
     .expand-btn svg { transition: transform 0.3s ease; }
@@ -191,7 +214,6 @@
     .reco-card-title { font-weight: 700; font-size: 1.05rem; margin-bottom: 0.6rem; display: flex; align-items: center; gap: 10px; color: var(--primary-soft); }
     .reco-card p { font-size: 0.9rem; line-height: 1.6; color: var(--text-main); margin-bottom: 0.8rem; }
     
-    /* Стили для улучшенного меню рекомендаций */
     .reco-mods-list { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
     .reco-mod-item { display: flex; flex-direction: column; gap: 6px; padding: 12px; background: var(--bg-creamy); border-radius: 14px; border: 1px solid var(--card-border); transition: all 0.2s ease; }
     .reco-mod-item:hover { border-color: var(--primary-soft); box-shadow: var(--shadow-soft); }
@@ -248,12 +270,41 @@
     footer { text-align: center; margin-top: 3.5rem; color: var(--text-muted); font-size: 0.9rem; display: flex; flex-direction: column; gap: 6px; align-items: center; }
     .creators-tag { font-weight: 700; color: var(--primary-soft); }
 
+    /* Стили для пасхалки */
+    .easter-egg-bubble {
+        position: absolute;
+        background: var(--bg-creamy);
+        border: 2px solid var(--primary-soft);
+        color: var(--text-main);
+        padding: 8px 14px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 700;
+        pointer-events: none;
+        z-index: 9999;
+        box-shadow: var(--shadow-soft);
+        animation: bubblePop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, bubbleFade 0.3s ease 2s forwards;
+        white-space: nowrap;
+        user-select: none;
+    }
+    .easter-egg-bubble::after {
+        content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+        border-width: 6px; border-style: solid; border-color: var(--primary-soft) transparent transparent transparent;
+    }
+    @keyframes bubblePop {
+        0% { transform: translate(-50%, 10px) scale(0); opacity: 0; }
+        100% { transform: translate(-50%, -10px) scale(1); opacity: 1; }
+    }
+    @keyframes bubbleFade {
+        to { opacity: 0; transform: translate(-50%, -20px) scale(0.9); }
+    }
+
     @media (max-width: 700px) {
       body { padding: 1rem 0.5rem 5rem 0.5rem; }
       header { padding: 1.5rem 1rem; border-radius: 25px; display: flex; flex-direction: column; text-align: center; }
       
       .mobile-app-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; width: 100%; }
-      .mobile-title { font-family: 'Cinzel Decorative', serif; font-size: 2.2rem; background: linear-gradient(135deg, var(--text-main) 30%, var(--primary-soft) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 0; line-height: 1; }
+      .mobile-title { font-family: 'Cinzel Decorative', serif; font-size: 2.2rem; background: linear-gradient(135deg, var(--text-main) 30%, var(--primary-soft) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 0; line-height: 1; user-select: none; }
       .mobile-nav-actions { display: flex; gap: 10px; align-items: center; }
       
       .hamburger-btn { background: transparent; border: 1px solid var(--card-border); color: var(--text-main); border-radius: 12px; padding: 8px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
@@ -298,7 +349,6 @@
       table, thead, tbody, th, td { display: block; width: 100%; text-align: left; }
       thead { display: none; }
 
-      /* ОБНОВЛЕННАЯ СЕТКА ДЛЯ МОБИЛЬНЫХ ТАБЛИЦ */
       tr:not(.variants-row) { 
         display: grid; 
         grid-template-columns: 64px 1fr; 
@@ -338,7 +388,8 @@
   <div class="container">
     <header>
       <div class="mobile-app-nav">
-        <h1 class="mobile-title">Lunaria</h1>
+        <!-- Пасхалка на мобилках -->
+        <h1 class="mobile-title" ondblclick="triggerEasterEgg(event)">Lunaria</h1>
         <div class="mobile-nav-actions">
           <button class="control-btn icon-only" onclick="toggleTheme()" title="Сменить тему">
             <svg id="themeIconMobile" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
@@ -386,7 +437,8 @@
         </div>
       </div>
       
-      <h1 id="title" class="desktop-title">Lunaria</h1>
+      <!-- Пасхалка на ПК -->
+      <h1 id="title" class="desktop-title" ondblclick="triggerEasterEgg(event)">Lunaria</h1>
       <p class="subtitle" id="subtitle">Светлое руководство по ресурспаку</p>
       <p class="description" id="desc">Добро пожаловать в библиотеку города Лунария. Воспользуйтесь наковальней и измените предмет исключительно по имени точно так, как указано в таблице, чтобы пробудить его истинную магическую форму.</p>
 
@@ -586,6 +638,35 @@ img.modrinth.com</pre>
       console.error('Lunaria: items.js не загрузился или не содержит массив LUNARIA_ITEMS. Проверьте путь, регистр имени файла и публикацию GitHub Pages.');
     }
 
+    // --- ПАСХАЛКА ДЛЯ ЛОГОТИПА ---
+    const easterEggPhrases = [
+      "ало скинофф?",
+      "шперма",
+      "мунрей где дизайн",
+      "блобленчики",
+      "свэгуля",
+      "тамоме привяу",
+      "анимян?",
+      "фурри порнушка"
+    ];
+
+    function triggerEasterEgg(event) {
+      const target = event.currentTarget;
+      const text = easterEggPhrases[Math.floor(Math.random() * easterEggPhrases.length)];
+      const bubble = document.createElement('div');
+      bubble.className = 'easter-egg-bubble';
+      bubble.innerText = text;
+      
+      const rect = target.getBoundingClientRect();
+      bubble.style.left = (rect.left + rect.width / 2) + window.scrollX + 'px';
+      bubble.style.top = (rect.top - 10) + window.scrollY + 'px';
+      
+      document.body.appendChild(bubble);
+      
+      setTimeout(() => bubble.remove(), 2500);
+    }
+    // -----------------------------
+
     let lastSparkleTime = 0;
     document.addEventListener('mousemove', function(e) {
       const now = Date.now();
@@ -711,7 +792,7 @@ img.modrinth.com</pre>
             <span class="reco-mod-desc">Позволяет объединять несколько РП на переименования.</span>
           </div>
         `,
-        modalRFText: "<strong>Если сервисы Modrinth не открываются:</strong> используйте утилиту <a href='https://github.com/flowseal/zapret-discord-youtube' target='_blank' style='color:var(--primary-soft); font-weight:700;'>zapret-discord-youtube</a> для обхода ограничений. Обязательно добавьте следующие домены в ваш лист конфигурации:",
+        modalRFText: "<strong>Если сервисы Modrinth не открываются:</strong> используйте утилиту <a href='https://github.com/flowseal/zapret-discord-youtube' target='_blank' style='color:var(--primary-soft); font-weight:700;'>zapret-discord-youtube</a> для обхода ограничений. Обязательно добавьте следующие домены в ваш лист конфигурации:<br><br><div class='fs-tree'><div class='fs-item'><svg class='folder-icon' viewBox='0 0 24 24'><path d='M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z'></path></svg>zapret-discord-youtube</div><div class='fs-item file'><svg class='file-icon' viewBox='0 0 24 24'><path d='M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z'></path><polyline points='13 2 13 9 20 9'></polyline></svg>list-general.txt</div></div>",
         variantsTitle: "Доступные варианты",
         subtleTermsBtn: "Условия использования пака",
         termsModalTitle: "Условия использования",
@@ -784,7 +865,7 @@ img.modrinth.com</pre>
             <span class="reco-mod-desc">Allows to combine different RP renaming.</span>
           </div>
         `,
-        modalRFText: "<strong>If Modrinth services fail to load:</strong> it is recommended to use the <a href='https://github.com/flowseal/zapret-discord-youtube' target='_blank' style='color:var(--primary-soft); font-weight:700;'>zapret-discord-youtube</a> utility. Make sure to add the following domains to your bypass list:",
+        modalRFText: "<strong>If Modrinth services fail to load:</strong> it is recommended to use the <a href='https://github.com/flowseal/zapret-discord-youtube' target='_blank' style='color:var(--primary-soft); font-weight:700;'>zapret-discord-youtube</a> utility. Make sure to add the following domains to your bypass list:<br><br><div class='fs-tree'><div class='fs-item'><svg class='folder-icon' viewBox='0 0 24 24'><path d='M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z'></path></svg>zapret-discord-youtube</div><div class='fs-item file'><svg class='file-icon' viewBox='0 0 24 24'><path d='M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z'></path><polyline points='13 2 13 9 20 9'></polyline></svg>list-general.txt</div></div>",
         variantsTitle: "Available Variants",
         subtleTermsBtn: "Terms of Use",
         termsModalTitle: "Terms of Use",
@@ -967,7 +1048,6 @@ img.modrinth.com</pre>
         return matchesCategory && matchesSearch;
       });
 
-      // --- ДОБАВЛЕНА СОРТИРОВКА ПО КАТЕГОРИЯМ ---
       if (currentCategory === 'all') {
         const orderStandard = ['weapons', 'armor', 'tools', 'hats', 'totems', 'food', 'goodies'];
         const orderTheme = ['slime', 'pugs', 'energy', 'lunaria', 'other'];
@@ -982,7 +1062,6 @@ img.modrinth.com</pre>
           return idxA - idxB;
         });
       }
-      // -------------------------------------------
 
       filteredItems.forEach((item, index) => {
         const tr = document.createElement('tr');
@@ -1000,6 +1079,19 @@ img.modrinth.com</pre>
           <td>
             <div class="orig-cell-content">
               <strong>${item.original[currentLang]}</strong>
+              
+              <!-- ЗНАЧОК RPT (ЕСЛИ УКАЗАНО В ITEMS.JS) -->
+              ${item.requiresRPT ? `
+                <div class="rpt-badge" onclick="openModal('recoModal'); event.stopPropagation();">
+                  <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                  </svg>
+                  <div class="rpt-tooltip">${currentLang === 'ru' ? 'Требует мод RPT (нажми)' : 'Requires RPT mod (click)'}</div>
+                </div>
+              ` : ''}
+
               ${hasVariants ? `
                 <button class="expand-btn" onclick="toggleVariants('${rowId}', this)" title="${i18n[currentLang].variantsTitle}">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
