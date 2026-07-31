@@ -64,7 +64,6 @@
     @keyframes fade-out { to { opacity: 0; } }
     @keyframes fade-in { from { opacity: 0; } }
 
-    /* Отключаем синее выделение при тапе на мобильных */
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
     body { font-family: 'Comfortaa', cursive, sans-serif; background: var(--bg-gradient); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 2rem 1rem 5rem 1rem; position: relative; overflow-x: hidden; transition: background 0.5s ease, color 0.5s ease; }
@@ -75,7 +74,6 @@
 
     header { background: var(--bg-creamy); border: 1px solid var(--card-border); border-radius: 30px; padding: 2rem; text-align: center; box-shadow: var(--shadow-soft); margin-bottom: 2rem; position: relative; }
 
-    /* DESKTOP LAYOUT CLASSES */
     .mobile-app-nav, .menu-overlay, .side-menu-header { display: none; }
     .side-menu-container { display: contents; } 
     .desktop-title { display: block; }
@@ -110,7 +108,6 @@
     .action-btn.secondary:hover { background: var(--bg-creamy); color: var(--primary-soft); filter: none; box-shadow: var(--glow-light); }
     .action-btn svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
-    /* КАТЕГОРИИ И ПОИСК */
     .controls-wrapper { margin-bottom: 1.8rem; display: flex; flex-direction: column; gap: 1rem; }
     .search-and-select-bar { display: flex; gap: 12px; flex-wrap: wrap; width: 100%; align-items: center; }
     .search-input { flex: 1 1 240px; padding: 0.85rem 1.4rem; border-radius: 25px; background: var(--bg-creamy); border: 1px solid var(--card-border); color: var(--text-main); font-family: inherit; font-size: 0.95rem; outline: none; transition: all 0.3s ease; }
@@ -133,7 +130,6 @@
     .dropdown-opt.active { background: var(--th-bg); color: var(--primary-soft); font-weight: 700; }
     .dropdown-opt .cat-count { font-size: 0.75rem; background: var(--card-border); color: var(--text-main); padding: 2px 8px; border-radius: 10px; opacity: 0.8; }
 
-    /* ТАБЛИЦА */
     .table-wrapper { background: var(--bg-creamy); border: 1px solid var(--card-border); border-radius: 25px; overflow: visible; box-shadow: var(--shadow-soft); }
     table { width: 100%; border-collapse: collapse; text-align: left; }
     th { background: var(--th-bg); color: var(--text-main); padding: 1.3rem 1rem; font-weight: 700; font-size: 0.95rem; border-bottom: 2px solid var(--card-border); }
@@ -173,7 +169,6 @@
     .variant-tooltip { position: absolute; bottom: 120%; left: 50%; transform: translateX(-50%) translateY(8px); background: var(--dropdown-bg); border: 1px solid var(--primary-soft); color: var(--text-main); padding: 6px 12px; border-radius: 12px; font-size: 0.8rem; font-weight: 700; white-space: nowrap; opacity: 0; visibility: hidden; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 5px 15px rgba(0,0,0,0.15); z-index: 20; pointer-events: none; }
     .variant-item:hover .variant-tooltip { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
 
-    /* МОДАЛЬНЫЕ ОКНА */
     .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); display: flex; align-items: center; justify-content: center; z-index: 3000; opacity: 0; visibility: hidden; transition: all 0.3s ease; padding: 1rem; }
     .modal-overlay.show { opacity: 1; visibility: visible; }
     .modal-content { background: var(--bg-creamy); border: 1px solid var(--card-border); border-radius: 28px; padding: 2.2rem 2rem; max-width: 650px; width: 100%; max-height: 90vh; overflow-y: auto; position: relative; box-shadow: var(--shadow-soft); transform: translateY(20px) scale(0.95); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
@@ -239,13 +234,9 @@
     footer { text-align: center; margin-top: 3.5rem; color: var(--text-muted); font-size: 0.9rem; display: flex; flex-direction: column; gap: 6px; align-items: center; }
     .creators-tag { font-weight: 700; color: var(--primary-soft); }
 
-    /* ==============================================================
-       АДАПТИВНАЯ МОБИЛЬНАЯ ВЕРСИЯ (КАК В ПРИЛОЖЕНИИ)
-       ============================================================== */
     @media (max-width: 700px) {
       body { padding: 1rem 0.5rem 5rem 0.5rem; }
       
-      /* Переделка шапки под App Bar */
       header { padding: 1.5rem 1rem; border-radius: 25px; display: flex; flex-direction: column; text-align: left; }
       
       .mobile-app-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; width: 100%; }
@@ -255,11 +246,10 @@
       .hamburger-btn { background: transparent; border: 1px solid var(--card-border); color: var(--text-main); border-radius: 12px; padding: 8px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
       .hamburger-btn:hover { background: var(--th-bg); border-color: var(--primary-soft); }
       
-      .desktop-title { display: none; } /* Прячем десктопный заголовок */
+      .desktop-title { display: none; }
       #subtitle { font-size: 1.1rem; margin-bottom: 0.8rem; }
       #desc { font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem; }
       
-      /* Боковое меню для телефонов */
       .menu-overlay { display: block; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2000; opacity: 0; visibility: hidden; transition: all 0.3s ease; backdrop-filter: blur(4px); }
       .menu-overlay.show { opacity: 1; visibility: visible; }
       
@@ -270,12 +260,10 @@
       .side-menu-header h3 { font-family: 'Comfortaa', sans-serif; font-weight: 700; font-size: 1.3rem; color: var(--text-main); margin: 0; }
       .close-btn { background: var(--th-bg); border: 1px solid var(--card-border); color: var(--text-main); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
       
-      /* Расположение кнопок внутри бокового меню */
       .top-bar { flex-direction: column; padding: 1.5rem; margin: 0; gap: 1.5rem; align-items: stretch; }
       .left-group, .right-group { flex-direction: column; align-items: stretch; gap: 1rem; width: 100%; }
       .download-badge { width: 100%; justify-content: center; padding: 0; height: 54px; border-radius: 15px; font-size: 1rem; }
       
-      /* Одинаковые прямоугольные кнопки соц.сетей с текстом */
       .social-links { flex-direction: column; width: 100%; gap: 1rem; }
       .social-btn { width: 100%; height: 54px; border-radius: 15px; justify-content: center; gap: 10px; padding: 0; }
       .social-btn::after { 
@@ -294,21 +282,18 @@
       .social-btn:hover::after { transform: none; }
       
       .control-btn { justify-content: center; padding: 0; height: 54px; border-radius: 15px; font-size: 1rem; width: 100%; }
-      #themeToggle { display: none; } /* Прячем дубликат переключателя темы в меню */
+      #themeToggle { display: none; }
 
       .header-actions { flex-direction: column; gap: 10px; align-items: stretch; }
       .action-btn { justify-content: center; padding: 1rem; border-radius: 15px; width: 100%; }
 
-      /* Контролы (Поиск и Фильтры) */
       .search-and-select-bar { flex-direction: column; background: transparent; padding: 0; gap: 12px; }
-      /* Фикс некрасиво растягивающегося инпута */
       .search-input { width: 100%; padding: 0 1.4rem; height: 54px; border-radius: 16px; flex: none; }
       .mode-switch-container { width: 100%; border-radius: 16px; padding: 6px; }
       .mode-btn { width: 50%; padding: 0.8rem; border-radius: 12px; }
       .category-dropdown-container { width: 100%; }
       .category-dropdown-btn { min-height: 54px; border-radius: 16px; }
       
-      /* Превращение таблицы в карточки (App-like design) */
       .table-wrapper { background: transparent; border: none; box-shadow: none; border-radius: 0; }
       table, thead, tbody, th, td, tr { display: block; width: 100%; }
       thead { display: none; }
@@ -327,7 +312,6 @@
       .variants-container { padding: 1.2rem; background: var(--th-bg); border-radius: 16px; border: 1px solid var(--card-border); margin: 0; }
       .variants-grid { justify-content: center; }
 
-      /* Кнопка поддержки, сворачивающаяся в кружок */
       .support-widget { 
         bottom: 15px; left: 50%; transform: translateX(-50%); width: calc(100% - 30px); 
         justify-content: center; border-radius: 16px; height: 54px; padding: 0; 
@@ -352,7 +336,7 @@
 
   <div class="container">
     <header>
-      <!-- МОБИЛЬНЫЙ APP BAR (Скрыт на ПК) -->
+      <!-- МОБИЛЬНЫЙ APP BAR -->
       <div class="mobile-app-nav">
         <h1 class="mobile-title">Lunaria</h1>
         <div class="mobile-nav-actions">
@@ -365,7 +349,7 @@
         </div>
       </div>
 
-      <!-- ОВЕРЛЕЙ И БОКОВОЕ МЕНЮ (Работает только на мобильных) -->
+      <!-- ОВЕРЛЕЙ И БОКОВОЕ МЕНЮ -->
       <div class="menu-overlay" id="menuOverlay" onclick="toggleMobileMenu()"></div>
       <div class="side-menu-container" id="sideMenuContainer">
         <div class="side-menu-header">
@@ -375,10 +359,9 @@
           </button>
         </div>
         
-        <!-- НАВИГАЦИЯ -->
         <div class="top-bar">
           <div class="left-group">
-            <button class="download-badge" id="openDownloadBtn">
+            <button class="download-badge" id="openDownloadBtn" onclick="openModal('downloadModal')">
               <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
               <span id="downloadHeaderBtnText">Скачать пак</span>
             </button>
@@ -416,7 +399,7 @@
           <svg viewBox="0 0 24 24"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
           <span id="suggestBtnText">Предложить свою идею</span>
         </a>
-        <button class="action-btn secondary" id="openRecoBtn">
+        <button class="action-btn secondary" id="openRecoBtn" onclick="openModal('recoModal')">
           <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           <span id="recoBtnText">Рекомендации к установке</span>
         </button>
@@ -458,14 +441,14 @@
     <footer>
       <p id="footerText">✨ С любовью из Лунарии | SPm Server</p>
       <p class="creators-tag" id="creatorsText">Создатели пака: Animun4ik и Moonray</p>
-      <button class="subtle-terms-btn" id="openTermsBtn">Условия использования пака</button>
+      <button class="subtle-terms-btn" id="openTermsBtn" onclick="openModal('termsModal')">Условия использования пака</button>
     </footer>
   </div>
 
   <!-- ОКНО СКАЧИВАНИЯ -->
   <div id="downloadModal" class="modal-overlay">
     <div class="modal-content text-center">
-      <button class="close-modal" id="closeDownloadBtn" title="Закрыть">
+      <button class="close-modal" onclick="closeModal('downloadModal')" title="Закрыть">
         <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" fill="none" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
       </button>
       <h2 class="modal-title mb-4" id="dlModalTitle">Скачивание (Очень важное)</h2>
@@ -494,7 +477,7 @@
   <!-- МОДАЛЬНОЕ ОКНО РЕКОМЕНДАЦИЙ -->
   <div id="recoModal" class="modal-overlay">
     <div class="modal-content">
-      <button class="close-modal" id="closeModalBtn" title="Закрыть">
+      <button class="close-modal" onclick="closeModal('recoModal')" title="Закрыть">
         <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" fill="none" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
       </button>
       <div class="modal-header">
@@ -551,7 +534,7 @@ img.modrinth.com</pre>
   <!-- МОДАЛЬНОЕ ОКНО УСЛОВИЙ ПОЛЬЗОВАНИЯ -->
   <div id="termsModal" class="modal-overlay">
     <div class="modal-content">
-      <button class="close-modal" id="closeTermsBtn" title="Закрыть">
+      <button class="close-modal" onclick="closeModal('termsModal')" title="Закрыть">
         <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" fill="none" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
       </button>
       <div class="modal-header">
@@ -615,7 +598,6 @@ img.modrinth.com</pre>
       }
     });
 
-    // Функция переключения бокового мобильного меню
     function toggleMobileMenu() {
       const menu = document.getElementById('sideMenuContainer');
       const overlay = document.getElementById('menuOverlay');
@@ -623,7 +605,6 @@ img.modrinth.com</pre>
       overlay.classList.toggle('show');
     }
     
-    // Сворачивание кнопки поддержки при скролле
     window.addEventListener('scroll', () => {
       const supportWidget = document.getElementById('supportWidget');
       if (window.innerWidth <= 700) {
@@ -669,14 +650,13 @@ img.modrinth.com</pre>
         original: { ru: "Любой Меч", en: "Any sword" }, rename: { ru: "Слизневый Меч", en: "Slime Sword" },
         variants: [
           { material: { ru: "Деревянный", en: "Wooden" }, image: "images/slime_sword_wood.png", matIcon: "images/mat_wood.png" },
-         { material: { ru: "Каменный", en: "Stone" }, image: "images/slime_sword_stone.png", matIcon: "images/mat_stone.png" },
+          { material: { ru: "Каменный", en: "Stone" }, image: "images/slime_sword_stone.png", matIcon: "images/mat_stone.png" },
           { material: { ru: "Железный", en: "Iron" }, image: "images/slime_sword_iron.png", matIcon: "images/mat_iron.png" },
           { material: { ru: "Золотой", en: "Golden" }, image: "images/slime_sword_gold.png", matIcon: "images/mat_gold.png" },
           { material: { ru: "Алмазный", en: "Diamond" }, image: "images/slime_sword_diamond.png", matIcon: "images/mat_diamond.png" },
           { material: { ru: "Незеритовый", en: "Netherite" }, image: "images/slime_sword_netherite.png", matIcon: "images/mat_netherite.png" }
         ]
       },
-      { image: "images/slime_sword.png", category: "weapons", theme: "slime", original: { ru: "Любой Меч", en: "Any sword" }, rename: { ru: "Слизневый Меч", en: "Slime Sword" } },      
       { image: "images/moonedge.png", category: "weapons", theme: "lunaria", original: { ru: "Любой Меч", en: "Any sword" }, rename: { ru: "Остролуние", en: "Moonedge" } },
       { image: "images/moonbattler.png", category: "weapons", theme: "lunaria", original: { ru: "Любое Копье", en: "Any spear" }, rename: { ru: "Луноборец", en: "Moonbattler" } },
       { image: "images/image_of_majesty_icon.png", category: "hats", theme: "lunaria", original: { ru: "Вырезанная Тыква", en: "Carved Pumpkin" }, rename: { ru: "Образ Величия", en: "Image of Majesty" } },
@@ -719,7 +699,7 @@ img.modrinth.com</pre>
         tgTooltip: "Telegram канал",
         cityBtnText: "Город",
         footer: "✨ С любовью из Лунарии | SPm Server",
-        creators: "Создатели пака: Animun4ik и Moonray (Тряси Киской Геймс)",
+        creators: "Создатели пака: Animun4ik и Moonray",
         supportText: "Что-то не работает? Пиши!",
         suggestBtnText: "Предложить свою идею",
         recoBtnText: "Рекомендации к установке",
@@ -769,7 +749,7 @@ img.modrinth.com</pre>
         tgTooltip: "Telegram Channel",
         cityBtnText: "City",
         footer: "✨ With love from Lunaria | SPm Server",
-        creators: "Pack creators: Animun4ik & Moonray (Shake Pussy Games)",
+        creators: "Pack creators: Animun4ik & Moonray",
         supportText: "Something not working? Write us!",
         suggestBtnText: "Suggest an idea",
         recoBtnText: "Installation Guide",
@@ -905,174 +885,159 @@ img.modrinth.com</pre>
       if (container && !container.contains(e.target)) container.classList.remove('open');
     });
 
-    function selectCategory(catKey) {
-      currentCategory = catKey;
-      document.getElementById('catDropdownContainer').classList.remove('open');
-      renderCategoryUI();
-      renderTable();
-    }
-
     function renderCategoryUI() {
-      const dropdownMenu = document.getElementById('catDropdownMenu');
-      const selectedLabel = document.getElementById('selectedCatLabel');
+      const menu = document.getElementById('catDropdownMenu');
+      const label = document.getElementById('selectedCatLabel');
+      const cats = categoryModes[currentMode].categories;
       
-      dropdownMenu.innerHTML = '';
-      const modeConfig = categoryModes[currentMode];
-      const categoriesDict = modeConfig.categories;
-
-      const activeCatObj = categoriesDict[currentCategory] || categoriesDict.all;
-      selectedLabel.innerText = activeCatObj[currentLang];
-
-      Object.keys(categoriesDict).forEach(catKey => {
-        const cat = categoriesDict[catKey];
-        let count = 0;
-
-        if (catKey === 'all') {
-          count = items.length;
-        } else {
-          count = items.filter(i => currentMode === 'standard' ? i.category === catKey : i.theme === catKey).length;
-        }
-
+      menu.innerHTML = '';
+      
+      Object.keys(cats).forEach(key => {
+        const count = key === 'all' 
+          ? items.length 
+          : items.filter(item => (currentMode === 'standard' ? item.category : item.theme) === key).length;
+        
         const opt = document.createElement('div');
-        opt.className = `dropdown-opt ${catKey === currentCategory ? 'active' : ''}`;
-        opt.onclick = () => selectCategory(catKey);
-        opt.innerHTML = `<span>${cat[currentLang]}</span> <span class="cat-count">${count}</span>`;
-        dropdownMenu.appendChild(opt);
+        opt.className = `dropdown-opt ${currentCategory === key ? 'active' : ''}`;
+        opt.innerHTML = `<span>${cats[key][currentLang]}</span><span class="cat-count">${count}</span>`;
+        opt.onclick = () => {
+          currentCategory = key;
+          label.innerText = cats[key][currentLang];
+          document.getElementById('catDropdownContainer').classList.remove('open');
+          renderCategoryUI();
+          renderTable();
+        };
+        menu.appendChild(opt);
       });
-    }
 
-    function filterTable() { renderTable(); }
-
-    function toggleVariants(index) {
-      const varRow = document.getElementById(`variants-${index}`);
-      const arrow = document.getElementById(`arrow-${index}`);
-      if (varRow) {
-        const isOpen = varRow.classList.contains('open');
-        varRow.classList.toggle('open');
-        if (arrow) {
-          arrow.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
-        }
-      }
+      label.innerText = cats[currentCategory] ? cats[currentCategory][currentLang] : cats['all'][currentLang];
     }
 
     function renderTable() {
-      const searchQuery = document.getElementById('searchInput').value.toLowerCase();
       const tbody = document.getElementById('tableBody');
+      const searchQuery = document.getElementById('searchInput').value.toLowerCase().trim();
       tbody.innerHTML = '';
 
-      items.forEach((item, index) => {
-        const origText = item.original[currentLang];
-        const renameText = item.rename[currentLang];
+      const filteredItems = items.filter(item => {
+        const matchesCategory = currentCategory === 'all' || 
+          (currentMode === 'standard' ? item.category === currentCategory : item.theme === currentCategory);
         
-        const matchesSearch = origText.toLowerCase().includes(searchQuery) || renameText.toLowerCase().includes(searchQuery);
-        
-        let matchesCategory = false;
-        if (currentCategory === 'all') {
-          matchesCategory = true;
-        } else if (currentMode === 'standard') {
-          matchesCategory = item.category === currentCategory;
-        } else if (currentMode === 'theme') {
-          matchesCategory = item.theme === currentCategory;
-        }
+        const origText = item.original[currentLang].toLowerCase();
+        const renameText = item.rename[currentLang].toLowerCase();
+        const matchesSearch = !searchQuery || origText.includes(searchQuery) || renameText.includes(searchQuery);
 
-        if (matchesSearch && matchesCategory) {
-          const hasVariants = item.variants && item.variants.length > 0;
-          const tr = document.createElement('tr');
-          
-          tr.innerHTML = `
-            <td>
-              <div class="orig-cell-content">
-                <div class="item-icon">
-                  <img src="${item.image}" alt="${origText}" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' viewBox=\\'0 0 24 24\\' fill=\\'none\\' stroke=\\'%236b8e96\\'><rect x=\\'3\\' y=\\'3\\' width=\\'18\\' height=\\'18\\' rx=\\'2\\' ry=\\'2\\'/><circle cx=\\'8.5\\' cy=\\'8.5\\' r=\\'1.5\\'/><polyline points=\\'21 15 16 10 5 21\\'/></svg>'">
-                </div>
-                <strong>${origText}</strong>
-                ${hasVariants ? `
-                  <button class="expand-btn" onclick="toggleVariants(${index})" title="Варианты материалов">
-                    <svg id="arrow-${index}" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
-                  </button>
-                ` : ''}
-              </div>
-            </td>
-            <td>
-              <div class="rename-code">
-                ${renameText}
-                <button class="copy-btn" onclick="copyText('${renameText}')" title="Копировать">
-                  <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+        return matchesCategory && matchesSearch;
+      });
+
+      filteredItems.forEach((item, index) => {
+        const tr = document.createElement('tr');
+        const hasVariants = item.variants && item.variants.length > 0;
+        const rowId = `variant-row-${index}`;
+
+        // ТРИ СТОЛБЦА (3x <td>) ДЛЯ КОРРЕКТНОЙ СЕТКИ
+        tr.innerHTML = `
+          <td>
+            <div class="item-icon">
+              <img src="${item.image}" alt="${item.rename[currentLang]}">
+            </div>
+          </td>
+          <td>
+            <div class="orig-cell-content">
+              <strong>${item.original[currentLang]}</strong>
+              ${hasVariants ? `
+                <button class="expand-btn" onclick="toggleVariants('${rowId}', this)" title="${i18n[currentLang].variantsTitle}">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
                 </button>
+              ` : ''}
+            </div>
+          </td>
+          <td>
+            <div class="rename-code">
+              <span>${item.rename[currentLang]}</span>
+              <button class="copy-btn" onclick="copyText('${item.rename[currentLang]}')" title="Скопировать">
+                <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              </button>
+            </div>
+          </td>
+        `;
+        tbody.appendChild(tr);
+
+        if (hasVariants) {
+          const varTr = document.createElement('tr');
+          varTr.className = 'variants-row';
+          varTr.id = rowId;
+
+          let variantsHTML = item.variants.map(v => `
+            <div class="variant-item">
+              <img class="variant-texture" src="${v.image}" alt="${v.material[currentLang]}">
+              <img class="variant-mat-icon" src="${v.matIcon}" alt="${v.material[currentLang]}">
+              <div class="variant-tooltip">${v.material[currentLang]}</div>
+            </div>
+          `).join('');
+
+          varTr.innerHTML = `
+            <td colspan="3">
+              <div class="variants-container">
+                <div class="variants-title">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+                  <span>${i18n[currentLang].variantsTitle}</span>
+                </div>
+                <div class="variants-grid">
+                  ${variantsHTML}
+                </div>
               </div>
             </td>
           `;
-          tbody.appendChild(tr);
-
-          if (hasVariants) {
-            const varTr = document.createElement('tr');
-            varTr.className = 'variants-row';
-            varTr.id = `variants-${index}`;
-
-            let cardsHtml = '';
-            item.variants.forEach(v => {
-              cardsHtml += `
-                <div class="variant-item">
-                  <img class="variant-texture" src="${v.image}" alt="${v.material[currentLang]}" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' viewBox=\\'0 0 24 24\\' fill=\\'%2378d2d6\\'><rect width=\\'24\\' height=\\'24\\'/></svg>'">
-                  <img class="variant-mat-icon" src="${v.matIcon || ''}" alt="Material" onerror="this.style.display='none'">
-                  <div class="variant-tooltip">${v.material[currentLang]}</div>
-                </div>
-              `;
-            });
-
-            varTr.innerHTML = `
-              <td colspan="2">
-                <div class="variants-container">
-                  <div class="variants-title">${i18n[currentLang].variantsTitle}</div>
-                  <div class="variants-grid">
-                    ${cardsHtml}
-                  </div>
-                </div>
-              </td>
-            `;
-            tbody.appendChild(varTr);
-          }
+          tbody.appendChild(varTr);
         }
       });
     }
 
-    function copyText(text) { navigator.clipboard.writeText(text).then(() => { showToast(i18n[currentLang].toast); }); }
-    function copyZapretCode() { const code = document.getElementById('zapretCode').innerText; navigator.clipboard.writeText(code).then(() => { showToast(i18n[currentLang].toastCode); }); }
-    function showToast(msg) { const toast = document.getElementById('toast'); toast.innerText = msg; toast.classList.add('show'); setTimeout(() => toast.classList.remove('show'), 2500); }
-
-    function setupModal(openBtnId, modalId, closeBtnId) {
-      const modal = document.getElementById(modalId);
-      const openBtn = document.getElementById(openBtnId);
-      const closeBtn = document.getElementById(closeBtnId);
-      if (openBtn && modal) openBtn.addEventListener('click', () => modal.classList.add('show'));
-      if (closeBtn && modal) closeBtn.addEventListener('click', () => modal.classList.remove('show'));
-      if (modal) modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('show'); });
+    function toggleVariants(rowId, btn) {
+      const targetRow = document.getElementById(rowId);
+      if (!targetRow) return;
+      const isOpen = targetRow.classList.contains('open');
+      
+      targetRow.classList.toggle('open');
+      const svg = btn.querySelector('svg');
+      if (svg) {
+        svg.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
+      }
     }
 
-    setupModal('openRecoBtn', 'recoModal', 'closeModalBtn');
-    setupModal('openDownloadBtn', 'downloadModal', 'closeDownloadBtn');
-    setupModal('openTermsBtn', 'termsModal', 'closeTermsBtn');
+    function filterTable() {
+      renderTable();
+    }
 
-    const bubbleTexts = ["ало скинофф студиос?", "ты пофиксил?!", "порталия", "Фиксите баги!", "Мяу 🐱", "Больше моделек!"];
-
-    document.querySelectorAll('#title').forEach(el => {
-      el.addEventListener('dblclick', function(e) {
-        for (let i = 0; i < 5; i++) {
-          const bubble = document.createElement('div');
-          bubble.className = 'easter-bubble';
-          bubble.innerText = (i === 0) ? "ало скинофф студиос?" : bubbleTexts[Math.floor(Math.random() * bubbleTexts.length)];
-          bubble.style.left = e.clientX + 'px';
-          bubble.style.top = e.clientY + 'px';
-          const angle = (Math.random() * Math.PI * 2);
-          const distance = 80 + Math.random() * 140;
-          bubble.style.setProperty('--tx', Math.cos(angle) * distance + 'px');
-          bubble.style.setProperty('--ty', Math.sin(angle) * distance + 'px');
-          document.body.appendChild(bubble);
-          setTimeout(() => bubble.remove(), 1200);
-        }
+    function copyText(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        showToast(i18n[currentLang].toast);
       });
-    });
+    }
 
+    function copyZapretCode() {
+      const code = document.getElementById('zapretCode').innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        showToast(i18n[currentLang].toastCode);
+      });
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.innerText = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2500);
+    }
+
+    function openModal(id) {
+      document.getElementById(id).classList.add('show');
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('show');
+    }
+
+    // Инициализация при загрузке страницы
     updateTexts();
     renderCategoryUI();
     renderTable();
