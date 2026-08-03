@@ -132,5 +132,40 @@ window.LUNARIA_ITEMS = [
     original: { ru: "Вырезанная Тыква", en: "Carved Pumpkin" },
     rename: { ru: "Великий Мопс", en: "Great Pug" },
     requiresRPT: true // <--- Добавлен индикатор мода RPT
+  },
+  {
+    image: "images/grass_sword.png",
+    category: "weapons",
+    theme: "adventure_time",
+    original: { ru: "Любой Меч", en: "Any Sword" },
+    rename: { ru: "Травяной Меч", en: "Grass Sword" }
+  },
+  {
+    image: "images/scarlet_icon.png",
+    category: "weapons",
+    theme: "adventure_time",
+    original: { ru: "Любой Меч", en: "Any Sword" },
+    rename: { ru: "Скарлет", en: "Scarlet" }
+  },
+  {
+    image: "images/silverine_shield.png",
+    category: "weapons",
+    theme: "lunaria",
+    original: { ru: "Щит", en: "Shield" },
+    rename: { ru: "Сильвериновый Щит", en: "Silverine Shield" }
+  },
+  {
+    image: "images/slime_shield.png",
+    category: "weapons",
+    theme: "slime",
+    original: { ru: "Щит", en: "Shield" },
+    rename: { ru: "Слизневый Щит", en: "Slime Shield" }
+  },
+  {
+    image: "images/ice_king_crown_icon.png",
+    category: "hats",
+    theme: "adventure_time",
+    original: { ru: "Вырезанная Тыква", en: "Carved Pumpkin" },
+    rename: { ru: "Корона Ледяного Короля", en: "Ice King Crown" }
   }
 ];
