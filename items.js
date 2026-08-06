@@ -46,6 +46,7 @@
 window.LUNARIA_ITEMS = [
   {
     image: "images/moonedge.png",
+    hoverImage: "images/moonedge_render.png",
     category: "weapons",
     theme: "lunaria",
     original: { ru: "Любой Меч", en: "Any sword" },
