@@ -54,6 +54,7 @@ window.LUNARIA_ITEMS = [
   },
   {
     image: "images/silverine_ingot.png",
+    hoverImage: "images/silverine_ingot_render.png",
     category: "goodies",
     theme: "lunaria",
     original: { ru: "Железный Слиток", en: "Iron Ingot" },
