@@ -79,6 +79,7 @@ window.LUNARIA_ITEMS = [
   },
   {
     image: "images/slime_sword.png",
+    hoverImage: "images/slime_sword_render.png",
     category: "weapons",
     theme: "slime",
     original: { ru: "Любой Меч", en: "Any sword" },
