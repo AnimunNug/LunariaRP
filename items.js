@@ -95,6 +95,7 @@ window.LUNARIA_ITEMS = [
   },
   {
     image: "images/monster.png",
+    hoverImage: "images/monster_render.png",
     category: "food",
     theme: "energy",
     original: { ru: "Золотая Морковь", en: "Golden Carrot" },
@@ -102,6 +103,7 @@ window.LUNARIA_ITEMS = [
   },
   {
     image: "images/white_monster.png",
+    hoverImage: "images/white_monster_render.png",
     category: "food",
     theme: "energy",
     original: { ru: "Золотая Морковь", en: "Golden Carrot" },
@@ -109,6 +111,7 @@ window.LUNARIA_ITEMS = [
   },
   {
     image: "images/slimeburger.png",
+    hoverImage: "images/slimeburger_render.png",
     category: "food",
     theme: "slime",
     original: { ru: "Золотая Морковь", en: "Golden Carrot" },
@@ -116,6 +119,7 @@ window.LUNARIA_ITEMS = [
   },
   {
     image: "images/spunked_carrot.png",
+    hoverImage: "images/spunked_carrot_render.png",
     category: "food",
     theme: "other",
     original: { ru: "Золотая Морковь", en: "Golden Carrot" },
